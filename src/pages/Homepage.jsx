@@ -1,11 +1,5 @@
-import Header from '../layouts/headers/Header';
-import Navbar from '../layouts/navbars/Navbar';
+import HomeContainer from '../features/home/HomeContainer';
 
-export default function Homepage() {
-  return (
-    <div>
-      <Header />
-      <Navbar />
-    </div>
-  );
+export default function HomePage() {
+  return <HomeContainer />;
 }
