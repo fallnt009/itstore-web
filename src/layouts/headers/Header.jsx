@@ -5,7 +5,9 @@ export default function Header() {
     <div className="bg-white">
       <div className="flex mx-10 my-10 items-center">
         {/* Logo */}
-        <div className="flex-2 font-mono font-extrabold text-5xl">ITStores</div>
+        <div className="flex-2 font-mono font-extrabold text-5xl font-jetmono text-cerulean-blue-800">
+          ITStores
+        </div>
         {/* Search Bar */}
         <div className="flex-1 mx-10">
           <div className=" p-3 rounded-full bg-neutral-400">Search Bar</div>
