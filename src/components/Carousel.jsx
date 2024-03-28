@@ -45,7 +45,7 @@ const Carousel = () => {
           </button>
         </div>
         {/* Carousel Indicator */}
-        <div className="hidden flex absolute bottom-0 -ml-4 mb-1 left-1/2 gap-1">
+        <div className=" flex absolute bottom-0 -ml-4 mb-3 left-1/2 gap-1">
           {imgUrl.map((_, current) => (
             <span
               key={current}

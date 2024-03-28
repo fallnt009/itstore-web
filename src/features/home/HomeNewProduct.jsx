@@ -1,11 +1,11 @@
 import ProductCard from '../../components/ProductCard';
 
-export default function HomeFlashSale() {
+export default function HomeNewProduct() {
   return (
     <div className="mx-5 mt-10">
       <div className="flex items-center justify-between">
         <h1 className="text-5xl text-cerulean-blue-800 font-semibold ">
-          Flash Sale
+          New Product
         </h1>
         <div>
           <button
