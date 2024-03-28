@@ -25,15 +25,18 @@ const Carousel = () => {
   };
 
   return (
-    <div>
+    <div className="relative m-auto max-w-3xl">
       {/* Carousel item */}
-      <div className=" w-3/4 h-96 relative border-1">
+      <div className="">
         {/* Carousel Image */}
-
-        <img src={imgUrl[index]} alt="carousel-pic" />
+        <img
+          src={imgUrl[index]}
+          alt="carousel-pic"
+          style={{width: '768px', height: '370px'}}
+        />
 
         {/* Carousel Action */}
-        <div className="flex absolute w-full h-full top-1/2 -translate-y-2/4  justify-between">
+        <div className="flex absolute w-full top-1/2 -translate-y-2/4  justify-between">
           <button onClick={handlePrevious}>
             <MdArrowCircleLeft size={50} color="white" />
           </button>
@@ -42,7 +45,7 @@ const Carousel = () => {
           </button>
         </div>
         {/* Carousel Indicator */}
-        <div className="flex absolute bottom-0 -ml-4 mb-1 left-1/2 gap-1">
+        <div className="hidden flex absolute bottom-0 -ml-4 mb-1 left-1/2 gap-1">
           {imgUrl.map((_, current) => (
             <span
               key={current}

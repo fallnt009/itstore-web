@@ -1,9 +1,16 @@
 import Carousel from '../../components/Carousel';
 
+import HomeFlashSale from './HomeFlashSale';
+
 export default function HomeContainer() {
   return (
-    <div className="mt-5 mx-20 text-xl underline">
-      <Carousel />
-    </div>
+    <>
+      <div>
+        <Carousel />
+        <div>
+          <HomeFlashSale />
+        </div>
+      </div>
+    </>
   );
 }
