@@ -1,7 +1,7 @@
 export default function ProductCard() {
   return (
-    <div className="container border-2">
-      <div className=" flex flex-col max-w-72 border-2">
+    <div className="container ">
+      <div className=" flex flex-col max-w-72 ">
         <div>
           <img
             src="https://media-cdn.bnn.in.th/361919/BX8071514100F-1-square_medium.jpg"
@@ -9,9 +9,9 @@ export default function ProductCard() {
           />
         </div>
         {/* Productbox */}
-        <div className="mx-5">
+        <div className="mx-5 text-cerulean-blue-800">
           <div className="flex">
-            <h3 className="font-medium">Intel Core i3-14100F LGA-1700</h3>
+            <h3 className="font-medium ">Intel Core i3-14100F LGA-1700</h3>
           </div>
           <div className="flex mt-5">
             <p className="font-regular text-sm">

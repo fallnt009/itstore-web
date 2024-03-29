@@ -1,3 +1,9 @@
+import ProductContainer from '../features/product/ProductContainer';
+
 export default function ProductPage() {
-  return <div>Productpage</div>;
+  return (
+    <div>
+      <ProductContainer />
+    </div>
+  );
 }
