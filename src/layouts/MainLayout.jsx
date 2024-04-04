@@ -7,7 +7,7 @@ import Footer from './footers/Footer';
 
 export default function MainLayout() {
   return (
-    <div>
+    <div className="">
       <Header />
       <Navbar />
       <div className="flex">

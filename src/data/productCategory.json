@@ -3,8 +3,18 @@
     "id": 1,
     "title": "Component(DIY)",
     "subCategory": [
-      {"id": 1, "title": "CPU"},
-      {"id": 2, "title": "Mainboard"},
+      {
+        "id": 1,
+        "title": "CPU",
+        "name": "cpu",
+        "pathname": "/categories/components/cpu"
+      },
+      {
+        "id": 2,
+        "title": "Mainboard",
+        "name": "mainboard",
+        "pathname": "/categories/components/mainboard"
+      },
       {"id": 3, "title": "Ram"},
       {"id": 4, "title": "Storage"},
       {"id": 5, "title": "Graphic Card"},
@@ -16,7 +26,12 @@
       {"id": 11, "title": "Accessories"}
     ]
   },
-  {"id": 2, "title": "Monitor"},
+  {
+    "id": 2,
+    "title": "Monitor",
+    "name": "monitor",
+    "pathname": "/categories/com-monitor/monitor"
+  },
   {
     "id": 3,
     "title": "Gaming Gear",

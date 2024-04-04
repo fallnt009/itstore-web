@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import {Link} from 'react-router-dom';
 
 import SidebarDropdown from './SidebarDropdown';
 
@@ -17,12 +18,14 @@ export default function SidebarMenu() {
     <div>
       {Category.map((el) => (
         <div key={el.id}>
-          <button
-            className="bg-white p-3 pl-8 w-full hover:bg-cerulean-blue-100 cursor-pointer text-start"
-            onClick={() => toggleOpen(el.id)}
-          >
-            {el.title}
-          </button>
+          <Link to={el.pathname}>
+            <button
+              className="bg-white p-3 pl-8 w-full hover:bg-cerulean-blue-100 cursor-pointer text-start"
+              onClick={() => toggleOpen(el.id)}
+            >
+              {el.title}
+            </button>
+          </Link>
           {isOpen[el.id] &&
             (el.subCategory ? (
               <div className="p-3 pl-12 text-lg">

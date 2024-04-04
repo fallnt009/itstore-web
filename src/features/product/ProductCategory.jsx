@@ -1,6 +1,6 @@
 import ProductCard from '../../components/ProductCard';
 
-export default function ProductCategory() {
+export default function ProductCategory({subCategoryName}) {
   return (
     <>
       <div className="mx-5 mt-10">
@@ -11,7 +11,7 @@ export default function ProductCategory() {
           <div>
             <button
               type="button"
-              className="bg-cerulean-blue-800 p-2 rounded-xl text-white "
+              className="bg-cerulean-blue-800 p-2 rounded-xl text-white"
             >
               View All
             </button>
