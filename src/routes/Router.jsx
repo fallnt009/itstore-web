@@ -1,6 +1,7 @@
 import {RouterProvider, createBrowserRouter} from 'react-router-dom';
 
 import MainLayout from '../layouts/MainLayout';
+import AuthLayout from '../layouts/AuthLayout';
 
 import HomePage from '../pages/HomePage';
 import ProductPage from '../pages/ProductPage';
@@ -8,6 +9,7 @@ import CategoryPage from '../pages/CategoryPage';
 import OurWorkPage from '../pages/OurWorkPage';
 import TrackingPage from '../pages/TrackingPage';
 import ContactUsPage from '../pages/ContactUsPage';
+import ProfilePage from '../pages/ProfilePage';
 
 export default function Router() {
   const router = createBrowserRouter([
@@ -37,6 +39,15 @@ export default function Router() {
         {
           path: '/contactus',
           element: <ContactUsPage />,
+        },
+      ],
+    },
+    {
+      element: <AuthLayout />,
+      children: [
+        {
+          path: '/profile/:userId',
+          element: <ProfilePage />,
         },
       ],
     },

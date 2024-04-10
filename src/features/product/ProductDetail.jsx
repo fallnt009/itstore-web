@@ -1,6 +1,6 @@
-import {MdOutlineRemoveCircle, MdOutlineAddCircle} from 'react-icons/md';
 import ProductSpecification from './ProductSpecification';
 import ProductDescription from './ProductDescription';
+import ProductQuantity from './ProductQuantity';
 
 export default function ProductDetail() {
   return (
@@ -39,25 +39,7 @@ export default function ProductDetail() {
             </div>
             {/* Checkout Box */}
             <div className="flex gap-6 my-10">
-              {/* Quantity */}
-              <div className="flex items-center gap-2">
-                <span>
-                  <MdOutlineRemoveCircle size={35} />
-                </span>
-                <span>1</span>
-                <span>
-                  <MdOutlineAddCircle size={35} />
-                </span>
-              </div>
-              {/* Add to Cart */}
-              <div>
-                <button
-                  type="button"
-                  className="bg-cerulean-blue-800 p-2  text-white"
-                >
-                  Add to Cart
-                </button>
-              </div>
+              <ProductQuantity />
             </div>
           </div>
         </div>

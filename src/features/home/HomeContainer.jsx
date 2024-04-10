@@ -7,7 +7,9 @@ export default function HomeContainer() {
   return (
     <>
       <div>
-        <Carousel />
+        <div>
+          <Carousel />
+        </div>
         <div>
           <HomeFlashSale />
           <HomeNewProduct />
