@@ -14,7 +14,7 @@ export default function MainLayout() {
         <div className="basis-1/6">
           <Sidebar />
         </div>
-        <div className="basis-5/6  h-screen">
+        <div className="basis-5/6 ">
           <Outlet />
         </div>
       </div>

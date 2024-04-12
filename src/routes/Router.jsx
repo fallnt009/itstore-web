@@ -10,6 +10,8 @@ import OurWorkPage from '../pages/OurWorkPage';
 import TrackingPage from '../pages/TrackingPage';
 import ContactUsPage from '../pages/ContactUsPage';
 import ProfilePage from '../pages/ProfilePage';
+import LoginPage from '../pages/LoginPage';
+import RegisterPage from '../pages/RegisterPage';
 
 export default function Router() {
   const router = createBrowserRouter([
@@ -42,6 +44,20 @@ export default function Router() {
         },
       ],
     },
+    {
+      element: <AuthLayout />,
+      children: [
+        {
+          path: '/login',
+          element: <LoginPage />,
+        },
+        {
+          path: '/register',
+          element: <RegisterPage />,
+        },
+      ],
+    },
+
     {
       element: <AuthLayout />,
       children: [

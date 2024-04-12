@@ -8,8 +8,8 @@ export default function AuthLayout() {
     <div>
       <Header />
       <Navbar />
-      <div className="flex">
-        <div className="h-screen">
+      <div>
+        <div>
           <Outlet />
         </div>
       </div>

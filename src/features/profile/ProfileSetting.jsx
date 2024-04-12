@@ -7,9 +7,9 @@ import ProfileSettingPreview from './ProfileSettingPreview';
 
 export default function ProfileSetting() {
   return (
-    <div className="mx-24 mt-10 text-cerulean-blue-800   block w-full">
+    <div className="mx-24 mt-10 text-cerulean-blue-800 block">
       <h1 className="text-4xl  font-semibold">Profile Setting</h1>
-      <div className="flex justify-center">
+      <div className="flex gap-20">
         <div className="flex-1 ">
           <ProfileSettingPreview />
           <ProfileSettingPicture />

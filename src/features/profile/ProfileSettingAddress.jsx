@@ -13,6 +13,9 @@ export default function ProfileSettingAddress() {
           <InputBox title="State/Province" type="text" />
           <InputBox title="Postal Code" type="text" />
         </form>
+        <button className="text-md  font-semibold  rounded-md p-2 border-2 hover:bg-cerulean-blue-100">
+          Save Changes
+        </button>
       </div>
     </div>
   );

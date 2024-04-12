@@ -18,6 +18,9 @@ export default function ProfileSettingInfo() {
             <InputBox title="Phone Number" type="text" />
           </form>
         </div>
+        <button className="text-md  font-semibold   rounded-md p-2 border-2 hover:bg-cerulean-blue-100">
+          Save Changes
+        </button>
       </div>
     </div>
   );
