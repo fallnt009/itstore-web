@@ -13,6 +13,9 @@ import ProfilePage from '../pages/ProfilePage';
 import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
 
+import ProtectedRoute from '../features/auth/ProtectedRoute';
+import RedirectIfAuthen from '../features/auth/RedirectIfAuthen';
+
 export default function Router() {
   const router = createBrowserRouter([
     {
@@ -49,7 +52,11 @@ export default function Router() {
       children: [
         {
           path: '/login',
-          element: <LoginPage />,
+          element: (
+            <RedirectIfAuthen>
+              <LoginPage />
+            </RedirectIfAuthen>
+          ),
         },
         {
           path: '/register',
@@ -59,7 +66,11 @@ export default function Router() {
     },
 
     {
-      element: <AuthLayout />,
+      element: (
+        <ProtectedRoute>
+          <AuthLayout />
+        </ProtectedRoute>
+      ),
       children: [
         {
           path: '/profile/:userId',
