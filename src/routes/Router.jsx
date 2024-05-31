@@ -12,6 +12,7 @@ import ContactUsPage from '../pages/ContactUsPage';
 import ProfilePage from '../pages/ProfilePage';
 import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
+import CartPage from '../pages/CartPage';
 
 import ProtectedRoute from '../features/auth/ProtectedRoute';
 import RedirectIfAuthen from '../features/auth/RedirectIfAuthen';
@@ -30,7 +31,7 @@ export default function Router() {
           element: <CategoryPage />,
         },
         {
-          path: '/product',
+          path: '/categories/product/:categoryName/:subCategoryName/:productName',
           element: <ProductPage />,
         },
         {
@@ -75,6 +76,10 @@ export default function Router() {
         {
           path: '/profile/:userId',
           element: <ProfilePage />,
+        },
+        {
+          path: '/yourcart',
+          element: <CartPage />,
         },
       ],
     },

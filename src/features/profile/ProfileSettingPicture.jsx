@@ -1,12 +1,12 @@
 import Avatar from '../../components/Avatar';
 
-export default function ProfileSettingPicture() {
+export default function ProfileSettingPicture({authenUser}) {
   return (
     <div className="flex flex-col gap-3 mt-5">
       <h2 className="text-lg ">Profile Picture</h2>
       <hr className="border-t-2"></hr>
       <div className="flex gap-5 items-center">
-        <Avatar size={100} />
+        <Avatar size={100} src={authenUser.profileImage} />
         <div className="flex flex-col gap-3">
           <button className="text-md  font-semibold   rounded-md p-2 border-2 hover:bg-cerulean-blue-100">
             Change Picture

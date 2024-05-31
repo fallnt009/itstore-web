@@ -3,6 +3,7 @@ import {useState} from 'react';
 import validateRegister from '../../validators/validate-register';
 import Input from '../../components/Input';
 import * as authApi from '../../apis/auth-api';
+import useLoading from '../../hooks/useLoading';
 
 const initialInput = {
   firstName: '',
@@ -17,6 +18,8 @@ export default function RegisterForm() {
   const [input, setInput] = useState(initialInput);
   const [error, setError] = useState({});
 
+  const {startLoading, stopLoading} = useLoading();
+
   const handleChangeInput = (e) => {
     setInput({...input, [e.target.name]: e.target.value});
   };
@@ -29,12 +32,16 @@ export default function RegisterForm() {
         setError(result);
       } else {
         setError({});
+        startLoading();
         await authApi.register(input);
+        stopLoading();
         setInput(initialInput);
       }
     } catch (err) {
-      //ERROR BOX
+      //ทำ Notification Box for Error
       console.log(err);
+    } finally {
+      stopLoading();
     }
   };
 

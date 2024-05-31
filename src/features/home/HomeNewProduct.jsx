@@ -1,6 +1,6 @@
 import ProductCard from '../../components/ProductCard';
 
-export default function HomeNewProduct() {
+export default function HomeNewProduct({newProducts}) {
   return (
     <div className="mx-5 mt-10">
       <div className="flex items-center justify-between">
@@ -17,11 +17,10 @@ export default function HomeNewProduct() {
         </div>
       </div>
       {/* Product Card */}
-      <div className=" flex mt-5">
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+      <div className="grid grid-cols-4 mt-10">
+        {newProducts.map((el) => (
+          <ProductCard key={el.id} product={el} />
+        ))}
       </div>
     </div>
   );

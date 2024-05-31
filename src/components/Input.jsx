@@ -9,7 +9,7 @@ export default function Input({
   return (
     <>
       <input
-        className={`rounded-md border-2 p-2 bg-gray-50 focus:outline-none  ${
+        className={` rounded-md border-2 p-2 bg-gray-50 focus:outline-none  ${
           error ? 'border-red-500 ' : 'focus:border-blue-500'
         }`}
         type={type || 'text'}

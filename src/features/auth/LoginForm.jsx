@@ -3,27 +3,33 @@ import {useState} from 'react';
 import validateLogin from '../../validators/validate-login';
 import Input from '../../components/Input';
 import useAuth from '../../hooks/useAuth';
+import useLoading from '../../hooks/useLoading';
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState({});
 
+  const {startLoading, stopLoading} = useLoading();
   const {login} = useAuth();
 
   const handleSubmitForm = async (e) => {
     try {
       e.preventDefault();
       const result = validateLogin({email, password});
-      console.log(result);
+
       if (result) {
         setError(result);
       } else {
         setError({});
+        startLoading();
         await login(email, password);
+        stopLoading();
       }
     } catch (err) {
-      //ERROR BOX
+      //ทำ Notification Box for Error
+    } finally {
+      stopLoading();
     }
   };
 

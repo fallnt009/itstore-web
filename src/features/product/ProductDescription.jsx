@@ -2,7 +2,7 @@ import {MdCheck} from 'react-icons/md';
 
 export default function ProductDescription() {
   return (
-    <>
+    <div>
       <div className="flex items-center">
         <span>
           <MdCheck />
@@ -27,6 +27,6 @@ export default function ProductDescription() {
         </span>
         <p>รองรับแรม 4 Slot ใส่ได้สูงสุด 3200MHz</p>
       </div>
-    </>
+    </div>
   );
 }

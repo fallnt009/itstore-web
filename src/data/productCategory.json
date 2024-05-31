@@ -7,23 +7,68 @@
         "id": 1,
         "title": "CPU",
         "name": "cpu",
-        "pathname": "/categories/components/cpu"
+        "pathname": "/categories/component/cpu"
       },
       {
         "id": 2,
         "title": "Mainboard",
         "name": "mainboard",
-        "pathname": "/categories/components/mainboard"
+        "pathname": "/categories/component/mainboard"
       },
-      {"id": 3, "title": "Ram"},
-      {"id": 4, "title": "Storage"},
-      {"id": 5, "title": "Graphic Card"},
-      {"id": 6, "title": "Case"},
-      {"id": 7, "title": "Power Supply"},
-      {"id": 8, "title": "CPU Cooler"},
-      {"id": 9, "title": "Fan"},
-      {"id": 10, "title": "Sound Card"},
-      {"id": 11, "title": "Accessories"}
+      {
+        "id": 3,
+        "title": "Ram",
+        "name": "ram",
+        "pathname": "/categories/component/ram"
+      },
+      {
+        "id": 4,
+        "title": "Storage",
+        "name": "storage",
+        "pathname": "/categories/component/storage"
+      },
+      {
+        "id": 5,
+        "title": "Graphic Card",
+        "name": "gpu",
+        "pathname": "/categories/component/gpu"
+      },
+      {
+        "id": 6,
+        "title": "Case",
+        "name": "case",
+        "pathname": "/categories/component/case"
+      },
+      {
+        "id": 7,
+        "title": "Power Supply",
+        "name": "powersupply",
+        "pathname": "/categories/component/powersupply"
+      },
+      {
+        "id": 8,
+        "title": "CPU Cooler",
+        "name": "cpucooler",
+        "pathname": "/categories/component/cpucooler"
+      },
+      {
+        "id": 9,
+        "title": "Fan",
+        "name": "fan",
+        "pathname": "/categories/component/fan"
+      },
+      {
+        "id": 10,
+        "title": "Sound Card",
+        "name": "soundcard",
+        "pathname": "/categories/component/soundcard"
+      },
+      {
+        "id": 11,
+        "title": "Accessories",
+        "name": "accessories",
+        "pathname": "/categories/component/accessories"
+      }
     ]
   },
   {

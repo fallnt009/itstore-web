@@ -39,8 +39,12 @@ export default function AuthContextProvider({children}) {
     setAuthenUser(null);
   };
 
+  const updateProfile = (data) => {
+    setAuthenUser({...authenUser, ...data});
+  };
+
   return (
-    <AuthContext.Provider value={{authenUser, login, logout}}>
+    <AuthContext.Provider value={{authenUser, login, logout, updateProfile}}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,37 +1,55 @@
-export default function ProductCard() {
+import {Link} from 'react-router-dom';
+
+import {IoMdHeartEmpty} from 'react-icons/io';
+import {FaCartArrowDown} from 'react-icons/fa';
+
+import ProductPic from './ProductPic';
+
+export default function ProductCard({product}) {
+  if (!product) {
+    return <div>No Data</div>;
+  }
+
+  const {title, description, price, productImage, ProductSubCategory} = product;
+
+  const subCategoryName =
+    ProductSubCategory?.BrandCategorySub?.SubCategory?.title || 'unknown';
+  const categoryName =
+    ProductSubCategory?.BrandCategorySub?.BrandCategory?.MainCategory?.title ||
+    'unknown';
+  console.log(ProductSubCategory);
+
   return (
-    <div className="container ">
-      <div className=" flex flex-col max-w-72 ">
-        <div>
-          <img
-            src="https://media-cdn.bnn.in.th/361919/BX8071514100F-1-square_medium.jpg"
-            style={{width: '300px', height: '300px'}}
-          />
-        </div>
-        {/* Productbox */}
-        <div className="mx-5 text-cerulean-blue-800">
-          <div className="flex">
-            <h3 className="font-medium ">Intel Core i3-14100F LGA-1700</h3>
-          </div>
-          <div className="flex mt-5">
-            <p className="font-regular text-sm">
-              3.50 GHz up to 4.70 GHz & 4 Core / 8 Threads
-            </p>
-          </div>
-          {/* Price  */}
-          <div className="font-semibold mt-5">฿4,790</div>
+    <div className="container border-t-4 py-16">
+      <div className="grid mx-7 h-full border">
+        <Link
+          to={`/categories/product/${categoryName}/${subCategoryName}/${title}`}
+        >
           <div className="flex justify-center">
-            <button
-              type="button"
-              className="bg-cerulean-blue-800 px-16 py-2 rounded-xl text-xl text-white mt-5"
-            >
-              ฿4,000
-            </button>
+            <ProductPic size="250px" src={productImage} />
           </div>
-          {/* Saving */}
-          <div className="flex justify-center mt-1 text-green-800">
-            Saving for ฿790
+          {/* Productbox */}
+          <div className=" grid text-cerulean-blue-800 mt-5 w-full">
+            <div className="flex flex-col items-start gap-3">
+              <h3 className="font-bold">{title}</h3>
+              <p className=" font-regular text-sm">{subCategoryName}</p>
+              {/* Price  */}
+              <div className=" font-bold text-2xl ">{price} THB</div>
+            </div>
           </div>
+        </Link>
+        <div className="flex items-center gap-5 mt-5">
+          {/* Add to Cart */}
+          <button
+            type="button"
+            className="rounded-full p-2 bg-cerulean-blue-800"
+          >
+            <FaCartArrowDown size={25} color="white" />
+          </button>
+          {/* Add Wishlist */}
+          <button type="button">
+            <IoMdHeartEmpty size={25} />
+          </button>
         </div>
       </div>
     </div>

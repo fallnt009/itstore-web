@@ -3,27 +3,31 @@ import {useParams} from 'react-router-dom';
 
 import ProductCategory from '../product/ProductCategory';
 
-import mainCategory from '../../data/productCategory.json';
+import * as productApi from '../../apis/product-api';
 
 export default function CategoryContainer() {
-  const {subCategoryName} = useParams();
-  const [subCategory, setSubCategory] = useState([]);
+  const {categoryName, subCategoryName} = useParams();
+  const [product, setProduct] = useState([]);
 
   useEffect(() => {
-    const fetchCategory = async () => {
+    const fetchProduct = async () => {
       try {
-        setSubCategory(mainCategory.subCategory);
-        console.log(subCategory);
+        const res = await productApi.getProductByCategory(
+          categoryName,
+          subCategoryName
+        );
+
+        setProduct(res.data.result);
       } catch (err) {
-        console.log(err);
+        console.log('Error fetching', err);
       }
     };
-    fetchCategory();
-  }, [subCategoryName]);
+    fetchProduct();
+  }, [categoryName, subCategoryName]);
 
   return (
     <div>
-      <ProductCategory subCategoryName={subCategoryName} />
+      <ProductCategory subCategoryName={subCategoryName} product={product} />
     </div>
   );
 }
