@@ -5,7 +5,7 @@ import useCart from '../../hooks/useCart';
 
 export default function CartContainer() {
   const {userCart, changeQtyCartItem, removeCartItem} = useCart();
-
+  console.log(userCart);
   return (
     <div className="container">
       <div className=" mx-10 mt-10">
@@ -31,14 +31,18 @@ export default function CartContainer() {
               </p>
             )}
             <div className="overflow-y-auto max-h-[75vh]">
-              {userCart.map((el) => (
-                <CartItem
-                  key={el.id}
-                  item={el}
-                  onQuantityChange={changeQtyCartItem}
-                  onDelete={removeCartItem}
-                />
-              ))}
+              {userCart.map(
+                (el) =>
+                  el?.id && (
+                    <CartItem
+                      key={el.id}
+                      item={el}
+                      onQuantityChange={changeQtyCartItem}
+                      onDelete={removeCartItem}
+                      limit={10}
+                    />
+                  )
+              )}
             </div>
           </div>
 

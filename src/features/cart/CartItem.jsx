@@ -2,7 +2,7 @@ import ProductPic from '../../components/ProductPic';
 
 import QuantityBox from '../../components/QuantityBox';
 
-export default function CartItem({item, onQuantityChange, onDelete}) {
+export default function CartItem({item, onQuantityChange, onDelete, limit}) {
   const {Product} = item;
 
   const handleQuantityChange = (newQty) => {
@@ -33,6 +33,7 @@ export default function CartItem({item, onQuantityChange, onDelete}) {
             <QuantityBox
               qty={Product.qtyInStock}
               initialQty={item.qty}
+              limit={limit}
               onQuantityChange={handleQuantityChange}
             />
           </div>

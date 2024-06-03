@@ -1,7 +1,12 @@
 import {useEffect, useState} from 'react';
 import {MdOutlineRemoveCircle, MdOutlineAddCircle} from 'react-icons/md';
 
-export default function QuantityBox({qty, initialQty, onQuantityChange}) {
+export default function QuantityBox({
+  qty,
+  initialQty,
+  onQuantityChange,
+  limit,
+}) {
   const [count, setCount] = useState(initialQty || 1);
 
   useEffect(() => {
@@ -9,8 +14,7 @@ export default function QuantityBox({qty, initialQty, onQuantityChange}) {
   }, [initialQty]);
 
   const increaseCount = () => {
-    //ไม่น้อยกว่า qty ของ stock
-    if (count < qty) {
+    if (count < limit) {
       const newCount = count + 1;
       setCount(newCount);
       onQuantityChange(newCount);

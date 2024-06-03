@@ -69,23 +69,29 @@ export default function CartContextProvider({children}) {
   //Add Cart
   const addCartItem = async (valueId) => {
     try {
-      //Check product id if match in cart item Product Id
-      const existItem = userCart.find((el) => el.productId === valueId);
-      //if exist update quantity by increment
-      if (existItem) {
-        const updatedCart = userCart.map((item) =>
-          item.productId === valueId ? {...item, qty: item.qty + 1} : item
-        );
-        setUserCart(updatedCart);
-        //send API
-        await CartApi.updateCartItem(existItem.id, existItem.qty + 1);
-        toast.success('Add to Cart Success');
-      } else {
-        //if not create new one +1
-        const res = await CartApi.addCartItem(valueId, 1);
-        setUserCart([...userCart, res.data.result]);
-        toast.success('Add to Cart Success');
+      //check userCart index that reach limit
+      if (userCart.length >= 10) {
+        toast.error('Cart can add only 10 items per order');
+        return;
       }
+      //find index of item in cart
+
+      const index = userCart.findIndex((item) => item.productId === valueId);
+      //if item is already  in cart update qty
+      if (index !== -1) {
+        const updatedCart = [...userCart];
+        updatedCart[index].qty++;
+        setUserCart(updatedCart);
+        await CartApi.updateCartItem(
+          updatedCart[index].id,
+          updatedCart[index].qty
+        );
+      } else {
+        //   //if the item is not in cart add it
+        const res = await CartApi.addCartItem(valueId, 1);
+        setUserCart([...userCart, res.data.result.CartItems[0]]);
+      }
+      toast.success('Add to Cart Success');
     } catch (err) {
       console.log('error adding item', err);
       toast.error('Something went wrong');
