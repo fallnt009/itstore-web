@@ -1,3 +1,4 @@
+import {ToastContainer} from 'react-toastify';
 import Spinner from './components/Spinner';
 import useLoading from './hooks/useLoading';
 
@@ -9,6 +10,7 @@ function App() {
     <>
       {loading && <Spinner />}
       <Router />
+      <ToastContainer autoClose="2000" theme="light" position="top-right" />
     </>
   );
 }

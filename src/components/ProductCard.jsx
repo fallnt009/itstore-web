@@ -5,19 +5,22 @@ import {FaCartArrowDown} from 'react-icons/fa';
 
 import ProductPic from './ProductPic';
 
+import useCart from '../hooks/useCart';
+
 export default function ProductCard({product}) {
+  const {addCartItem} = useCart();
+
   if (!product) {
     return <div>No Data</div>;
   }
 
-  const {title, description, price, productImage, ProductSubCategory} = product;
+  const {id, title, price, productImage, ProductSubCategory} = product;
 
   const subCategoryName =
     ProductSubCategory?.BrandCategorySub?.SubCategory?.title || 'unknown';
   const categoryName =
     ProductSubCategory?.BrandCategorySub?.BrandCategory?.MainCategory?.title ||
     'unknown';
-  console.log(ProductSubCategory);
 
   return (
     <div className="container border-t-4 py-16">
@@ -42,7 +45,8 @@ export default function ProductCard({product}) {
           {/* Add to Cart */}
           <button
             type="button"
-            className="rounded-full p-2 bg-cerulean-blue-800"
+            className="rounded-full p-2 bg-cerulean-blue-800 hover:bg-stone-400"
+            onClick={() => addCartItem(id)}
           >
             <FaCartArrowDown size={25} color="white" />
           </button>

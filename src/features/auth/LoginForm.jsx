@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import {toast} from 'react-toastify';
 
 import validateLogin from '../../validators/validate-login';
 import Input from '../../components/Input';
@@ -25,9 +26,11 @@ export default function LoginForm() {
         startLoading();
         await login(email, password);
         stopLoading();
+        toast.success('Login Success');
       }
     } catch (err) {
       //ทำ Notification Box for Error
+      toast.error(err.response?.data.message);
     } finally {
       stopLoading();
     }
