@@ -16,18 +16,18 @@ export default function ProductCard({product}) {
 
   const {id, title, price, productImage, ProductSubCategory} = product;
 
-  const subCategoryName =
-    ProductSubCategory?.BrandCategorySub?.SubCategory?.title || 'unknown';
-  const categoryName =
+  const subCategoryName = (
+    ProductSubCategory?.BrandCategorySub?.SubCategory?.title || 'unknown'
+  ).toLowerCase();
+  const categoryName = (
     ProductSubCategory?.BrandCategorySub?.BrandCategory?.MainCategory?.title ||
-    'unknown';
+    'unknown'
+  ).toLowerCase();
 
   return (
     <div className="container border-t-4 py-16">
       <div className="grid mx-7 h-full border">
-        <Link
-          to={`/categories/product/${categoryName}/${subCategoryName}/${title}`}
-        >
+        <Link to={`/categories/${categoryName}/${subCategoryName}/${title}`}>
           <div className="flex justify-center">
             <ProductPic size="250px" src={productImage} />
           </div>

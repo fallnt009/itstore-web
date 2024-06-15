@@ -1,31 +1,17 @@
-import {useEffect, useState} from 'react';
-import ProductDetail from '../product/ProductDetail';
+import {useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 
-import * as productApi from '../../apis/product-api';
+import useProduct from '../../hooks/useProduct';
+
+import ProductDetail from '../product/ProductDetail';
 
 export default function ProductContainer() {
   const {categoryName, subCategoryName, productName} = useParams();
-  const [productInfo, setProductInfo] = useState([]);
-  const [productSpec, setProductSpec] = useState([]);
+  const {productInfo, productSpec, setProductParams} = useProduct();
   useEffect(() => {
-    const fetchProductInfo = async () => {
-      try {
-        const productInfoRes = await productApi.getProductInfo(
-          categoryName,
-          subCategoryName,
-          productName
-        );
-        const productSpecRes = await productApi.getProductSpec(productName);
+    setProductParams({categoryName, subCategoryName, productName});
+  }, [categoryName, subCategoryName, productName, setProductParams]);
 
-        setProductSpec(productSpecRes.data.result);
-        setProductInfo(productInfoRes.data.result);
-      } catch (err) {
-        console.log('Error fetching', err);
-      }
-    };
-    fetchProductInfo();
-  }, [categoryName, subCategoryName, productName]);
   return (
     <div>
       <ProductDetail productInfo={productInfo} productSpec={productSpec} />

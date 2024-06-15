@@ -5,7 +5,10 @@ import useCart from '../../hooks/useCart';
 
 export default function CartContainer() {
   const {userCart, changeQtyCartItem, removeCartItem} = useCart();
-  console.log(userCart);
+
+  //calculate total quantity
+  const totalItem = userCart.reduce((total, item) => total + item.qty, 0);
+
   return (
     <div className="container">
       <div className=" mx-10 mt-10">
@@ -21,13 +24,13 @@ export default function CartContainer() {
           {/* ITEM LENGTH */}
           <div className="p-2  ">
             {/* need to fix cart items total */}
-            {userCart.length > 1 ? (
+            {totalItem > 1 ? (
               <p className="mx-5 p-2 text-stone-500">
-                {userCart.length} items in total
+                {totalItem} items in total
               </p>
             ) : (
               <p className="mx-5 p-2 text-stone-500">
-                {userCart.length} item in total
+                {totalItem} item in total
               </p>
             )}
             <div className="overflow-y-auto max-h-[75vh]">

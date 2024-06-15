@@ -1,50 +1,59 @@
 import ProductSpecification from './ProductSpecification';
 import ProductDescription from './ProductDescription';
-import ProductQuantity from './ProductQuantity';
 
-import ProductImage from '../../components/ProductPic';
+import ImageSlider from '../../components/ImageSlider';
+import StockStatus from '../../components/StockStatus';
+import BreadCrumb from '../../components/BreadCrumb';
+
+import useCart from '../../hooks/useCart';
 
 export default function ProductDetail({productInfo, productSpec}) {
+  const {addCartItem} = useCart();
   //Check if product info is defined
   if (!productInfo) {
     return <div>No Product avaliable</div>;
   }
 
-  const {title, price, qtyInStock, productImage, ProductSubCategory} =
+  const {id, title, price, description, qtyInStock, ProductSubCategory} =
     productInfo;
+
   const brand =
     ProductSubCategory?.BrandCategorySub?.BrandCategory?.Brand?.title ||
     'unknown';
   return (
-    <div className="container mx-5 mt-10">
+    <div className="container p-4">
       <div className="my-5">
-        <p>Home / Components / Mainboard / AM4 /ASROCK B450M STEEL LEGEND</p>
+        <BreadCrumb />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 items-center">
-        <div className="items-center">
-          <ProductImage src={productImage} size="400px" />
+      <div className="grid grid-cols-[2fr_3fr] items-center  p-2">
+        <div className="grid max-h-60vh">
+          <ImageSlider />
+          {/* <ProductImage src={productImage} size="400px" /> */}
         </div>
         {/* Title */}
-        <div className="items-center">
+        <div className="grid mx-10 items-center  text-cerulean-blue-800">
           <div>
-            <h1 className="text-4xl text-cerulean-blue-800 font-semibold ">
-              {title}
-            </h1>
+            <h1 className="text-4xl  font-semibold ">{title}</h1>
             {/* Brand */}
-            <p className=" text-lg ml-1 mt-2 text-cerulean-blue-800">{brand}</p>
+            <p className=" text-lg ml-1 mt-2 ">{brand}</p>
           </div>
           {/* Price */}
-          <div className="my-5 text-2xl text-cerulean-blue-800 font-semibold ">
+          <div className="my-5 text-2xl  font-semibold ">
             <h1>฿{price}</h1>
           </div>
           {/*Description box*/}
-          <div className="my-5 text-cerulean-blue-800">
-            <ProductDescription />
+          <div className="">
+            <ProductDescription description={description} />
           </div>
-          {/* Checkout Box */}
-          <div className="flex gap-6 my-10 text-cerulean-blue-800">
-            <ProductQuantity qty={qtyInStock} />
+          <div className="mt-5 border-2 rounded-lg p-4">
+            <StockStatus qtyInStock={qtyInStock} />
           </div>
+          <button
+            className="flex justify-center  font-bold text-sm bg-cerulean-blue-800 px-6 py-5 rounded-full text-white mt-5 hover:bg-stone-400"
+            onClick={() => addCartItem(id)}
+          >
+            <div className="text-lg">Add to Cart</div>
+          </button>
         </div>
       </div>
       <div className="m-2 mt-10">

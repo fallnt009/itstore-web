@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom';
+
 export default function CartSummaryForm({cart}) {
   //Calculate total price and items
   const totalItemPrice = cart.reduce(
@@ -44,9 +46,12 @@ export default function CartSummaryForm({cart}) {
         <div className="text-stone-700 text-sm mt-5 ">
           By clicking "check out" to proceed your order
         </div>
-        <button className="flex justify-center font-bold text-sm bg-cerulean-blue-800 px-6 py-5 rounded-full text-white mt-5">
+        <Link
+          to={'/checkout/details'}
+          className="flex justify-center font-bold text-sm bg-cerulean-blue-800 px-6 py-5 rounded-full text-white mt-5"
+        >
           <div className="text-lg">Go to Checkout</div>
-        </button>
+        </Link>
       </div>
     </div>
   );

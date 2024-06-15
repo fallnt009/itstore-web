@@ -20,7 +20,9 @@ export default function Header() {
         {authenUser ? (
           <Link to={'/yourcart'}>
             <div className="flex-2 mx-4 hover:bg-cerulean-blue-800 hover:text-white rounded-full p-2">
-              <MdShoppingCart size={35} />
+              <div className="flex">
+                <MdShoppingCart size={35} />
+              </div>
             </div>
           </Link>
         ) : (

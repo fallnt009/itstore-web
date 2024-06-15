@@ -2,22 +2,17 @@ import {Outlet} from 'react-router-dom';
 
 import Header from './headers/Header';
 import Navbar from './navbars/Navbar';
-import Sidebar from './navbars/Sidebar';
-import Footer from './footers/Footer';
+import PanelMenu from '../features/admin/PanelMenu';
 
-export default function MainLayout() {
+export default function AdminLayout() {
   return (
     <div className="container">
       <Header />
       <Navbar />
-      <div>
-        <div>
-          <Sidebar />
-        </div>
-
+      <div className="grid grid-cols-[1fr_4fr]">
+        <PanelMenu />
         <Outlet />
       </div>
-      <Footer />
     </div>
   );
 }

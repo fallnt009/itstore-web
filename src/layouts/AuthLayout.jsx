@@ -1,18 +1,16 @@
 import {Outlet} from 'react-router-dom';
 
 import Header from './headers/Header';
-import Navbar from './navbars/Navbar';
+// import Navbar from './navbars/Navbar';
 import Footer from './footers/Footer';
 
 export default function AuthLayout() {
   return (
-    <div>
+    <div className="container">
       <Header />
-      <Navbar />
-      <div>
-        <div>
-          <Outlet />
-        </div>
+      {/* <Navbar /> */}
+      <div className="mt-11">
+        <Outlet />
       </div>
       <Footer />
     </div>

@@ -10,9 +10,9 @@ export default function Navbar() {
   ];
 
   return (
-    <div>
+    <>
       <div className="bg-cerulean-blue-800 ">
-        <div className="flex justify-around mx-10 text-center content-center p-3 text-xl font-semibold text-white">
+        <div className="flex justify-around text-center content-center p-3 text-xl font-semibold text-white">
           {newNav.map((el) => (
             <NavbarItem key={el.id} to={el.pathname}>
               {el.title}
@@ -20,6 +20,6 @@ export default function Navbar() {
           ))}
         </div>
       </div>
-    </div>
+    </>
   );
 }
