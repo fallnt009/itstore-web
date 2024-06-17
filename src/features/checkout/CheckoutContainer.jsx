@@ -1,12 +1,25 @@
+import {useState} from 'react';
 import {Outlet} from 'react-router-dom';
 
 import CheckoutBreadCrumb from './CheckoutBreadCrumb';
 import CheckoutSummary from './CheckoutSummary';
 
 import useCart from '../../hooks/useCart';
+import SideDrawer from '../../components/SideDrawer';
 
 export default function CheckoutContainer() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [drawerContent, setDrawerContent] = useState(null);
+
   const {userCart} = useCart();
+
+  const openDrawerWithContent = (content) => {
+    setDrawerContent(content);
+    setIsOpen(true);
+  };
+  const closeDrawer = () => {
+    setIsOpen(false);
+  };
 
   return (
     <div className="container ">
@@ -15,9 +28,12 @@ export default function CheckoutContainer() {
           <CheckoutBreadCrumb />
         </div>
         <div className="grid grid-cols-[2fr_1fr] p-5">
-          <Outlet />
+          <Outlet context={[openDrawerWithContent, closeDrawer]} />
           <CheckoutSummary userCart={userCart} />
         </div>
+        <SideDrawer isOpen={isOpen} onClose={closeDrawer}>
+          {drawerContent}
+        </SideDrawer>
       </div>
     </div>
   );

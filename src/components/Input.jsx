@@ -5,6 +5,7 @@ export default function Input({
   value,
   onChange,
   error,
+  maxLength,
 }) {
   return (
     <>
@@ -17,6 +18,7 @@ export default function Input({
         name={name}
         value={value}
         onChange={onChange}
+        maxLength={maxLength}
       />
       {error && <div className="text-red-500">{error}</div>}
     </>

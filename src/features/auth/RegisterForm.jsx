@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import {toast} from 'react-toastify';
 
 import validateRegister from '../../validators/validate-register';
 import Input from '../../components/Input';
@@ -34,12 +35,13 @@ export default function RegisterForm() {
         setError({});
         startLoading();
         await authApi.register(input);
-        stopLoading();
         setInput(initialInput);
+        stopLoading();
+        toast.success('Register Success');
       }
     } catch (err) {
       //ทำ Notification Box for Error
-      console.log(err);
+      toast.error(err.response?.data.message);
     } finally {
       stopLoading();
     }

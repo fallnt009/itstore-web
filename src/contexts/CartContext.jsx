@@ -24,7 +24,8 @@ export default function CartContextProvider({children}) {
       startLoading();
       try {
         const res = await CartApi.getMyCart();
-        setUserCart(res.data.result[0].CartItems);
+        const cartItems = res.data.result[0].CartItems;
+        setUserCart(cartItems);
       } catch (err) {
         console.log('Error fetching', err);
       } finally {

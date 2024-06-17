@@ -7,6 +7,7 @@ import AuthContextProvider from './contexts/AuthContext';
 import LoadingContextProvider from './contexts/LoadingContext';
 import CartContextProvider from './contexts/CartContext';
 import ProductContextProvider from './contexts/ProductContext';
+import AddressContextProvider from './contexts/AddressContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,7 +16,9 @@ root.render(
       <AuthContextProvider>
         <CartContextProvider>
           <ProductContextProvider>
-            <App />
+            <AddressContextProvider>
+              <App />
+            </AddressContextProvider>
           </ProductContextProvider>
         </CartContextProvider>
       </AuthContextProvider>

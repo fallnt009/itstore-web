@@ -1,4 +1,7 @@
 import {Link} from 'react-router-dom';
+import {NumericFormat} from 'react-number-format';
+
+import {VAT_PERCENTAGE, DELIVERY_FEE} from '../../config/store';
 
 export default function CartSummaryForm({cart}) {
   //Calculate total price and items
@@ -6,15 +9,10 @@ export default function CartSummaryForm({cart}) {
     (total, item) => total + parseFloat(item.Product.price) * item.qty,
     0
   );
-
   //define delivery and vat price
-  const deliveryPrice = 90;
-  const vatPercentage = 7;
-  const vatPrice = (totalItemPrice + deliveryPrice) * (vatPercentage / 100);
-
+  const vatPrice = (totalItemPrice + DELIVERY_FEE) * (VAT_PERCENTAGE / 100);
   //Calculate total
-
-  const realTotal = totalItemPrice + deliveryPrice + vatPrice;
+  const realTotal = totalItemPrice + DELIVERY_FEE + vatPrice;
 
   return (
     <div className="container">
@@ -25,21 +23,48 @@ export default function CartSummaryForm({cart}) {
           <div className="flex justify-between">
             <div>Products({cart.length})</div>
             {/* price total */}
-            <div>{totalItemPrice.toFixed(2)}THB</div>
+            <div>
+              <NumericFormat
+                value={totalItemPrice}
+                displayType="text"
+                thousandSeparator=","
+              />{' '}
+              THB
+            </div>
           </div>
           <div className="flex justify-between">
             <div>Delivery price</div>
-            <div>{deliveryPrice}THB</div>
+            <div>
+              <NumericFormat
+                value={DELIVERY_FEE}
+                displayType="text"
+                thousandSeparator=","
+              />{' '}
+              THB
+            </div>
           </div>
           <div className="flex justify-between">
-            <div>Vat {vatPercentage}%</div>
-            <div>{vatPrice.toFixed(2)}THB</div>
+            <div>Vat {VAT_PERCENTAGE}%</div>
+            <div>
+              <NumericFormat
+                value={vatPrice}
+                displayType="text"
+                thousandSeparator=","
+              />{' '}
+              THB
+            </div>
           </div>
         </div>
         <div className="flex justify-between border-t-2 border-black mt-5 pt-5 text-2xl font-semibold items-baseline">
           <div>Total</div>
           <div className="flex gap-1 items-baseline">
-            <div className="text-3xl">{realTotal.toFixed(2)}</div>
+            <div className="text-3xl">
+              <NumericFormat
+                value={realTotal}
+                displayType="text"
+                thousandSeparator=","
+              />
+            </div>
             <div className=" flex text-sm items-end">THB</div>
           </div>
         </div>
