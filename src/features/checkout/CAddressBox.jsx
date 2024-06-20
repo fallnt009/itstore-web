@@ -1,7 +1,8 @@
-export default function CAddressBox({selectedAddress}) {
-  if (!selectedAddress) {
+export default function CAddressBox({defaultAddress}) {
+  if (!defaultAddress || Object.keys(defaultAddress).length === 0) {
     return <div className="text-stone-600">Please select your address </div>;
   }
+
   const {
     fullName,
     phoneNumber,
@@ -9,7 +10,7 @@ export default function CAddressBox({selectedAddress}) {
     addressLine2,
     postalCode,
     province,
-  } = selectedAddress;
+  } = defaultAddress;
   return (
     <ul className="text-stone-600">
       <li>{fullName}</li>

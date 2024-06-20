@@ -51,7 +51,7 @@ export default function CartContainer() {
 
           {/* proceed to check out */}
           <div>
-            <CartSummaryForm cart={userCart} />
+            <CartSummaryForm cart={userCart} totalItem={totalItem} />
           </div>
         </div>
       </div>

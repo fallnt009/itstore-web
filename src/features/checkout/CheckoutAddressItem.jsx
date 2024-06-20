@@ -1,9 +1,10 @@
 export default function CheckoutAddressItem({
   addressItem,
-  isSelected,
-  onSelect,
+  selectedId,
+  setSelectedId,
 }) {
   const {
+    id,
     fullName,
     phoneNumber,
     addressLine1,
@@ -12,17 +13,16 @@ export default function CheckoutAddressItem({
     province,
   } = addressItem;
 
-  const handleSelect = (e) => {
-    e.preventDefault();
-    onSelect(addressItem);
+  const handleSelect = (addrId) => {
+    setSelectedId(addrId);
   };
 
   return (
     <div
       className={`container border-2 hover:border-cerulean-blue-800 cursor-pointer rounded-lg p-4 ${
-        isSelected ? 'border-cerulean-blue-800' : ''
+        selectedId ? 'border-cerulean-blue-800' : ''
       }`}
-      onClick={handleSelect}
+      onClick={() => handleSelect(id)}
     >
       <ul className="text-stone-600">
         <li>{fullName}</li>

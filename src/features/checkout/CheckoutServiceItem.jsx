@@ -1,17 +1,31 @@
-export default function CheckoutServiceItem({select, setSelect}) {
+export default function CheckoutServiceItem({
+  select,
+  setSelect,
+  setSelectItem,
+  item,
+}) {
+  const {name, price, description} = item;
+
+  const handleOnclick = (item) => {
+    setSelect(true);
+    setSelectItem(item);
+  };
   return (
     <div
       className={`flex flex-col gap-1 mt-5 border-2 p-3 py-4 rounded-lg hover:border-cerulean-blue-800 cursor-pointer ${
         select ? 'border-cerulean-blue-800' : ''
       }`}
-      onClick={() => setSelect(true)}
-      value="parcel"
+      onClick={() => handleOnclick(item)}
     >
       <div className="flex justify-between">
-        <h4 className="font-semibold ">Parcel Delivery</h4>
-        <h4 className="font-semibold ">99 thb</h4>
+        <h4 className="font-semibold ">{name}</h4>
+        {price ? <h4 className="font-semibold ">{price} THB</h4> : ''}
       </div>
-      <p className="text-sm text-stone-600">Delivered within 3-5 days</p>
+      {description ? (
+        <p className="text-sm text-stone-600">{description}</p>
+      ) : (
+        ''
+      )}
     </div>
   );
 }

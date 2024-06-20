@@ -2,7 +2,7 @@ export default function SideDrawer({children, isOpen, onClose}) {
   return (
     <main
       className={
-        'fixed overflow-hidden z-50  bg-opacity-25 inset-0 trasform ease-in-out' +
+        'fixed overflow-hidden z-25  bg-opacity-25 inset-0 trasform ease-in-out' +
         (isOpen
           ? 'transition-opacity opacity-100 duration-500 translate-x-0'
           : 'transition-all delay-500 opacity-0 translate-x-full')

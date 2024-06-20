@@ -1,18 +1,23 @@
+import {useState} from 'react';
 import useAddress from '../../hooks/useAddress';
 
 import CheckoutAddressList from '../checkout/CheckoutAddressList';
 import CAddressForm from './CAddressForm';
 
-export default function CheckoutAddress({openDrawerWithContent, onClose}) {
-  const {address, addAddress, selectedAddress, setDefaultAddress} =
-    useAddress();
+export default function CheckoutAddress({
+  openDrawerWithContent,
+  onClose,
+  setSelect,
+}) {
+  const {address, addAddress, defaultAddress, setDefaultAddress} = useAddress();
+
+  const [selectedId, setSelectedId] = useState(defaultAddress.id);
 
   const handleAddAddress = async (addressId) => {
     setDefaultAddress(addressId);
+    setSelect(true);
     onClose();
   };
-
-  const {id} = selectedAddress;
 
   return (
     <div className="flex flex-col mx-5">
@@ -32,20 +37,30 @@ export default function CheckoutAddress({openDrawerWithContent, onClose}) {
         </button>
         <div className="py-8">
           {address && address.length > 0 ? (
-            <CheckoutAddressList address={address} />
+            <CheckoutAddressList
+              address={address}
+              setSelectedId={setSelectedId}
+              selectedId={selectedId}
+            />
           ) : (
             <div className="flex justify-center text-stone-600">
               Your saved address is empty. Please add new address
             </div>
           )}
         </div>
-        <button
-          type="submit"
-          className="flex justify-center rounded-full border-2 py-4 px-5 text-white bg-cerulean-blue-800 font-semibold"
-          onClick={() => handleAddAddress(id)}
-        >
-          Use this address
-        </button>
+        {selectedId ? (
+          <button
+            type="submit"
+            className="flex justify-center rounded-full border-2 py-4 px-5 text-white bg-cerulean-blue-800 font-semibold"
+            onClick={() => handleAddAddress(selectedId)}
+          >
+            Use this address
+          </button>
+        ) : (
+          <div className="flex justify-center rounded-full border-2 py-4 px-5  bg-stone-300 text-stone-500 ">
+            Use this address
+          </div>
+        )}
       </div>
     </div>
   );

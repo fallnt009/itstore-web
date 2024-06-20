@@ -1,15 +1,19 @@
-import {createContext, useState, useEffect} from 'react';
+import {createContext, useEffect, useReducer} from 'react';
+import * as AddressApi from '../apis/address-api';
 
 import useLoading from '../hooks/useLoading';
 
-import * as AddressApi from '../apis/address-api';
+import addressReducer, {
+  ADD_ADDRESS,
+  EDIT_ADDRESS,
+  SET_DEFAULT_ADDRESS,
+} from '../reducers/addressReducer';
+import {INIT_ADDRESS, FETCH_ADDRESS} from '../reducers/addressReducer';
 
 const AddressContext = createContext();
 
 export default function AddressContextProvider({children}) {
-  //address data and selected address
-  const [address, setAddress] = useState([]);
-  const [selectedAddress, setSelectedAddress] = useState({});
+  const [AllAddress, dispatch] = useReducer(addressReducer, INIT_ADDRESS);
 
   const {startLoading, stopLoading} = useLoading();
 
@@ -18,10 +22,11 @@ export default function AddressContextProvider({children}) {
     const fetchMyAddress = async () => {
       try {
         const res = await AddressApi.getMyAddress();
-        const address = res.data.result;
-        setAddress(address);
-        // const defaultAddress = address.find((el) => el.UserAddresses);
-        // console.log(defaultAddress);
+
+        dispatch({
+          type: FETCH_ADDRESS,
+          payload: {address: res.data?.result},
+        });
       } catch (err) {
         console.log('error fetch address');
       }
@@ -33,36 +38,54 @@ export default function AddressContextProvider({children}) {
   const addAddress = async (newAddress) => {
     try {
       const res = await AddressApi.createAddress(newAddress);
-      const createdAddress = res.data.result;
-      setAddress([...address, createdAddress]);
+      dispatch({
+        type: ADD_ADDRESS,
+        payload: {newAddress: res.data.result},
+      });
     } catch (err) {
       console.log(err);
     }
   };
 
   //update Address
+  const updateAddress = async (addressId, updatedAddress) => {
+    try {
+      const res = await AddressApi.updateAddress(addressId, updatedAddress);
+      dispatch({
+        type: EDIT_ADDRESS,
+        payload: {id: addressId, updatedAddress: res.data.result},
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  //delete Address
 
   //set default
   const setDefaultAddress = async (addressId) => {
     try {
       startLoading();
       const res = await AddressApi.updateDefault(addressId);
-      setSelectedAddress(res.data.result);
+      dispatch({
+        type: SET_DEFAULT_ADDRESS,
+        payload: {address: res.data.result},
+      });
     } catch (err) {
       console.log(err);
     } finally {
       stopLoading();
     }
   };
-  //delete Address
+  //selectAddress
 
   return (
     <AddressContext.Provider
       value={{
-        address,
-        selectedAddress,
-        setSelectedAddress,
+        address: AllAddress.address,
+        defaultAddress: AllAddress.defaultAddress,
         addAddress,
+        updateAddress,
         setDefaultAddress,
       }}
     >

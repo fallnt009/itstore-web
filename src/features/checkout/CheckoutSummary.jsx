@@ -2,14 +2,15 @@ import {VAT_PERCENTAGE, DELIVERY_FEE} from '../../config/store';
 import {NumericFormat} from 'react-number-format';
 
 import CheckoutProduct from './CheckoutProduct';
+import CAddressBox from './CAddressBox';
 
-export default function CheckoutSummary({userCart}) {
+export default function CheckoutSummary({userCart, defaultAddress}) {
   //Calculate total price and items
   const totalItemPrice = userCart.reduce(
     (total, item) => total + parseFloat(item.Product.price) * item.qty,
     0
   );
-  //define delivery and vat price
+  //Define delivery and vat price
   const vatPrice = (totalItemPrice + DELIVERY_FEE) * (VAT_PERCENTAGE / 100);
   //Calculate total
   const realTotal = totalItemPrice + DELIVERY_FEE + vatPrice;
@@ -33,7 +34,9 @@ export default function CheckoutSummary({userCart}) {
         </div>
         <div className="flex flex-col gap-1 border-t-2  py-4">
           <h4 className="font-semibold">Delivery Information</h4>
-          <div>My Address</div>
+          <div>
+            <CAddressBox defaultAddress={defaultAddress} />
+          </div>
         </div>
         <div className="flex flex-col gap-1 border-t-2  py-4">
           <h4 className="font-semibold">Delivery Method</h4>

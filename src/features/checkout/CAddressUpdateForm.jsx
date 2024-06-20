@@ -7,19 +7,30 @@ import validateAddress from '../../validators/validate-address';
 
 import useLoading from '../../hooks/useLoading';
 
-import * as AddressApi from '../../apis/address-api';
+export default function CAddressUpdateForm({
+  defaultAddress,
+  onClose,
+  updateAddress,
+}) {
+  const {
+    id,
+    fullName,
+    phoneNumber,
+    addressLine1,
+    addressLine2,
+    postalCode,
+    province,
+  } = defaultAddress;
 
-const dataForm = {
-  fullName: '',
-  phoneNumber: '',
-  addressLine1: '',
-  addressLine2: '',
-  province: '',
-  postalCode: '',
-};
+  const [input, setInput] = useState({
+    fullName: fullName,
+    phoneNumber: phoneNumber,
+    addressLine1: addressLine1,
+    addressLine2: addressLine2,
+    province: province,
+    postalCode: postalCode,
+  });
 
-export default function CAddressUpdateForm() {
-  const [input, setInput] = useState(dataForm);
   const [error, setError] = useState({});
 
   const {startLoading, stopLoading} = useLoading();
@@ -37,23 +48,23 @@ export default function CAddressUpdateForm() {
       } else {
         setError({});
         startLoading();
-        // await create
-        await AddressApi.createAddress(input);
-        setInput(dataForm);
+        await updateAddress(id, input);
         stopLoading();
-        toast.success('Create Success');
+
+        toast.success('Update Success');
       }
     } catch (err) {
       toast.error(err.response?.data.message);
     } finally {
       stopLoading();
+      onClose();
     }
   };
 
   return (
     <form className="flex flex-col gap-5 mx-5 " onSubmit={handleSubmitForm}>
       <header className="flex flex-col p-5 font-semibold text-lg mx-5">
-        <h4 className="flex justify-center p-2 pb-5">Add new address</h4>
+        <h4 className="flex justify-center p-2 pb-5">Edit new address</h4>
         <p className="text-sm font-normal text-stone-600">
           All information will be saved to your account, for easy access the
           next time you need it.

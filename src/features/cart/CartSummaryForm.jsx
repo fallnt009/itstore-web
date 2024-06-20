@@ -3,7 +3,7 @@ import {NumericFormat} from 'react-number-format';
 
 import {VAT_PERCENTAGE, DELIVERY_FEE} from '../../config/store';
 
-export default function CartSummaryForm({cart}) {
+export default function CartSummaryForm({cart, totalItem}) {
   //Calculate total price and items
   const totalItemPrice = cart.reduce(
     (total, item) => total + parseFloat(item.Product.price) * item.qty,
@@ -21,7 +21,7 @@ export default function CartSummaryForm({cart}) {
         {/* Show product and price */}
         <div className=" text-stone-700 text-md mt-5 ">
           <div className="flex justify-between">
-            <div>Products({cart.length})</div>
+            <div>Products({totalItem})</div>
             {/* price total */}
             <div>
               <NumericFormat

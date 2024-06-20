@@ -6,12 +6,14 @@ import CheckoutSummary from './CheckoutSummary';
 
 import useCart from '../../hooks/useCart';
 import SideDrawer from '../../components/SideDrawer';
+import useAddress from '../../hooks/useAddress';
 
 export default function CheckoutContainer() {
   const [isOpen, setIsOpen] = useState(false);
   const [drawerContent, setDrawerContent] = useState(null);
 
   const {userCart} = useCart();
+  const {defaultAddress} = useAddress();
 
   const openDrawerWithContent = (content) => {
     setDrawerContent(content);
@@ -29,7 +31,10 @@ export default function CheckoutContainer() {
         </div>
         <div className="grid grid-cols-[2fr_1fr] p-5">
           <Outlet context={[openDrawerWithContent, closeDrawer]} />
-          <CheckoutSummary userCart={userCart} />
+          <CheckoutSummary
+            userCart={userCart}
+            defaultAddress={defaultAddress}
+          />
         </div>
         <SideDrawer isOpen={isOpen} onClose={closeDrawer}>
           {drawerContent}

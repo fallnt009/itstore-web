@@ -40,12 +40,12 @@ export default function CAddressForm({onClose, addAddress}) {
         setInput(dataForm);
         stopLoading();
         toast.success('Create Success');
-        onClose();
       }
     } catch (err) {
       toast.error(err.response?.data.message);
     } finally {
       stopLoading();
+      onClose();
     }
   };
 

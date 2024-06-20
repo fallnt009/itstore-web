@@ -1,10 +1,17 @@
 import {useState} from 'react';
 import {Link} from 'react-router-dom';
 
-import CheckoutPaymentItem from './CheckoutPaymentItem';
+import {PAYMENT_METHOD} from '../../config/store';
+
+import ActiveButton from '../../components/ActiveButton';
+
+import CheckoutServiceItem from './CheckoutServiceItem';
 
 export default function CheckoutPayment() {
   const [select, setSelect] = useState(false);
+  const [selectItem, setSelectItem] = useState({});
+
+  console.log(selectItem);
 
   return (
     <div className="container grid ">
@@ -13,18 +20,24 @@ export default function CheckoutPayment() {
           <h1 className="font-semibold text-3xl">How would you like to pay?</h1>
         </div>
         <div>
-          <CheckoutPaymentItem select={select} setSelect={setSelect} />
+          {PAYMENT_METHOD.map((item) => (
+            <CheckoutServiceItem
+              select={select}
+              setSelect={setSelect}
+              setSelectItem={setSelectItem}
+              item={item}
+              key={item.id}
+            />
+          ))}
           <div className=" border-t-2 mt-9 font-semibold ">
             <div className="flex flex-col justify-center gap-3 mt-5">
-              {select ? (
-                <Link className="flex justify-center rounded-full border-2 py-4 px-5 text-white bg-cerulean-blue-800  ">
-                  Proceed to payment
-                </Link>
-              ) : (
-                <div className="flex justify-center rounded-full border-2 py-4 px-5  bg-stone-300 text-stone-500 ">
-                  Proceed to payment
-                </div>
-              )}
+              <ActiveButton
+                select={select}
+                to={''}
+                activeTitle="Proceed to payment"
+                inActiveTitle="Proceed to payment"
+              />
+
               <Link
                 to={'/checkout/services'}
                 className="flex justify-center py-4 px-5 border-black "
