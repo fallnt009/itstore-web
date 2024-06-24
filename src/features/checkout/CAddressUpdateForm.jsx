@@ -64,7 +64,7 @@ export default function CAddressUpdateForm({
   return (
     <form className="flex flex-col gap-5 mx-5 " onSubmit={handleSubmitForm}>
       <header className="flex flex-col p-5 font-semibold text-lg mx-5">
-        <h4 className="flex justify-center p-2 pb-5">Edit new address</h4>
+        <h4 className="flex justify-center p-2 pb-5">Edit default address</h4>
         <p className="text-sm font-normal text-stone-600">
           All information will be saved to your account, for easy access the
           next time you need it.

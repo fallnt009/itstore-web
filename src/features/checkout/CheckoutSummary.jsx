@@ -4,7 +4,11 @@ import {NumericFormat} from 'react-number-format';
 import CheckoutProduct from './CheckoutProduct';
 import CAddressBox from './CAddressBox';
 
+import useCheckout from '../../hooks/useCheckout';
+
 export default function CheckoutSummary({userCart, defaultAddress}) {
+  const {finalCart, finalAddress, finalParcel, finalPayment} = useCheckout();
+
   //Calculate total price and items
   const totalItemPrice = userCart.reduce(
     (total, item) => total + parseFloat(item.Product.price) * item.qty,
@@ -42,7 +46,7 @@ export default function CheckoutSummary({userCart, defaultAddress}) {
           <h4 className="font-semibold">Delivery Method</h4>
           <div>For preview parcel</div>
         </div>
-        <CheckoutProduct userCart={userCart} />
+        <CheckoutProduct finalCart={finalCart} />
       </div>
     </div>
   );

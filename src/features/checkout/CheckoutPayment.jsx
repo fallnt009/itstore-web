@@ -2,6 +2,7 @@ import {useState} from 'react';
 import {Link} from 'react-router-dom';
 
 import {PAYMENT_METHOD} from '../../config/store';
+import useCheckout from '../../hooks/useCheckout';
 
 import ActiveButton from '../../components/ActiveButton';
 
@@ -11,7 +12,7 @@ export default function CheckoutPayment() {
   const [select, setSelect] = useState(false);
   const [selectItem, setSelectItem] = useState({});
 
-  console.log(selectItem);
+  const {selectPayment} = useCheckout();
 
   return (
     <div className="container grid ">
@@ -36,6 +37,7 @@ export default function CheckoutPayment() {
                 to={''}
                 activeTitle="Proceed to payment"
                 inActiveTitle="Proceed to payment"
+                onClick={() => selectPayment(selectItem)}
               />
 
               <Link

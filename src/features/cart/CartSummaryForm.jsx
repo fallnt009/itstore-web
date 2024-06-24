@@ -1,9 +1,16 @@
 import {Link} from 'react-router-dom';
 import {NumericFormat} from 'react-number-format';
 
+import useCheckout from '../../hooks/useCheckout';
+import useCart from '../../hooks/useCart';
+
 import {VAT_PERCENTAGE, DELIVERY_FEE} from '../../config/store';
+import {CHECKOUT_DETAIL} from '../../config/routing';
 
 export default function CartSummaryForm({cart, totalItem}) {
+  const {userCart} = useCart();
+  const {selectCart} = useCheckout();
+
   //Calculate total price and items
   const totalItemPrice = cart.reduce(
     (total, item) => total + parseFloat(item.Product.price) * item.qty,
@@ -13,6 +20,10 @@ export default function CartSummaryForm({cart, totalItem}) {
   const vatPrice = (totalItemPrice + DELIVERY_FEE) * (VAT_PERCENTAGE / 100);
   //Calculate total
   const realTotal = totalItemPrice + DELIVERY_FEE + vatPrice;
+
+  const handleOnClickCart = () => {
+    selectCart(userCart);
+  };
 
   return (
     <div className="container">
@@ -72,8 +83,9 @@ export default function CartSummaryForm({cart, totalItem}) {
           By clicking "check out" to proceed your order
         </div>
         <Link
-          to={'/checkout/details'}
+          to={CHECKOUT_DETAIL}
           className="flex justify-center font-bold text-sm bg-cerulean-blue-800 px-6 py-5 rounded-full text-white mt-5"
+          onClick={handleOnClickCart}
         >
           <div className="text-lg">Go to Checkout</div>
         </Link>

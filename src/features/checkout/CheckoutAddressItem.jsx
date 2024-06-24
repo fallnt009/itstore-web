@@ -1,3 +1,6 @@
+import {MdDeleteOutline} from 'react-icons/md';
+import useAddress from '../../hooks/useAddress';
+
 export default function CheckoutAddressItem({
   addressItem,
   selectedId,
@@ -13,6 +16,8 @@ export default function CheckoutAddressItem({
     province,
   } = addressItem;
 
+  const {deleteAddress} = useAddress();
+
   const handleSelect = (addrId) => {
     setSelectedId(addrId);
   };
@@ -25,7 +30,12 @@ export default function CheckoutAddressItem({
       onClick={() => handleSelect(id)}
     >
       <ul className="text-stone-600">
-        <li>{fullName}</li>
+        <div className="flex items-center justify-between">
+          {fullName}
+          <span onClick={() => deleteAddress(id)}>
+            <MdDeleteOutline size={25} />
+          </span>
+        </div>
         <ul className="py-2">
           <li>{addressLine1}</li>
           <li>{addressLine2}</li>

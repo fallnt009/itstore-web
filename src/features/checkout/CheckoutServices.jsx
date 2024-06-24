@@ -4,6 +4,8 @@ import {Link} from 'react-router-dom';
 import {PARCEL_SERVICE} from '../../config/store';
 import {CHECKOUT_PAYMENT} from '../../config/routing';
 
+import useCheckout from '../../hooks/useCheckout';
+
 import ActiveButton from '../../components/ActiveButton';
 
 import CheckoutServiceItem from './CheckoutServiceItem';
@@ -12,7 +14,8 @@ export default function CheckoutServices() {
   const [select, setSelect] = useState(false);
   const [selectItem, setSelectItem] = useState({});
 
-  //data that selected
+  const {selectParcel} = useCheckout();
+
   return (
     <div className="container grid ">
       <div className="mx-24">
@@ -40,6 +43,7 @@ export default function CheckoutServices() {
                 to={CHECKOUT_PAYMENT}
                 activeTitle="Proceed to payment"
                 inActiveTitle="Proceed to payment"
+                onClick={() => selectParcel(selectItem)}
               />
 
               <Link

@@ -2,19 +2,23 @@ import {createContext, useEffect, useReducer} from 'react';
 import * as AddressApi from '../apis/address-api';
 
 import useLoading from '../hooks/useLoading';
+import useAuth from '../hooks/useAuth';
 
 import addressReducer, {
+  INIT_ADDRESS,
+  FETCH_ADDRESS,
   ADD_ADDRESS,
+  DELETE_ADDRESS,
   EDIT_ADDRESS,
   SET_DEFAULT_ADDRESS,
 } from '../reducers/addressReducer';
-import {INIT_ADDRESS, FETCH_ADDRESS} from '../reducers/addressReducer';
 
 const AddressContext = createContext();
 
 export default function AddressContextProvider({children}) {
   const [AllAddress, dispatch] = useReducer(addressReducer, INIT_ADDRESS);
 
+  const {authenUser} = useAuth();
   const {startLoading, stopLoading} = useLoading();
 
   //fetch address
@@ -22,7 +26,8 @@ export default function AddressContextProvider({children}) {
     const fetchMyAddress = async () => {
       try {
         const res = await AddressApi.getMyAddress();
-
+        const data = res.data?.result;
+        console.log(data);
         dispatch({
           type: FETCH_ADDRESS,
           payload: {address: res.data?.result},
@@ -31,8 +36,10 @@ export default function AddressContextProvider({children}) {
         console.log('error fetch address');
       }
     };
-    fetchMyAddress();
-  }, []);
+    if (authenUser) {
+      fetchMyAddress();
+    }
+  }, [authenUser]);
 
   //create Address
   const addAddress = async (newAddress) => {
@@ -61,6 +68,20 @@ export default function AddressContextProvider({children}) {
   };
 
   //delete Address
+  const deleteAddress = async (addressId) => {
+    try {
+      startLoading();
+      await AddressApi.deleteAddress(addressId);
+      dispatch({
+        type: DELETE_ADDRESS,
+        payload: {id: addressId},
+      });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      stopLoading();
+    }
+  };
 
   //set default
   const setDefaultAddress = async (addressId) => {
@@ -77,7 +98,6 @@ export default function AddressContextProvider({children}) {
       stopLoading();
     }
   };
-  //selectAddress
 
   return (
     <AddressContext.Provider
@@ -86,6 +106,7 @@ export default function AddressContextProvider({children}) {
         defaultAddress: AllAddress.defaultAddress,
         addAddress,
         updateAddress,
+        deleteAddress,
         setDefaultAddress,
       }}
     >

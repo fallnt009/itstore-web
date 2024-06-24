@@ -5,6 +5,7 @@ import {HOME, CHECKOUT_SERVICES} from '../../config/routing';
 
 import useAuth from '../../hooks/useAuth';
 import useAddress from '../../hooks/useAddress';
+import useCheckout from '../../hooks/useCheckout';
 
 import CheckoutAddress from './CheckoutAddress';
 import CAddressBox from './CAddressBox';
@@ -17,6 +18,7 @@ export default function CheckoutDetails() {
 
   const {authenUser} = useAuth();
   const {defaultAddress, updateAddress} = useAddress();
+  const {selectAddress} = useCheckout();
 
   useEffect(() => {
     const hasDefaultAddress = Object.keys(defaultAddress || {}).length !== 0;
@@ -38,7 +40,7 @@ export default function CheckoutDetails() {
           <div className="flex justify-between items-center mt-5">
             <h4 className="font-semibold text-lg">Delivery Address</h4>
             <button
-              className="font-semibold  rounded-full border border-black p-2 px-5 hover:border-2"
+              className="font-semibold  rounded-full border border-black p-2 px-5 hover:border-2 max-w-24 max-h-10"
               onClick={() =>
                 openDrawerWithContent(
                   <CAddressUpdateForm
@@ -52,25 +54,27 @@ export default function CheckoutDetails() {
               Edit
             </button>
           </div>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 py-3">
             <CAddressBox
               defaultAddress={defaultAddress}
               setSelect={setSelect}
             />
-            <button
-              className="font-semibold  rounded-full border py-4 px-5 border-black mt-5 hover:border-2"
-              onClick={() =>
-                openDrawerWithContent(
-                  <CheckoutAddress
-                    openDrawerWithContent={openDrawerWithContent}
-                    setSelect={setSelect}
-                    onClose={closeDrawer}
-                  />
-                )
-              }
-            >
-              Choose another address
-            </button>
+            <div>
+              <button
+                className="flex justify-center items-center font-semibold p-3 rounded-full border border-black hover:border-2 max-h-12 "
+                onClick={() =>
+                  openDrawerWithContent(
+                    <CheckoutAddress
+                      openDrawerWithContent={openDrawerWithContent}
+                      setSelect={setSelect}
+                      onClose={closeDrawer}
+                    />
+                  )
+                }
+              >
+                Choose another address
+              </button>
+            </div>
           </div>
           <div className="flex flex-col gap-2 mt-5">
             <h4 className="font-semibold text-lg">Confirmation Email</h4>
@@ -86,6 +90,7 @@ export default function CheckoutDetails() {
                 to={CHECKOUT_SERVICES}
                 activeTitle="Proceed to next"
                 inActiveTitle="Proceed to next"
+                onClick={() => selectAddress(defaultAddress)}
               />
               <Link
                 to={HOME}

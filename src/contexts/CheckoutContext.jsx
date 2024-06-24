@@ -1,31 +1,80 @@
-import {createContext, useState} from 'react';
+import {createContext, useReducer} from 'react';
+
+import checkoutReducer, {
+  INIT_CHECKOUT,
+  SELECT_ADDRESS,
+  SELECT_CART,
+  SELECT_PARCEL,
+  SELECT_PAYMENT,
+} from '../reducers/checkoutReducer';
 
 const CheckoutContext = createContext();
 
 export default function CheckoutContextProvider({children}) {
-  const [selectedAddress, setSelectedAddress] = useState(null);
-  const [selectedPayment, setSelectedPayment] = useState(null);
-  const [selectedParcel, setSelectedParcel] = useState(null);
-  const [orderDetails, setOrderDetails] = useState([]);
+  const [AllCheckout, dispatch] = useReducer(checkoutReducer, INIT_CHECKOUT);
 
-  //get addr to order_detail/reciever_addr
-  //get parcel to order_detail/delivery_type
-  //get payment method to user_payment/payment_type
+  //get CART
+  const selectCart = (input) => {
+    try {
+      dispatch({
+        type: SELECT_CART,
+        payload: {cart: input},
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  //get ADDRESS
+  const selectAddress = (input) => {
+    try {
+      dispatch({
+        type: SELECT_ADDRESS,
+        payload: {address: input},
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  //get PARCEL
+  const selectParcel = (input) => {
+    try {
+      dispatch({
+        type: SELECT_PARCEL,
+        payload: {parcel: input},
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  //get PAYMENT
+  const selectPayment = (input) => {
+    try {
+      dispatch({
+        type: SELECT_PAYMENT,
+        payload: {payment: input},
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <CheckoutContext.Provider
       value={{
-        setSelectedAddress,
-        setSelectedPayment,
-        setSelectedParcel,
-        setOrderDetails,
-        selectedAddress,
-        selectedPayment,
-        selectedParcel,
-        orderDetails,
+        finalCart: AllCheckout.selectedCart,
+        finalAddress: AllCheckout.selectedAddress,
+        finalParcel: AllCheckout.selectedParcel,
+        finalPayment: AllCheckout.selectedPayment,
+        selectCart,
+        selectAddress,
+        selectParcel,
+        selectPayment,
       }}
     >
       {children}
     </CheckoutContext.Provider>
   );
 }
+
+export {CheckoutContext};

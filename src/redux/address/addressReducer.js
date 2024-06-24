@@ -1,10 +1,11 @@
 //action.type
-export const FETCH_ADDRESS = 'FETCH_ADDRESS';
-export const ADD_ADDRESS = 'ADD_ADDRESS';
-export const EDIT_ADDRESS = 'EDIT_ADDRESS';
-export const DELETE_ADDRESS = 'DELETE_ADDRESS';
-export const SET_DEFAULT_ADDRESS = 'SET_DEFAULT_ADDRESS';
-
+import {
+  FETCH_ADDRESS,
+  ADD_ADDRESS,
+  EDIT_ADDRESS,
+  DELETE_ADDRESS,
+  SET_DEFAULT_ADDRESS,
+} from './addressType';
 //initial state
 export const INIT_ADDRESS = {
   address: [],

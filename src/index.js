@@ -8,6 +8,7 @@ import LoadingContextProvider from './contexts/LoadingContext';
 import CartContextProvider from './contexts/CartContext';
 import ProductContextProvider from './contexts/ProductContext';
 import AddressContextProvider from './contexts/AddressContext';
+import CheckoutContextProvider from './contexts/CheckoutContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,7 +18,9 @@ root.render(
         <CartContextProvider>
           <ProductContextProvider>
             <AddressContextProvider>
-              <App />
+              <CheckoutContextProvider>
+                <App />
+              </CheckoutContextProvider>
             </AddressContextProvider>
           </ProductContextProvider>
         </CartContextProvider>

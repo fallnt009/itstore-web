@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import useAddress from '../../hooks/useAddress';
 
 import CheckoutAddressList from '../checkout/CheckoutAddressList';
@@ -11,13 +11,25 @@ export default function CheckoutAddress({
 }) {
   const {address, addAddress, defaultAddress, setDefaultAddress} = useAddress();
 
-  const [selectedId, setSelectedId] = useState(defaultAddress.id);
+  const [selectedId, setSelectedId] = useState();
+
+  useEffect(() => {
+    //if address not default
+    if (defaultAddress) {
+      setSelectedId(defaultAddress.id);
+    } else {
+      setSelectedId();
+    }
+  }, [defaultAddress]);
 
   const handleAddAddress = async (addressId) => {
     setDefaultAddress(addressId);
     setSelect(true);
     onClose();
   };
+
+  //find that not default
+  const isDefaultAddress = selectedId === defaultAddress?.id;
 
   return (
     <div className="flex flex-col mx-5">
@@ -48,17 +60,17 @@ export default function CheckoutAddress({
             </div>
           )}
         </div>
-        {selectedId ? (
+        {selectedId && !isDefaultAddress ? (
           <button
             type="submit"
             className="flex justify-center rounded-full border-2 py-4 px-5 text-white bg-cerulean-blue-800 font-semibold"
             onClick={() => handleAddAddress(selectedId)}
           >
-            Use this address
+            Use this address as default
           </button>
         ) : (
           <div className="flex justify-center rounded-full border-2 py-4 px-5  bg-stone-300 text-stone-500 ">
-            Use this address
+            Use this address as default
           </div>
         )}
       </div>

@@ -9,3 +9,6 @@ export const updateDefault = (addressId) =>
 
 export const updateAddress = (addressId, input) =>
   axios.patch(`/address/${addressId}`, input);
+
+export const deleteAddress = (addressId) =>
+  axios.delete(`/address/${addressId}`);
