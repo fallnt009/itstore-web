@@ -26,8 +26,7 @@ export default function AddressContextProvider({children}) {
     const fetchMyAddress = async () => {
       try {
         const res = await AddressApi.getMyAddress();
-        const data = res.data?.result;
-        console.log(data);
+
         dispatch({
           type: FETCH_ADDRESS,
           payload: {address: res.data?.result},

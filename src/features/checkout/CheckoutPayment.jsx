@@ -14,6 +14,8 @@ export default function CheckoutPayment() {
 
   const {selectPayment} = useCheckout();
 
+  console.log(selectItem);
+
   return (
     <div className="container grid ">
       <div className="mx-24">
