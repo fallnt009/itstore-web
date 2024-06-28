@@ -1,11 +1,15 @@
-import {createContext, useReducer} from 'react';
+import {createContext, useCallback, useEffect, useReducer} from 'react';
+
+import * as CheckoutApi from '../apis/checkout-api';
 
 import checkoutReducer, {
+  FETCH_CHECKOUT,
+  FETCH_SERVICE,
+  FETCH_PAYMENT,
   INIT_CHECKOUT,
-  SELECT_ADDRESS,
-  SELECT_CART,
-  SELECT_PARCEL,
+  SELECT_SERVICE,
   SELECT_PAYMENT,
+  UPDATE_CHECKOUT,
 } from '../reducers/checkoutReducer';
 
 const CheckoutContext = createContext();
@@ -13,46 +17,81 @@ const CheckoutContext = createContext();
 export default function CheckoutContextProvider({children}) {
   const [AllCheckout, dispatch] = useReducer(checkoutReducer, INIT_CHECKOUT);
 
-  //get CART
-  const selectCart = (input) => {
+  //fetch
+  const fetchMyCheckout = useCallback(async () => {
     try {
+      const checkout = await CheckoutApi.getMyCheckout();
+      const service = await CheckoutApi.getService();
+      const payment = await CheckoutApi.getPayment();
+
+      if (checkout.data?.result[0] !== AllCheckout.checkout) {
+        dispatch({
+          type: FETCH_CHECKOUT,
+          payload: {checkout: checkout.data?.result[0]},
+        });
+      }
+      if (service.data?.result !== AllCheckout.service) {
+        dispatch({
+          type: FETCH_SERVICE,
+          payload: {service: service.data?.result},
+        });
+      }
+      if (payment.data?.result !== AllCheckout.payment) {
+        dispatch({
+          type: FETCH_PAYMENT,
+          payload: {payment: payment.data?.result},
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }, [AllCheckout]);
+
+  useEffect(() => {
+    fetchMyCheckout();
+  }, []);
+
+  const updateService = async (checkoutId, data) => {
+    try {
+      const res = await CheckoutApi.updateCheckout(checkoutId, data);
+
       dispatch({
-        type: SELECT_CART,
-        payload: {cart: input},
+        type: UPDATE_CHECKOUT,
+        payload: {data: res.data?.result},
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const updatePayment = async (checkoutId, data) => {
+    try {
+      const res = await CheckoutApi.updateCheckout(checkoutId, data);
+      dispatch({
+        type: UPDATE_CHECKOUT,
+        payload: {data: res.data?.result},
       });
     } catch (err) {
       console.log(err);
     }
   };
 
-  //get ADDRESS
-  const selectAddress = (input) => {
+  //SELECT
+
+  const selectService = (data) => {
     try {
       dispatch({
-        type: SELECT_ADDRESS,
-        payload: {address: input},
+        type: SELECT_SERVICE,
+        payload: {selectedService: data},
       });
     } catch (err) {
       console.log(err);
     }
   };
-  //get PARCEL
-  const selectParcel = (input) => {
-    try {
-      dispatch({
-        type: SELECT_PARCEL,
-        payload: {parcel: input},
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  //get PAYMENT
-  const selectPayment = (input) => {
+  const selectPayment = (data) => {
     try {
       dispatch({
         type: SELECT_PAYMENT,
-        payload: {payment: input},
+        payload: {selectedPayment: data},
       });
     } catch (err) {
       console.log(err);
@@ -62,14 +101,15 @@ export default function CheckoutContextProvider({children}) {
   return (
     <CheckoutContext.Provider
       value={{
-        finalCart: AllCheckout.selectedCart,
-        finalAddress: AllCheckout.selectedAddress,
-        finalParcel: AllCheckout.selectedParcel,
-        finalPayment: AllCheckout.selectedPayment,
-        selectCart,
-        selectAddress,
-        selectParcel,
+        checkout: AllCheckout.checkout,
+        service: AllCheckout.service,
+        payment: AllCheckout.payment,
+        selectedService: AllCheckout.selectedService,
+        selectedPayment: AllCheckout.selectedPayment,
+        selectService,
+        updateService,
         selectPayment,
+        updatePayment,
       }}
     >
       {children}

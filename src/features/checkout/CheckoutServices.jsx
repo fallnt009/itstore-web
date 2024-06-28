@@ -1,20 +1,38 @@
 import {useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
-import {PARCEL_SERVICE} from '../../config/store';
 import {CHECKOUT_PAYMENT} from '../../config/routing';
 
 import useCheckout from '../../hooks/useCheckout';
+import useLoading from '../../hooks/useLoading';
 
 import ActiveButton from '../../components/ActiveButton';
 
 import CheckoutServiceItem from './CheckoutServiceItem';
 
 export default function CheckoutServices() {
-  const [select, setSelect] = useState(false);
-  const [selectItem, setSelectItem] = useState({});
+  const navigate = useNavigate();
 
-  const {selectParcel} = useCheckout();
+  const [select, setSelect] = useState(false);
+
+  const {checkout, service, selectService, selectedService, updateService} =
+    useCheckout();
+  const {startLoading, stopLoading} = useLoading();
+
+  const handleOnClickService = async (e) => {
+    e.preventDefault();
+    startLoading();
+    const data = {serviceId: selectedService.id};
+    try {
+      await updateService(checkout.id, data);
+      navigate(CHECKOUT_PAYMENT);
+      navigate(0);
+    } catch (err) {
+      console.log('error updating');
+    } finally {
+      stopLoading();
+    }
+  };
 
   return (
     <div className="container grid ">
@@ -26,11 +44,12 @@ export default function CheckoutServices() {
           <p>Parcel Service info</p>
         </div>
         <div>
-          {PARCEL_SERVICE.map((item) => (
+          {service.map((item) => (
             <CheckoutServiceItem
+              checkout={checkout}
               select={select}
               setSelect={setSelect}
-              setSelectItem={setSelectItem}
+              selectService={selectService}
               item={item}
               key={item.id}
             />
@@ -40,10 +59,9 @@ export default function CheckoutServices() {
             <div className="flex flex-col justify-center gap-3 mt-5">
               <ActiveButton
                 select={select}
-                to={CHECKOUT_PAYMENT}
                 activeTitle="Proceed to payment"
                 inActiveTitle="Proceed to payment"
-                onClick={() => selectParcel(selectItem)}
+                onClick={handleOnClickService}
               />
 
               <Link

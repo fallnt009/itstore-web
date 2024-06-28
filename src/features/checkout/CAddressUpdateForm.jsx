@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 import {toast} from 'react-toastify';
 
 import Input from '../../components/Input';
@@ -35,31 +35,37 @@ export default function CAddressUpdateForm({
 
   const {startLoading, stopLoading} = useLoading();
 
-  const handleChangeInput = (e) => {
-    setInput({...input, [e.target.name]: e.target.value});
-  };
+  const handleChangeInput = useCallback(
+    (e) => {
+      setInput({...input, [e.target.name]: e.target.value});
+    },
+    [input]
+  );
 
-  const handleSubmitForm = async (e) => {
-    try {
-      e.preventDefault();
-      const result = validateAddress(input);
-      if (result) {
-        setError(result);
-      } else {
-        setError({});
-        startLoading();
-        await updateAddress(id, input);
+  const handleSubmitForm = useCallback(
+    async (e) => {
+      try {
+        e.preventDefault();
+        const result = validateAddress(input);
+        if (result) {
+          setError(result);
+        } else {
+          setError({});
+          startLoading();
+          await updateAddress(id, input);
+          stopLoading();
+
+          toast.success('Update Success');
+        }
+      } catch (err) {
+        toast.error(err.response?.data.message);
+      } finally {
         stopLoading();
-
-        toast.success('Update Success');
+        onClose();
       }
-    } catch (err) {
-      toast.error(err.response?.data.message);
-    } finally {
-      stopLoading();
-      onClose();
-    }
-  };
+    },
+    [id, input, updateAddress, startLoading, stopLoading, onClose]
+  );
 
   return (
     <form className="flex flex-col gap-5 mx-5 " onSubmit={handleSubmitForm}>

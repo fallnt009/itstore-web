@@ -1,32 +1,31 @@
 import {useCallback, useEffect} from 'react';
 
-export default function CheckoutServiceItem({
+export default function CheckoutPaymentItem({
   select,
   setSelect,
-  selectService,
+  selectPayment,
   item,
   checkout,
 }) {
   const {name, price, description} = item;
 
-  const serviceId = checkout.Service?.id;
+  const paymentId = checkout.Payment?.id;
 
   useEffect(() => {
-    if (serviceId === item.id) {
+    if (paymentId === item.id) {
       setSelect(true);
     } else {
       setSelect(false);
     }
-  }, [serviceId, item.id, setSelect]);
+  }, [paymentId, item.id, setSelect]);
 
   const handleOnclick = useCallback(
     (item) => {
-      selectService(item);
+      selectPayment(item);
       setSelect(true);
     },
-    [selectService, item, setSelect]
+    [selectPayment, item, setSelect]
   );
-
   return (
     <div
       className={`flex flex-col gap-1 mt-5 border-2 p-3 py-4 rounded-lg hover:border-cerulean-blue-800 cursor-pointer ${

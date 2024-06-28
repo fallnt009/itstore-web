@@ -1,20 +1,35 @@
 import {useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
-import {PAYMENT_METHOD} from '../../config/store';
 import useCheckout from '../../hooks/useCheckout';
+import useLoading from '../../hooks/useLoading';
 
 import ActiveButton from '../../components/ActiveButton';
 
-import CheckoutServiceItem from './CheckoutServiceItem';
+import CheckoutPaymentItem from './CheckoutPaymentItem';
 
 export default function CheckoutPayment() {
+  const navigate = useNavigate();
   const [select, setSelect] = useState(false);
-  const [selectItem, setSelectItem] = useState({});
 
-  const {selectPayment} = useCheckout();
+  const {checkout, payment, selectedPayment, selectPayment, updatePayment} =
+    useCheckout();
+  const {startLoading, stopLoading} = useLoading();
 
-  console.log(selectItem);
+  const handleOnClickPayment = async (e) => {
+    e.preventDefault();
+    startLoading();
+    const data = {paymentId: selectedPayment.id};
+    try {
+      //await update by using data
+      await updatePayment(checkout.id, data);
+      navigate(0);
+    } catch (err) {
+      console.log('error updating');
+    } finally {
+      stopLoading();
+    }
+  };
 
   return (
     <div className="container grid ">
@@ -23,23 +38,24 @@ export default function CheckoutPayment() {
           <h1 className="font-semibold text-3xl">How would you like to pay?</h1>
         </div>
         <div>
-          {PAYMENT_METHOD.map((item) => (
-            <CheckoutServiceItem
+          {payment.map((item) => (
+            <CheckoutPaymentItem
+              checkout={checkout}
               select={select}
               setSelect={setSelect}
-              setSelectItem={setSelectItem}
+              selectPayment={selectPayment}
               item={item}
               key={item.id}
             />
           ))}
-          <div className=" border-t-2 mt-9 font-semibold ">
+          <div className="border-t-2 mt-9 font-semibold ">
             <div className="flex flex-col justify-center gap-3 mt-5">
               <ActiveButton
                 select={select}
                 to={''}
                 activeTitle="Proceed to payment"
                 inActiveTitle="Proceed to payment"
-                onClick={() => selectPayment(selectItem)}
+                onClick={handleOnClickPayment}
               />
 
               <Link

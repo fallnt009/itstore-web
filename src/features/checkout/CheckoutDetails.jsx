@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {Link, useOutletContext} from 'react-router-dom';
 
 import {HOME, CHECKOUT_SERVICES} from '../../config/routing';
@@ -18,14 +18,34 @@ export default function CheckoutDetails() {
 
   const {authenUser} = useAuth();
   const {defaultAddress, updateAddress} = useAddress();
-  const {selectAddress} = useCheckout();
+  const {checkout} = useCheckout();
 
   useEffect(() => {
     const hasDefaultAddress = Object.keys(defaultAddress || {}).length !== 0;
     if (hasDefaultAddress !== select) {
       setSelect(hasDefaultAddress);
     }
-  }, [defaultAddress]);
+  }, [defaultAddress, select]);
+
+  const handleEditClick = useCallback(() => {
+    openDrawerWithContent(
+      <CAddressUpdateForm
+        defaultAddress={defaultAddress}
+        onClose={closeDrawer}
+        updateAddress={updateAddress}
+      />
+    );
+  }, [defaultAddress, openDrawerWithContent, closeDrawer, updateAddress]);
+
+  const handleChooseAddress = useCallback(() => {
+    openDrawerWithContent(
+      <CheckoutAddress
+        openDrawerWithContent={openDrawerWithContent}
+        setSelect={setSelect}
+        onClose={closeDrawer}
+      />
+    );
+  }, [openDrawerWithContent, setSelect, closeDrawer]);
 
   return (
     <div className="container grid ">
@@ -41,15 +61,7 @@ export default function CheckoutDetails() {
             <h4 className="font-semibold text-lg">Delivery Address</h4>
             <button
               className="font-semibold  rounded-full border border-black p-2 px-5 hover:border-2 max-w-24 max-h-10"
-              onClick={() =>
-                openDrawerWithContent(
-                  <CAddressUpdateForm
-                    defaultAddress={defaultAddress}
-                    onClose={closeDrawer}
-                    updateAddress={updateAddress}
-                  />
-                )
-              }
+              onClick={handleEditClick}
             >
               Edit
             </button>
@@ -62,15 +74,7 @@ export default function CheckoutDetails() {
             <div>
               <button
                 className="flex justify-center items-center font-semibold p-3 rounded-full border border-black hover:border-2 max-h-12 "
-                onClick={() =>
-                  openDrawerWithContent(
-                    <CheckoutAddress
-                      openDrawerWithContent={openDrawerWithContent}
-                      setSelect={setSelect}
-                      onClose={closeDrawer}
-                    />
-                  )
-                }
+                onClick={handleChooseAddress}
               >
                 Choose another address
               </button>
@@ -90,7 +94,6 @@ export default function CheckoutDetails() {
                 to={CHECKOUT_SERVICES}
                 activeTitle="Proceed to next"
                 inActiveTitle="Proceed to next"
-                onClick={() => selectAddress(defaultAddress)}
               />
               <Link
                 to={HOME}

@@ -1,39 +1,62 @@
 //action.type
-export const SELECT_CART = 'SELECT_CART';
-export const SELECT_ADDRESS = 'SELECT_ADDRESS';
-export const SELECT_PARCEL = 'SELECT_PARCEL';
+export const FETCH_CHECKOUT = 'FETCH_CHECKOUT';
+export const FETCH_SERVICE = 'FETCH_SERVICE';
+export const FETCH_PAYMENT = 'FETCH_PAYMENT';
+export const CREATE_CHECKOUT = 'CREATE_CHECKOUT';
+export const UPDATE_CHECKOUT = 'UPDATE_CHECKOUT';
+export const SELECT_SERVICE = 'SELECT_SERVICE';
 export const SELECT_PAYMENT = 'SELECT_PAYMENT';
 
 //initial state
 export const INIT_CHECKOUT = {
-  selectedCart: [],
-  selectedAddress: {},
-  selectedParcel: {},
+  checkout: {},
+  service: [],
+  payment: [],
+  selectedService: {},
   selectedPayment: {},
 };
 
 function checkoutReducer(state, action) {
   switch (action.type) {
-    case SELECT_CART:
+    case FETCH_CHECKOUT:
       return {
         ...state,
-        selectedCart: action.payload.cart,
+        checkout: action.payload.checkout,
       };
-    case SELECT_ADDRESS:
+    case FETCH_SERVICE:
       return {
         ...state,
-        selectedAddress: action.payload.address,
+        service: action.payload.service,
       };
-    case SELECT_PARCEL:
+    case FETCH_PAYMENT:
       return {
         ...state,
-        selectedParcel: action.payload.parcel,
+        payment: action.payload.payment,
+      };
+    case CREATE_CHECKOUT:
+      return {
+        ...state,
+      };
+    case UPDATE_CHECKOUT:
+      return {
+        ...state,
+        checkout: {
+          ...state.checkout,
+          ...action.payload.data,
+        },
+      };
+
+    case SELECT_SERVICE:
+      return {
+        ...state,
+        selectedService: action.payload.selectedService,
       };
     case SELECT_PAYMENT:
       return {
         ...state,
-        selectedPayment: action.payload.payment,
+        selectedPayment: action.payload.selectedPayment,
       };
+
     default:
       return state;
   }
