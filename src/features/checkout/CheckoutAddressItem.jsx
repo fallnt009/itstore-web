@@ -32,9 +32,16 @@ export default function CheckoutAddressItem({
       <ul className="text-stone-600">
         <div className="flex items-center justify-between">
           {fullName}
-          <span onClick={() => deleteAddress(id)}>
-            <MdDeleteOutline size={25} />
-          </span>
+          {selectedId ? (
+            <div className="text-sm">default</div>
+          ) : (
+            <span
+              className="hover:text-cerulean-blue-800"
+              onClick={() => deleteAddress(id)}
+            >
+              <MdDeleteOutline size={25} />
+            </span>
+          )}
         </div>
         <ul className="py-2">
           <li>{addressLine1}</li>

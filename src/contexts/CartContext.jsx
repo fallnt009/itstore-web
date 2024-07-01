@@ -21,15 +21,12 @@ export default function CartContextProvider({children}) {
       if (!authenUser) {
         return;
       }
-      startLoading();
       try {
         const res = await CartApi.getMyCart();
         const cartItems = res.data.result[0].CartItems;
         setUserCart(cartItems);
       } catch (err) {
         console.log('Error fetching', err);
-      } finally {
-        stopLoading();
       }
     };
     fetchCart();

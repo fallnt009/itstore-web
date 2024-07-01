@@ -18,14 +18,18 @@ export default function CheckoutDetails() {
 
   const {authenUser} = useAuth();
   const {defaultAddress, updateAddress} = useAddress();
-  const {checkout} = useCheckout();
+  const {checkout, selectAddress, selectedAddress} = useCheckout();
 
+  //if already have default
   useEffect(() => {
-    const hasDefaultAddress = Object.keys(defaultAddress || {}).length !== 0;
-    if (hasDefaultAddress !== select) {
-      setSelect(hasDefaultAddress);
+    if (defaultAddress) {
+      selectAddress(defaultAddress);
+      setSelect(true);
+    } else {
+      selectAddress({});
+      setSelect(false);
     }
-  }, [defaultAddress, select]);
+  }, [defaultAddress]);
 
   const handleEditClick = useCallback(() => {
     openDrawerWithContent(
@@ -59,12 +63,18 @@ export default function CheckoutDetails() {
         <div>
           <div className="flex justify-between items-center mt-5">
             <h4 className="font-semibold text-lg">Delivery Address</h4>
-            <button
-              className="font-semibold  rounded-full border border-black p-2 px-5 hover:border-2 max-w-24 max-h-10"
-              onClick={handleEditClick}
-            >
-              Edit
-            </button>
+            {defaultAddress ? (
+              <button
+                className="font-semibold  rounded-full border border-black p-2 px-5 hover:border-2 max-w-24 max-h-10"
+                onClick={handleEditClick}
+              >
+                Edit
+              </button>
+            ) : (
+              <button className="font-semibold  rounded-full border border-stone-600 text-stone-500  p-2 px-5 max-w-24 max-h-10 cursor-default">
+                Edit
+              </button>
+            )}
           </div>
           <div className="flex flex-col gap-2 py-3">
             <CAddressBox

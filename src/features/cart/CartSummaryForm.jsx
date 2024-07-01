@@ -1,15 +1,17 @@
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {NumericFormat} from 'react-number-format';
 
 import useCheckout from '../../hooks/useCheckout';
-import useCart from '../../hooks/useCart';
+import useLoading from '../../hooks/useLoading';
 
 import {VAT_PERCENTAGE, DELIVERY_FEE} from '../../config/store';
 import {CHECKOUT_DETAIL} from '../../config/routing';
 
 export default function CartSummaryForm({cart, totalItem}) {
-  const {userCart} = useCart();
-  const {selectCart} = useCheckout();
+  const {createCheckout} = useCheckout();
+  const {startLoading, stopLoading} = useLoading();
+
+  const navigate = useNavigate();
 
   //Calculate total price and items
   const totalItemPrice = cart.reduce(
@@ -21,8 +23,18 @@ export default function CartSummaryForm({cart, totalItem}) {
   //Calculate total
   const realTotal = totalItemPrice + DELIVERY_FEE + vatPrice;
 
-  const handleOnClickCart = () => {
-    selectCart(userCart);
+  const handleOnClickCart = async (e) => {
+    e.preventDefault();
+    startLoading();
+    try {
+      await createCheckout();
+      navigate(CHECKOUT_DETAIL);
+      navigate(0);
+    } catch (err) {
+      console.log('something went wrong!');
+    } finally {
+      stopLoading();
+    }
   };
 
   return (
@@ -82,8 +94,8 @@ export default function CartSummaryForm({cart, totalItem}) {
         <div className="text-stone-700 text-sm mt-5 ">
           By clicking "check out" to proceed your order
         </div>
+        {/* if Cart empty cannot proceed payment */}
         <Link
-          to={CHECKOUT_DETAIL}
           className="flex justify-center font-bold text-sm bg-cerulean-blue-800 px-6 py-5 rounded-full text-white mt-5"
           onClick={handleOnClickCart}
         >

@@ -33,8 +33,8 @@ export default function CAddressForm({onClose, addAddress}) {
       if (result) {
         setError(result);
       } else {
-        setError({});
         startLoading();
+        setError({});
         // await create
         await addAddress(input);
         setInput(dataForm);

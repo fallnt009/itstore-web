@@ -10,12 +10,18 @@ import checkoutReducer, {
   SELECT_SERVICE,
   SELECT_PAYMENT,
   UPDATE_CHECKOUT,
+  CREATE_CHECKOUT,
+  SELECT_ADDRESS,
 } from '../reducers/checkoutReducer';
+
+import useAddress from '../hooks/useAddress';
 
 const CheckoutContext = createContext();
 
 export default function CheckoutContextProvider({children}) {
   const [AllCheckout, dispatch] = useReducer(checkoutReducer, INIT_CHECKOUT);
+
+  const {defaultAddress} = useAddress();
 
   //fetch
   const fetchMyCheckout = useCallback(async () => {
@@ -51,6 +57,33 @@ export default function CheckoutContextProvider({children}) {
     fetchMyCheckout();
   }, []);
 
+  //Create Checkout
+  const createCheckout = async () => {
+    try {
+      const res = await CheckoutApi.createCheckout();
+
+      dispatch({
+        type: CREATE_CHECKOUT,
+        payload: {checkout: res.data.result},
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const updateAddress = async (checkoutId, addressId) => {
+    try {
+      const data = {userAddressId: addressId};
+      const res = await CheckoutApi.updateCheckout(checkoutId, data);
+
+      dispatch({
+        type: UPDATE_CHECKOUT,
+        payload: {address: res.data?.result},
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const updateService = async (checkoutId, data) => {
     try {
       const res = await CheckoutApi.updateCheckout(checkoutId, data);
@@ -76,6 +109,16 @@ export default function CheckoutContextProvider({children}) {
   };
 
   //SELECT
+  const selectAddress = (data) => {
+    try {
+      dispatch({
+        type: SELECT_ADDRESS,
+        payload: {selectedAddress: data},
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const selectService = (data) => {
     try {
@@ -104,12 +147,16 @@ export default function CheckoutContextProvider({children}) {
         checkout: AllCheckout.checkout,
         service: AllCheckout.service,
         payment: AllCheckout.payment,
+        selectedAddress: AllCheckout.selectedAddress,
         selectedService: AllCheckout.selectedService,
         selectedPayment: AllCheckout.selectedPayment,
+        createCheckout,
         selectService,
         updateService,
         selectPayment,
         updatePayment,
+        selectAddress,
+        updateAddress,
       }}
     >
       {children}

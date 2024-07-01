@@ -1,12 +1,30 @@
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {MdShoppingCart} from 'react-icons/md';
 import Brand from './Brand';
 import Dropdown from './Dropdown';
 
 import useAuth from '../../hooks/useAuth';
+import useLoading from '../../hooks/useLoading';
 
 export default function Header() {
   const {authenUser} = useAuth();
+
+  const {startLoading, stopLoading} = useLoading();
+
+  const navigate = useNavigate();
+
+  const handleOnClickCart = (e) => {
+    startLoading();
+    try {
+      e.preventDefault();
+      navigate('/yourcart');
+      navigate(0);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      stopLoading();
+    }
+  };
   return (
     <div className="bg-white">
       <div className="flex mx-10 my-10 items-center">
@@ -18,7 +36,7 @@ export default function Header() {
         </div>
         {/* Cart */}
         {authenUser ? (
-          <Link to={'/yourcart'}>
+          <Link onClick={handleOnClickCart}>
             <div className="flex-2 mx-4 hover:bg-cerulean-blue-800 hover:text-white rounded-full p-2">
               <div className="flex">
                 <MdShoppingCart size={35} />

@@ -11,7 +11,7 @@ export const getPayment = () => {
 };
 
 export const createCheckout = () => {
-  return axios.post('/checkout');
+  return axios.post('/checkout/');
 };
 export const updateCheckout = (checkoutId, input) => {
   return axios.patch(`/checkout/${checkoutId}`, input);

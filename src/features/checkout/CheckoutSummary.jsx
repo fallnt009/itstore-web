@@ -3,11 +3,14 @@ import {NumericFormat} from 'react-number-format';
 
 import CheckoutProduct from './CheckoutProduct';
 import CAddressBox from './CAddressBox';
+import CheckoutSummaryService from './CheckoutSummaryService';
 
 import useCheckout from '../../hooks/useCheckout';
+import useCart from '../../hooks/useCart';
 
-export default function CheckoutSummary({userCart, defaultAddress}) {
-  const {finalCart, finalAddress, finalParcel, finalPayment} = useCheckout();
+export default function CheckoutSummary({defaultAddress}) {
+  const {selectedService} = useCheckout();
+  const {userCart} = useCart();
 
   //Calculate total price and items
   const totalItemPrice = userCart.reduce(
@@ -44,9 +47,11 @@ export default function CheckoutSummary({userCart, defaultAddress}) {
         </div>
         <div className="flex flex-col gap-1 border-t-2  py-4">
           <h4 className="font-semibold">Delivery Method</h4>
-          <div>For preview parcel</div>
+          <div>
+            <CheckoutSummaryService selectedService={selectedService} />
+          </div>
         </div>
-        <CheckoutProduct finalCart={finalCart} />
+        <CheckoutProduct userCart={userCart} />
       </div>
     </div>
   );

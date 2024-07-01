@@ -1,5 +1,8 @@
 import {useEffect, useState} from 'react';
+
 import useAddress from '../../hooks/useAddress';
+import useCheckout from '../../hooks/useCheckout';
+import useLoading from '../../hooks/useLoading';
 
 import CheckoutAddressList from '../checkout/CheckoutAddressList';
 import CAddressForm from './CAddressForm';
@@ -10,6 +13,8 @@ export default function CheckoutAddress({
   setSelect,
 }) {
   const {address, addAddress, defaultAddress, setDefaultAddress} = useAddress();
+  const {checkout, updateAddress} = useCheckout();
+  const {startLoading, stopLoading} = useLoading();
 
   const [selectedId, setSelectedId] = useState();
 
@@ -23,9 +28,17 @@ export default function CheckoutAddress({
   }, [defaultAddress]);
 
   const handleAddAddress = async (addressId) => {
-    setDefaultAddress(addressId);
-    setSelect(true);
-    onClose();
+    startLoading();
+    try {
+      setDefaultAddress(addressId);
+      setSelect(true);
+      await updateAddress(checkout.id, addressId);
+      onClose();
+    } catch (err) {
+      console.log('add error');
+    } finally {
+      stopLoading();
+    }
   };
 
   //find that not default
@@ -60,6 +73,7 @@ export default function CheckoutAddress({
             </div>
           )}
         </div>
+
         {selectedId && !isDefaultAddress ? (
           <button
             type="submit"

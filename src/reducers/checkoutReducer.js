@@ -4,6 +4,7 @@ export const FETCH_SERVICE = 'FETCH_SERVICE';
 export const FETCH_PAYMENT = 'FETCH_PAYMENT';
 export const CREATE_CHECKOUT = 'CREATE_CHECKOUT';
 export const UPDATE_CHECKOUT = 'UPDATE_CHECKOUT';
+export const SELECT_ADDRESS = 'SELECT_ADDRESS';
 export const SELECT_SERVICE = 'SELECT_SERVICE';
 export const SELECT_PAYMENT = 'SELECT_PAYMENT';
 
@@ -12,8 +13,9 @@ export const INIT_CHECKOUT = {
   checkout: {},
   service: [],
   payment: [],
-  selectedService: {},
-  selectedPayment: {},
+  selectedAddress: null,
+  selectedService: null,
+  selectedPayment: null,
 };
 
 function checkoutReducer(state, action) {
@@ -36,6 +38,7 @@ function checkoutReducer(state, action) {
     case CREATE_CHECKOUT:
       return {
         ...state,
+        checkout: action.payload.checkout,
       };
     case UPDATE_CHECKOUT:
       return {
@@ -44,6 +47,12 @@ function checkoutReducer(state, action) {
           ...state.checkout,
           ...action.payload.data,
         },
+      };
+
+    case SELECT_ADDRESS:
+      return {
+        ...state,
+        selectedAddress: action.payload.selectedAddress,
       };
 
     case SELECT_SERVICE:

@@ -1,33 +1,26 @@
 import {useState} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 import useCheckout from '../../hooks/useCheckout';
-import useLoading from '../../hooks/useLoading';
 
 import ActiveButton from '../../components/ActiveButton';
 
 import CheckoutPaymentItem from './CheckoutPaymentItem';
 
 export default function CheckoutPayment() {
-  const navigate = useNavigate();
   const [select, setSelect] = useState(false);
 
   const {checkout, payment, selectedPayment, selectPayment, updatePayment} =
     useCheckout();
-  const {startLoading, stopLoading} = useLoading();
 
   const handleOnClickPayment = async (e) => {
     e.preventDefault();
-    startLoading();
     const data = {paymentId: selectedPayment.id};
     try {
       //await update by using data
       await updatePayment(checkout.id, data);
-      navigate(0);
     } catch (err) {
       console.log('error updating');
-    } finally {
-      stopLoading();
     }
   };
 

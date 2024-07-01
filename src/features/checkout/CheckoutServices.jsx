@@ -1,36 +1,27 @@
 import {useState} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 import {CHECKOUT_PAYMENT} from '../../config/routing';
 
 import useCheckout from '../../hooks/useCheckout';
-import useLoading from '../../hooks/useLoading';
 
 import ActiveButton from '../../components/ActiveButton';
 
 import CheckoutServiceItem from './CheckoutServiceItem';
 
 export default function CheckoutServices() {
-  const navigate = useNavigate();
-
   const [select, setSelect] = useState(false);
 
   const {checkout, service, selectService, selectedService, updateService} =
     useCheckout();
-  const {startLoading, stopLoading} = useLoading();
 
   const handleOnClickService = async (e) => {
     e.preventDefault();
-    startLoading();
     const data = {serviceId: selectedService.id};
     try {
       await updateService(checkout.id, data);
-      navigate(CHECKOUT_PAYMENT);
-      navigate(0);
     } catch (err) {
       console.log('error updating');
-    } finally {
-      stopLoading();
     }
   };
 
@@ -58,6 +49,7 @@ export default function CheckoutServices() {
           <div className=" border-t-2 mt-9 font-semibold ">
             <div className="flex flex-col justify-center gap-3 mt-5">
               <ActiveButton
+                to={CHECKOUT_PAYMENT}
                 select={select}
                 activeTitle="Proceed to payment"
                 inActiveTitle="Proceed to payment"
