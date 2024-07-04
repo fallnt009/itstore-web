@@ -1,27 +1,20 @@
-import {useState} from 'react';
 import {Outlet} from 'react-router-dom';
 
 import CheckoutBreadCrumb from './CheckoutBreadCrumb';
 import CheckoutSummary from './CheckoutSummary';
 
-import useCart from '../../hooks/useCart';
 import SideDrawer from '../../components/SideDrawer';
+
+import useDrawer from '../../hooks/useDrawer';
+import useCart from '../../hooks/useCart';
 import useAddress from '../../hooks/useAddress';
+import useCheckout from '../../hooks/useCheckout';
 
 export default function CheckoutContainer() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [drawerContent, setDrawerContent] = useState(null);
-
+  const {closeDrawer, isOpen, drawerContent} = useDrawer();
   const {userCart} = useCart();
   const {defaultAddress} = useAddress();
-
-  const openDrawerWithContent = (content) => {
-    setDrawerContent(content);
-    setIsOpen(true);
-  };
-  const closeDrawer = () => {
-    setIsOpen(false);
-  };
+  const {checkout} = useCheckout();
 
   return (
     <div className="container ">
@@ -30,8 +23,9 @@ export default function CheckoutContainer() {
           <CheckoutBreadCrumb />
         </div>
         <div className="grid grid-cols-[2fr_1fr] p-5">
-          <Outlet context={[openDrawerWithContent, closeDrawer]} />
+          <Outlet />
           <CheckoutSummary
+            checkout={checkout}
             userCart={userCart}
             defaultAddress={defaultAddress}
           />

@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 
 import {CHECKOUT_PAYMENT} from '../../config/routing';
@@ -15,8 +15,19 @@ export default function CheckoutServices() {
   const {checkout, service, selectService, selectedService, updateService} =
     useCheckout();
 
-  const handleOnClickService = async (e) => {
-    e.preventDefault();
+  //if checkout already have serviceId
+  //already selected service until change
+  //fetch every time that refresh
+  useEffect(() => {
+    if (checkout.serviceId) {
+      const matchData = service.find((el) => el.id === checkout.serviceId);
+      selectService(matchData);
+      setSelect(true);
+    }
+  }, [checkout.serviceId]);
+
+  //handleOnclick click = update
+  const handleOnClickService = async () => {
     const data = {serviceId: selectedService.id};
     try {
       await updateService(checkout.id, data);

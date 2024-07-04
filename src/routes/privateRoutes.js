@@ -50,7 +50,7 @@ export const privateRoute = [
     element: <OrderPage />,
     children: [
       {
-        path: 'details',
+        path: 'details/:orderNumber',
         element: <OrderDetails />,
       },
       {

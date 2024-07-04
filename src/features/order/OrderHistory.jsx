@@ -1,11 +1,29 @@
+import {useNavigate} from 'react-router-dom';
+import {ORDER_DETAIL} from '../../config/routing';
+
 import OrderHistoryItem from './OrderHistoryItem';
 
 import useOrder from '../../hooks/useOrder';
+import useLoading from '../../hooks/useLoading';
 
 export default function OrderHistory() {
   const {order} = useOrder();
-  console.log(order, 'aaaaaa');
-  console.log(order, 'bbbbb');
+  const {startLoading, stopLoading} = useLoading();
+
+  const navigate = useNavigate();
+
+  const handleOnClickOrder = async (orderNumber) => {
+    startLoading();
+    try {
+      navigate(ORDER_DETAIL(orderNumber));
+      navigate(0);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      stopLoading();
+    }
+  };
+
   return (
     <div className="container">
       <div className="grid mx-24 border">
@@ -25,7 +43,11 @@ export default function OrderHistory() {
           <h4>Action</h4>
         </div>
         {order.map((item) => (
-          <OrderHistoryItem key={item.id} order={item} />
+          <OrderHistoryItem
+            key={item.id}
+            order={item}
+            setOrderNum={handleOnClickOrder}
+          />
         ))}
       </div>
     </div>

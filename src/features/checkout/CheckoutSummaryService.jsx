@@ -1,9 +1,9 @@
-export default function CheckoutSummaryService({selectedService}) {
-  if (!selectedService) {
+export default function CheckoutSummaryService({checkoutService}) {
+  if (!checkoutService) {
     return <></>;
   }
 
-  const {name, description} = selectedService;
+  const {name, description} = checkoutService;
 
   return (
     <>

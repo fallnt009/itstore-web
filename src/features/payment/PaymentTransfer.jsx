@@ -29,7 +29,7 @@ export default function PaymentTransfer() {
               <p>5. After completed payment.Press Confirm Order.</p>
               <p>
                 5. Please upload proof of payment on Our Website to Completed
-                Your Order in 24 hours.
+                Your Order in 12 hours.
               </p>
             </div>
           </div>

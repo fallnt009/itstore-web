@@ -1,4 +1,11 @@
+//Public Routes
 exports.HOME = '/';
+
+//For Profile
+exports.MY_PROFILE = (userId) => `/profile/${userId}`;
+
+//For Cart
+exports.YOUR_CART = '/yourcart';
 
 //For Checkout
 exports.CHECKOUT_DETAIL = '/checkout/details';
@@ -9,4 +16,6 @@ exports.CHECKOUT_PAYMENT = '/checkout/payment';
 exports.PAYMENT_TRANSFER = '/checkout/transferpay';
 
 //For Order
-exports.ORDER_DETAIL = '/order/details';
+exports.ORDER_DETAIL = (orderNumber) => `/order/details/${orderNumber}`;
+exports.ORDER_HISTORY = '/order/history';
+exports.ORDER_PROOF = '/order/proof';

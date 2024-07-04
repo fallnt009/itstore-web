@@ -36,6 +36,7 @@ export default function CheckoutContextProvider({children}) {
           payload: {checkout: checkout.data?.result[0]},
         });
       }
+      //fetch for select
       if (service.data?.result !== AllCheckout.service) {
         dispatch({
           type: FETCH_SERVICE,

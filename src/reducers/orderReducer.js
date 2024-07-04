@@ -1,9 +1,12 @@
 //action type
 export const FETCH_ORDER = 'FETCH_ORDER';
+export const SELECT_ORDER = 'SELECT_ORDER';
 
 //inital state
 export const INIT_ORDER = {
   order: [],
+  orderItems: [],
+  selectedOrder: null,
 };
 
 function orderReducer(state, action) {
@@ -12,6 +15,13 @@ function orderReducer(state, action) {
       return {
         ...state,
         order: action.payload.order,
+      };
+
+    case SELECT_ORDER:
+      return {
+        ...state,
+        selectedOrder: action.payload.selectedOrder,
+        orderItems: action.payload.orderItems,
       };
     default:
       return state;

@@ -3,6 +3,7 @@ import {Link, useOutletContext} from 'react-router-dom';
 
 import {HOME, CHECKOUT_SERVICES} from '../../config/routing';
 
+import useDrawer from '../../hooks/useDrawer';
 import useAuth from '../../hooks/useAuth';
 import useAddress from '../../hooks/useAddress';
 import useCheckout from '../../hooks/useCheckout';
@@ -14,11 +15,10 @@ import ActiveButton from '../../components/ActiveButton';
 
 export default function CheckoutDetails() {
   const [select, setSelect] = useState(false);
-  const [openDrawerWithContent, closeDrawer] = useOutletContext();
-
+  const {openDrawerWithContent, closeDrawer} = useDrawer();
   const {authenUser} = useAuth();
   const {defaultAddress, updateAddress} = useAddress();
-  const {checkout, selectAddress, selectedAddress} = useCheckout();
+  const {selectAddress} = useCheckout();
 
   //if already have default
   useEffect(() => {

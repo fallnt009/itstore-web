@@ -5,12 +5,8 @@ import CheckoutProduct from './CheckoutProduct';
 import CAddressBox from './CAddressBox';
 import CheckoutSummaryService from './CheckoutSummaryService';
 
-import useCheckout from '../../hooks/useCheckout';
-import useCart from '../../hooks/useCart';
-
-export default function CheckoutSummary({defaultAddress}) {
-  const {selectedService} = useCheckout();
-  const {userCart} = useCart();
+export default function CheckoutSummary({defaultAddress, checkout, userCart}) {
+  const {Service, UserAddress} = checkout;
 
   //Calculate total price and items
   const totalItemPrice = userCart.reduce(
@@ -48,7 +44,7 @@ export default function CheckoutSummary({defaultAddress}) {
         <div className="flex flex-col gap-1 border-t-2  py-4">
           <h4 className="font-semibold">Delivery Method</h4>
           <div>
-            <CheckoutSummaryService selectedService={selectedService} />
+            <CheckoutSummaryService checkoutService={Service} />
           </div>
         </div>
         <CheckoutProduct userCart={userCart} />
