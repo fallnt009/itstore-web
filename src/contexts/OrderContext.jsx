@@ -7,6 +7,7 @@ import orderReducer, {
   FETCH_ORDER,
   INIT_ORDER,
   SELECT_ORDER,
+  SELECT_ORDER_LIST,
 } from '../reducers/orderReducer';
 
 const OrderContext = createContext();
@@ -57,15 +58,21 @@ export default function OrderContextProvider({children}) {
     }
   };
 
-  //orderItems belong what order Id
+  //for order filters
+  const selectOrderList = (selectIndex) => {
+    dispatch({type: SELECT_ORDER_LIST, payload: selectIndex});
+  };
+  //make order history can order in desc or asce
 
   return (
     <OrderContext.Provider
       value={{
         order: AllOrder.order,
+        orderFilter: AllOrder.orderFilter,
         orderItems: AllOrder.orderItems,
         selectedOrder: AllOrder.selectedOrder,
         getOrderByNumber,
+        selectOrderList,
       }}
     >
       {children}

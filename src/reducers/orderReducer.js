@@ -1,11 +1,19 @@
+import {
+  ORDER_PENDING,
+  ORDER_PROCESSING,
+  ORDER_COMPLETED,
+} from '../config/constants';
+
 //action type
 export const FETCH_ORDER = 'FETCH_ORDER';
 export const SELECT_ORDER = 'SELECT_ORDER';
+export const SELECT_ORDER_LIST = 'SELECT_ORDER_LIST';
 
 //inital state
 export const INIT_ORDER = {
   order: [],
   orderItems: [],
+  orderFilter: [],
   selectedOrder: null,
 };
 
@@ -15,6 +23,7 @@ function orderReducer(state, action) {
       return {
         ...state,
         order: action.payload.order,
+        orderFilter: action.payload.order,
       };
 
     case SELECT_ORDER:
@@ -23,6 +32,35 @@ function orderReducer(state, action) {
         selectedOrder: action.payload.selectedOrder,
         orderItems: action.payload.orderItems,
       };
+    case SELECT_ORDER_LIST:
+      const selectIndex = action.payload;
+
+      console.log(selectIndex);
+
+      let filteredList = [];
+
+      switch (selectIndex) {
+        case 0:
+          filteredList = state.order.filter(
+            (order) => order.orderStatus === ORDER_PENDING
+          );
+          break;
+        case 1:
+          filteredList = state.order.filter(
+            (order) => order.orderStatus === ORDER_PROCESSING
+          );
+          break;
+        case 2:
+          filteredList = state.order.filter(
+            (order) => order.orderStatus === ORDER_COMPLETED
+          );
+          break;
+        default:
+          return state;
+      }
+
+      return {order: state.order, orderFilter: filteredList};
+
     default:
       return state;
   }
