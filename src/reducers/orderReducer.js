@@ -35,8 +35,6 @@ function orderReducer(state, action) {
     case SELECT_ORDER_LIST:
       const selectIndex = action.payload;
 
-      console.log(selectIndex);
-
       let filteredList = [];
 
       switch (selectIndex) {

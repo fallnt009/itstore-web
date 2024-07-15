@@ -7,6 +7,7 @@ export const UPDATE_CHECKOUT = 'UPDATE_CHECKOUT';
 export const SELECT_ADDRESS = 'SELECT_ADDRESS';
 export const SELECT_SERVICE = 'SELECT_SERVICE';
 export const SELECT_PAYMENT = 'SELECT_PAYMENT';
+export const GET_TOTAL_AMOUNT = 'GET_TOTAL_AMOUNT';
 
 //initial state
 export const INIT_CHECKOUT = {
@@ -16,6 +17,7 @@ export const INIT_CHECKOUT = {
   selectedAddress: null,
   selectedService: null,
   selectedPayment: null,
+  amount: {totalAmount: '', subTotal: ''},
 };
 
 function checkoutReducer(state, action) {
@@ -64,6 +66,14 @@ function checkoutReducer(state, action) {
       return {
         ...state,
         selectedPayment: action.payload.selectedPayment,
+      };
+    case GET_TOTAL_AMOUNT:
+      return {
+        ...state,
+        amount: {
+          totalAmount: action.payload.totalAmount,
+          subTotal: action.payload.subTotal,
+        },
       };
 
     default:

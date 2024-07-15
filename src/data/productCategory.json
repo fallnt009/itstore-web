@@ -71,14 +71,9 @@
       }
     ]
   },
+
   {
     "id": 2,
-    "title": "Monitor",
-    "name": "monitor",
-    "pathname": "/categories/com-monitor/monitor"
-  },
-  {
-    "id": 3,
     "title": "Gaming Gear",
     "subCategory": [
       {"id": 1, "title": "Keyboard"},
@@ -94,6 +89,14 @@
     ]
   },
   {
+    "id": 3,
+    "title": "Laptop",
+    "subCategory": [
+      {"id": 1, "title": "Gaming Laptop"},
+      {"id": 2, "title": "Working Laptop"}
+    ]
+  },
+  {
     "id": 4,
     "title": "Network",
     "subCategory": [
@@ -101,18 +104,16 @@
       {"id": 2, "title": "Router"}
     ]
   },
-  {"id": 5, "title": "UPS"},
-  {"id": 6, "title": "Software"},
-  {"id": 7, "title": "Comset"},
-  {"id": 8, "title": "Accessories"},
-  {"id": 9, "title": "Desktop PC"},
   {
-    "id": 10,
-    "title": "Laptop",
-    "subCategory": [
-      {"id": 1, "title": "Gaming Laptop"},
-      {"id": 2, "title": "Working Laptop"}
-    ]
+    "id": 5,
+    "title": "Monitor",
+    "name": "monitor",
+    "pathname": "/categories/com-monitor/monitor"
   },
+  {"id": 6, "title": "UPS"},
+  {"id": 7, "title": "Software"},
+  {"id": 8, "title": "Comset"},
+  {"id": 9, "title": "Accessories"},
+  {"id": 10, "title": "Desktop PC"},
   {"id": 11, "title": "Console"}
 ]

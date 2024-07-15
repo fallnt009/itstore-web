@@ -1,5 +1,5 @@
 import {useParams} from 'react-router-dom';
-import ProductCard from '../../components/ProductCard';
+import ProductCard from '../../components/ProductCard/ProductCard';
 
 export default function ProductCategory({product}) {
   const {categoryName, subCategoryName} = useParams();

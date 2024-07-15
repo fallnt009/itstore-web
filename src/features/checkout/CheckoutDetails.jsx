@@ -1,5 +1,5 @@
 import {useCallback, useEffect, useState} from 'react';
-import {Link, useOutletContext} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 import {HOME, CHECKOUT_SERVICES} from '../../config/routing';
 

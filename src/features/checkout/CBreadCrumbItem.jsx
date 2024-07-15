@@ -1,26 +1,26 @@
 import {useLocation} from 'react-router-dom';
+import {MdCheck} from 'react-icons/md';
 
-export default function CBreadCrumbItem({icon, title, targetPath}) {
+export default function CBreadCrumbItem({icon, title, targetPath, isVisited}) {
   const location = useLocation();
   const {pathname} = location;
 
+  const isActive = pathname === targetPath;
+
   return (
     <>
-      {pathname === targetPath ? (
-        <div className="flex flex-col items-center gap-3">
-          <div className="rounded-full bg-cerulean-blue-800 text-white p-2">
-            {icon}
-          </div>
-          <h4 className="text-stone-600 font-bold">{title}</h4>
+      <div className="flex flex-col items-center gap-3">
+        <div
+          className={`relative rounded-full text-white p-2 ${
+            isActive ? ' bg-cerulean-blue-800' : 'bg-stone-300 text-stone-500'
+          }`}
+        >
+          {isVisited ? <MdCheck size={25} /> : icon}
         </div>
-      ) : (
-        <div className="flex flex-col items-center gap-3">
-          <div className="rounded-full bg-stone-300 text-stone-500 p-2">
-            {icon}
-          </div>
-          <h4 className="text-stone-600">{title}</h4>
-        </div>
-      )}
+        <h4 className={`text-stone-600 ${isActive ? 'font-bold' : ''}`}>
+          {title}
+        </h4>
+      </div>
     </>
   );
 }

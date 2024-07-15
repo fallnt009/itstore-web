@@ -6,13 +6,17 @@ import Footer from './footers/Footer';
 
 export default function AuthLayout() {
   return (
-    <div className="container">
-      <Header />
+    <div>
+      <div>
+        <Header />
+      </div>
       {/* <Navbar /> */}
-      <div className="mt-11">
+      <div>
         <Outlet />
       </div>
-      <Footer />
+      <div>
+        <Footer />
+      </div>
     </div>
   );
 }

@@ -25,7 +25,7 @@ const Carousel = () => {
   };
 
   return (
-    <div className="relative  m-auto max-w-3xl">
+    <div className="relative z-50 m-auto max-w-3xl">
       {/* Carousel item */}
       <div className="">
         {/* Carousel Image */}

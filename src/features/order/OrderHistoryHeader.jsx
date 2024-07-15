@@ -1,10 +1,11 @@
 import {useState} from 'react';
+
 import useOrder from '../../hooks/useOrder';
 
 export default function OrderHistoryHeader() {
   const [selectIndex, setSelectIndex] = useState(0);
 
-  const {orderFilter, selectOrderList} = useOrder();
+  const {selectOrderList} = useOrder();
 
   const orderStatus = [
     {id: 1, name: 'Pending'},
@@ -13,6 +14,7 @@ export default function OrderHistoryHeader() {
   ];
 
   const handleSelectIndex = (list) => {
+    //useLoading ??
     const findIndex = orderStatus.findIndex((status) => status.id === list.id);
     setSelectIndex(findIndex);
     selectOrderList(findIndex);

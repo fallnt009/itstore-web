@@ -1,9 +1,30 @@
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
+
+import useOrder from '../../hooks/useOrder';
+import useCheckout from '../../hooks/useCheckout';
+import useLoading from '../../hooks/useLoading';
 
 import ActiveButton from '../../components/ActiveButton';
 import PaymentTransferItem from './PaymentTransferItem';
 
 export default function PaymentTransfer() {
+  const {createOrder} = useOrder();
+  const {amount} = useCheckout();
+  const {startLoading, stopLoading} = useLoading();
+
+  const navigate = useNavigate();
+
+  const handlePlaceOrder = async () => {
+    startLoading();
+    try {
+      const data = {totalAmount: amount.totalAmount, subTotal: amount.subTotal};
+      await createOrder(data);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      stopLoading();
+    }
+  };
   return (
     <div className="container grid ">
       <div className="mx-24">
@@ -41,6 +62,7 @@ export default function PaymentTransfer() {
                 to={''}
                 activeTitle="Confirm your order"
                 inActiveTitle="Confirm your order"
+                onClick={handlePlaceOrder}
               />
 
               <Link

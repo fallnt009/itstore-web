@@ -1,18 +1,22 @@
 import {Navigate} from 'react-router-dom';
 
 import ProfilePage from '../pages/ProfilePage';
-import CartPage from '../pages/CartPage';
 import CheckoutPage from '../pages/CheckoutPage';
+import OrderPage from '../pages/OrderPage';
+import CartPage from '../pages/CartPage';
 
 //Checkout
 import CheckoutDetails from '../features/checkout/CheckoutDetails';
 import CheckoutServices from '../features/checkout/CheckoutServices';
 import CheckoutPayment from '../features/checkout/CheckoutPayment';
-import OrderPage from '../pages/OrderPage';
 import OrderDetails from '../features/order/OrderDetails';
+import OrderHistory from '../features/order/OrderHistory';
+import CheckoutSuccess from '../features/checkout/CheckoutSuccess';
+
 import PaymentTransfer from '../features/payment/PaymentTransfer';
 import PaymentProof from '../features/payment/PaymentProof';
-import OrderHistory from '../features/order/OrderHistory';
+
+//redirect
 
 export const privateRoute = [
   {
@@ -60,6 +64,15 @@ export const privateRoute = [
       {
         path: 'history',
         element: <OrderHistory />,
+      },
+    ],
+  },
+  {
+    path: '/status',
+    children: [
+      {
+        path: 'ordersuccess',
+        element: <CheckoutSuccess />,
       },
     ],
   },

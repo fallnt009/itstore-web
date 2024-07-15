@@ -6,7 +6,7 @@ import PanelMenu from '../features/admin/PanelMenu';
 
 export default function AdminLayout() {
   return (
-    <div className="container">
+    <div>
       <Header />
       <Navbar />
       <div className="grid grid-cols-[1fr_4fr]">

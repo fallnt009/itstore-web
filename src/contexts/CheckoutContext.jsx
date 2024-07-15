@@ -12,16 +12,17 @@ import checkoutReducer, {
   UPDATE_CHECKOUT,
   CREATE_CHECKOUT,
   SELECT_ADDRESS,
+  GET_TOTAL_AMOUNT,
 } from '../reducers/checkoutReducer';
 
-import useAddress from '../hooks/useAddress';
+import useAuth from '../hooks/useAuth';
 
 const CheckoutContext = createContext();
 
 export default function CheckoutContextProvider({children}) {
   const [AllCheckout, dispatch] = useReducer(checkoutReducer, INIT_CHECKOUT);
 
-  const {defaultAddress} = useAddress();
+  const {authenUser} = useAuth();
 
   //fetch
   const fetchMyCheckout = useCallback(async () => {
@@ -55,7 +56,9 @@ export default function CheckoutContextProvider({children}) {
   }, [AllCheckout]);
 
   useEffect(() => {
-    fetchMyCheckout();
+    if (authenUser) {
+      fetchMyCheckout();
+    }
   }, []);
 
   //Create Checkout
@@ -142,6 +145,14 @@ export default function CheckoutContextProvider({children}) {
     }
   };
 
+  //get total amount
+  const getTotalAmount = (totalPrice, itemsPrice) => {
+    dispatch({
+      type: GET_TOTAL_AMOUNT,
+      payload: {totalAmount: totalPrice, subTotal: itemsPrice},
+    });
+  };
+
   return (
     <CheckoutContext.Provider
       value={{
@@ -151,6 +162,7 @@ export default function CheckoutContextProvider({children}) {
         selectedAddress: AllCheckout.selectedAddress,
         selectedService: AllCheckout.selectedService,
         selectedPayment: AllCheckout.selectedPayment,
+        amount: AllCheckout.amount,
         createCheckout,
         selectService,
         updateService,
@@ -158,6 +170,7 @@ export default function CheckoutContextProvider({children}) {
         updatePayment,
         selectAddress,
         updateAddress,
+        getTotalAmount,
       }}
     >
       {children}

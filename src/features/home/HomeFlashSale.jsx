@@ -1,6 +1,6 @@
-import ProductCard from '../../components/ProductCard';
+import ProductCard from '../../components/ProductCard/ProductCard';
 
-export default function HomeFlashSale() {
+export default function HomeFlashSale({error, salesProduct}) {
   return (
     <div className="mx-5 mt-10">
       <div className="flex items-center justify-between">
@@ -17,12 +17,15 @@ export default function HomeFlashSale() {
         </div>
       </div>
       {/* Product Card */}
-      <div className=" flex mt-5">
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-      </div>
+      {error ? (
+        <div className="flex justify-center py-24"> {error}</div>
+      ) : (
+        <div className=" grid grid-cols-4 py-5">
+          {salesProduct?.map((item) => (
+            <ProductCard key={item.id} product={item} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

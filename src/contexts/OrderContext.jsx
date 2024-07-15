@@ -2,7 +2,8 @@ import {createContext, useEffect, useReducer} from 'react';
 
 import * as OrderApi from '../apis/order-api';
 
-// import useAuth from '../hooks/useAuth';
+import useAuth from '../hooks/useAuth';
+
 import orderReducer, {
   FETCH_ORDER,
   INIT_ORDER,
@@ -14,7 +15,9 @@ const OrderContext = createContext();
 
 export default function OrderContextProvider({children}) {
   const [AllOrder, dispatch] = useReducer(orderReducer, INIT_ORDER);
-  // const {authenUser} = useAuth();
+
+  const {authenUser} = useAuth();
+
   //fetch Order
   useEffect(() => {
     const fetchMyOrder = async () => {
@@ -29,8 +32,9 @@ export default function OrderContextProvider({children}) {
         console.log('error fetch');
       }
     };
-
-    fetchMyOrder();
+    if (authenUser) {
+      fetchMyOrder();
+    }
   }, []);
 
   //get checkout
@@ -41,6 +45,22 @@ export default function OrderContextProvider({children}) {
   //create Userpayment
   //put total price //assign payment id from checkout payment id
   //create order //userid,userPaymentId,orderDetailsId, total amount form
+  const createOrder = async (data) => {
+    try {
+      await OrderApi.createOrder(data);
+      console.log('create order success');
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const updateOrder = async () => {
+    //need to
+    try {
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const getOrderByNumber = async (orderNumber) => {
     try {
@@ -54,7 +74,7 @@ export default function OrderContextProvider({children}) {
         },
       });
     } catch (err) {
-      console.log(err);
+      throw err;
     }
   };
 
@@ -73,6 +93,7 @@ export default function OrderContextProvider({children}) {
         selectedOrder: AllOrder.selectedOrder,
         getOrderByNumber,
         selectOrderList,
+        createOrder,
       }}
     >
       {children}

@@ -3,9 +3,10 @@ import {Link} from 'react-router-dom';
 import {IoMdHeartEmpty} from 'react-icons/io';
 import {FaCartArrowDown} from 'react-icons/fa';
 
-import ProductPic from './ProductPic';
+import ProductPic from '../ProductPic';
 
-import useCart from '../hooks/useCart';
+import useCart from '../../hooks/useCart';
+import ProductCardInfo from './ProductCardInfo';
 
 export default function ProductCard({product}) {
   const {addCartItem} = useCart();
@@ -14,7 +15,8 @@ export default function ProductCard({product}) {
     return <div>No Data</div>;
   }
 
-  const {id, title, price, productImage, ProductSubCategory} = product;
+  const {id, title, price, productImage, ProductSubCategory, ProductDiscount} =
+    product;
 
   const subCategoryName = (
     ProductSubCategory?.BrandCategorySub?.SubCategory?.title || 'unknown'
@@ -25,21 +27,19 @@ export default function ProductCard({product}) {
   ).toLowerCase();
 
   return (
-    <div className="container border-t-4 py-16">
+    <div className="container py-16">
       <div className="grid mx-7 h-full border">
         <Link to={`/categories/${categoryName}/${subCategoryName}/${title}`}>
           <div className="flex justify-center">
             <ProductPic size="250px" src={productImage} />
           </div>
           {/* Productbox */}
-          <div className=" grid text-cerulean-blue-800 mt-5 w-full">
-            <div className="flex flex-col items-start gap-3">
-              <h3 className="font-bold">{title}</h3>
-              <p className=" font-regular text-sm">{subCategoryName}</p>
-              {/* Price  */}
-              <div className=" font-bold text-2xl ">{price} THB</div>
-            </div>
-          </div>
+          <ProductCardInfo
+            title={title}
+            subCategoryName={subCategoryName}
+            price={price}
+            discount={ProductDiscount?.Discount}
+          />
         </Link>
         <div className="flex items-center gap-5 mt-5">
           {/* Add to Cart */}

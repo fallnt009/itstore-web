@@ -3,30 +3,19 @@ import Carousel from '../../components/Carousel';
 import HomeFlashSale from './HomeFlashSale';
 import HomeNewProduct from './HomeNewProduct';
 
-import * as productApi from '../../apis/product-api';
-import {useState, useEffect} from 'react';
+import useProduct from '../../hooks/useProduct';
 
 export default function HomeContainer() {
-  const [newProducts, setNewProducts] = useState([]);
-  useEffect(() => {
-    const fetchNewProduct = async () => {
-      const res = await productApi.getNewProduct();
-      setNewProducts(res.data.result);
-    };
-    fetchNewProduct();
-  }, []);
+  const {newProduct, salesProduct, error} = useProduct();
 
   return (
     <>
       <div>
-        <div>
-          <Carousel />
+        <div className="grid border">{/* <Carousel /> */}</div>
+        <div className="px-16">
+          <HomeFlashSale salesProduct={salesProduct} error={error} />
+          <HomeNewProduct newProducts={newProduct} error={error} />
         </div>
-        <div>
-          <HomeFlashSale />
-          <HomeNewProduct newProducts={newProducts} />
-        </div>
-        <div className="border-2">Hello</div>
       </div>
     </>
   );

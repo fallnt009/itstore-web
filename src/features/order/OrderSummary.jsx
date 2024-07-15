@@ -3,12 +3,10 @@ import {NumericFormat} from 'react-number-format';
 import {VAT_PERCENTAGE} from '../../config/store';
 
 export default function OrderSummary({totalAmount, OrderDetail}) {
-  const servicePrice = OrderDetail?.Service?.price;
+  const serviceFee = OrderDetail?.Service?.price;
 
-  const taxCal =
-    (Number(totalAmount) + Number(servicePrice)) * (VAT_PERCENTAGE / 100);
-  const totalPrice =
-    Number(totalAmount) + Number(servicePrice) + parseInt(taxCal);
+  const taxCal = Number(totalAmount) * (VAT_PERCENTAGE / 100);
+  const totalPrice = Number(totalAmount) + Number(serviceFee) + Number(taxCal);
 
   return (
     <div>
@@ -29,7 +27,7 @@ export default function OrderSummary({totalAmount, OrderDetail}) {
           <h4>Delivery</h4>
           <p>
             <NumericFormat
-              value={servicePrice}
+              value={serviceFee}
               displayType="text"
               thousandSeparator=","
             />{' '}
@@ -40,7 +38,7 @@ export default function OrderSummary({totalAmount, OrderDetail}) {
           <h4>Tax</h4>
           <p>
             <NumericFormat
-              value={parseInt(taxCal)}
+              value={taxCal.toFixed(1)}
               displayType="text"
               thousandSeparator=","
             />{' '}
