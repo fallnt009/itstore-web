@@ -1,4 +1,4 @@
-import {createContext, useEffect, useReducer} from 'react';
+import {createContext, useCallback, useReducer} from 'react';
 
 import * as OrderApi from '../apis/order-api';
 
@@ -16,24 +16,18 @@ const OrderContext = createContext();
 export default function OrderContextProvider({children}) {
   const [AllOrder, dispatch] = useReducer(orderReducer, INIT_ORDER);
 
-  const {authenUser} = useAuth();
-
   //fetch Order
-  useEffect(() => {
-    const fetchMyOrder = async () => {
-      try {
-        const res = await OrderApi.getMyOrder();
 
-        dispatch({
-          type: FETCH_ORDER,
-          payload: {order: res.data?.result},
-        });
-      } catch (err) {
-        console.log('error fetch');
-      }
-    };
-    if (authenUser) {
-      fetchMyOrder();
+  const fetchMyOrder = useCallback(async () => {
+    try {
+      const res = await OrderApi.getMyOrder();
+
+      dispatch({
+        type: FETCH_ORDER,
+        payload: {order: res.data?.result},
+      });
+    } catch (err) {
+      console.log('error fetch');
     }
   }, []);
 
@@ -94,6 +88,7 @@ export default function OrderContextProvider({children}) {
         getOrderByNumber,
         selectOrderList,
         createOrder,
+        fetchMyOrder,
       }}
     >
       {children}

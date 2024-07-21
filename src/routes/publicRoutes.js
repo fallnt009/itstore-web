@@ -1,24 +1,48 @@
+import {Navigate} from 'react-router-dom';
+import {
+  HOME,
+  PRODUCT,
+  PRODUCT_CATEGORY,
+  PRODUCT_DETAIL,
+} from '../config/routing';
+
 import HomePage from '../pages/HomePage';
 import CategoryPage from '../pages/CategoryPage';
 import ProductPage from '../pages/ProductPage';
 import OurWorkPage from '../pages/OurWorkPage';
 import TrackingPage from '../pages/TrackingPage';
 import ContactUsPage from '../pages/ContactUsPage';
-import {Navigate} from 'react-router-dom';
+
+import CategoryNewProduct from '../features/category/CategoryNewProduct';
+import CategorySaleProduct from '../features/category/CategorySaleProduct';
 
 export const publicRoutes = [
   {
-    path: '/',
+    path: HOME,
     element: <HomePage />,
   },
   {
-    path: '/categories/:categoryName/:subCategoryName',
+    path: PRODUCT_CATEGORY,
     element: <CategoryPage />,
   },
   {
-    path: '/categories/:categoryName/:subCategoryName/:productName',
+    path: PRODUCT_DETAIL,
     element: <ProductPage />,
   },
+  {
+    path: PRODUCT,
+    children: [
+      {
+        path: 'new',
+        element: <CategoryNewProduct />,
+      },
+      {
+        path: 'flashsale',
+        element: <CategorySaleProduct />,
+      },
+    ],
+  },
+
   {
     path: '/ourwork',
     element: <OurWorkPage />,

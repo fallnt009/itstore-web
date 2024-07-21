@@ -1,4 +1,4 @@
-import {createContext, useCallback, useEffect, useReducer} from 'react';
+import {createContext, useCallback, useReducer} from 'react';
 
 import * as CheckoutApi from '../apis/checkout-api';
 
@@ -15,14 +15,10 @@ import checkoutReducer, {
   GET_TOTAL_AMOUNT,
 } from '../reducers/checkoutReducer';
 
-import useAuth from '../hooks/useAuth';
-
 const CheckoutContext = createContext();
 
 export default function CheckoutContextProvider({children}) {
   const [AllCheckout, dispatch] = useReducer(checkoutReducer, INIT_CHECKOUT);
-
-  const {authenUser} = useAuth();
 
   //fetch
   const fetchMyCheckout = useCallback(async () => {
@@ -54,12 +50,6 @@ export default function CheckoutContextProvider({children}) {
       console.log(err);
     }
   }, [AllCheckout]);
-
-  useEffect(() => {
-    if (authenUser) {
-      fetchMyCheckout();
-    }
-  }, []);
 
   //Create Checkout
   const createCheckout = async () => {
@@ -171,6 +161,7 @@ export default function CheckoutContextProvider({children}) {
         selectAddress,
         updateAddress,
         getTotalAmount,
+        fetchMyCheckout,
       }}
     >
       {children}

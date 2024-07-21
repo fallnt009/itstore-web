@@ -1,5 +1,14 @@
 //Public Routes
 exports.HOME = '/';
+//for new and sale
+exports.PRODUCT = '/product';
+exports.NEW_PRODUCT = '/product/new';
+exports.SALE_PRODUCT = '/product/flashsale';
+//Category
+exports.PRODUCT_CATEGORY = '/categories/:categoryName/:subCategoryName';
+//Product Detail
+exports.PRODUCT_DETAIL =
+  '/categories/:categoryName/:subCategoryName/:productName';
 
 //For Profile
 exports.MY_PROFILE = (userId) => `/profile/${userId}`;

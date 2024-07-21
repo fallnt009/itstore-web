@@ -1,4 +1,4 @@
-import {createContext, useState, useEffect} from 'react';
+import {createContext, useState, useEffect, useCallback} from 'react';
 import {toast} from 'react-toastify';
 
 import * as CartApi from '../apis/cart-api';
@@ -16,21 +16,19 @@ export default function CartContextProvider({children}) {
   const {startLoading, stopLoading} = useLoading();
 
   //fetch user cart
-  useEffect(() => {
-    const fetchCart = async () => {
-      if (!authenUser) {
-        return;
-      }
-      try {
-        const res = await CartApi.getMyCart();
-        const cartItems = res.data.result[0].CartItems;
-        setUserCart(cartItems);
-      } catch (err) {
-        console.log('Error fetching', err);
-      }
-    };
-    fetchCart();
-  }, []);
+
+  const fetchMyCart = useCallback(async () => {
+    if (!authenUser) {
+      return;
+    }
+    try {
+      const res = await CartApi.getMyCart();
+      const cartItems = res.data.result[0].CartItems;
+      setUserCart(cartItems);
+    } catch (err) {
+      console.log('Error fetching', err);
+    }
+  }, [authenUser]);
 
   //update qty CartItem
   const changeQtyCartItem = async (itemId, newQty) => {
@@ -98,7 +96,13 @@ export default function CartContextProvider({children}) {
 
   return (
     <CartContext.Provider
-      value={{userCart, changeQtyCartItem, removeCartItem, addCartItem}}
+      value={{
+        userCart,
+        fetchMyCart,
+        changeQtyCartItem,
+        removeCartItem,
+        addCartItem,
+      }}
     >
       {children}
     </CartContext.Provider>

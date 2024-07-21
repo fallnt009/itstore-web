@@ -11,15 +11,6 @@ export default function ProductCategory({product}) {
           <h1 className="text-5xl text-cerulean-blue-800 font-semibold ">
             {categoryName.toUpperCase()}
           </h1>
-
-          <div>
-            <button
-              type="button"
-              className="bg-cerulean-blue-800 p-2 rounded-xl text-white"
-            >
-              View All
-            </button>
-          </div>
         </div>
         <div className="flex">
           <p className=" text-lg ml-1 mt-2 text-cerulean-blue-800">

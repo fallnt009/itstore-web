@@ -1,8 +1,9 @@
-import {createContext, useState, useEffect, useReducer} from 'react';
+import {createContext, useState, useReducer, useCallback} from 'react';
 
 import * as ProductApi from '../apis/product-api';
 import productReducer, {
   FETCH_HOME_PRODUCT,
+  FETCH_PRODUCT_LIST,
   FETCH_PRODUCT_ERROR,
   FETCH_PRODUCT_INFO,
   INIT_PRODUCT,
@@ -20,57 +21,75 @@ export default function ProductContextProvider({children}) {
     dispatch,
   ] = useReducer(productReducer, INIT_PRODUCT);
 
-  //Fetch FOR HOME
-  useEffect(() => {
-    const fetchHomeProduct = async () => {
-      try {
-        const newProduct = await ProductApi.getNewProduct();
-        const salesProduct = await ProductApi.getSalesProduct();
-        dispatch({
-          type: FETCH_HOME_PRODUCT,
-          payload: {
-            newProduct: newProduct.data.result,
-            salesProduct: salesProduct.data.result,
-          },
-        });
-      } catch (err) {
-        dispatch({
-          type: FETCH_PRODUCT_ERROR,
-          payload: err.message,
-        });
-      }
-    };
-    fetchHomeProduct();
+  //Fetch for homepage
+
+  const fetchHomeProduct = useCallback(async () => {
+    try {
+      const newProduct = await ProductApi.getNewProduct();
+      const salesProduct = await ProductApi.getSalesProduct();
+      dispatch({
+        type: FETCH_HOME_PRODUCT,
+        payload: {
+          newProduct: newProduct.data.result,
+          salesProduct: salesProduct.data.result,
+        },
+      });
+    } catch (err) {
+      dispatch({
+        type: FETCH_PRODUCT_ERROR,
+        payload: err.message,
+      });
+    }
   }, []);
 
-  //Fetch Product Info
-  useEffect(() => {
-    const fetchProductInfo = async () => {
-      try {
-        const productInfoRes = await ProductApi.getProductInfo(
-          categoryName,
-          subCategoryName,
-          productName
-        );
-        const productSpecRes = await ProductApi.getProductSpec(productName);
+  //Fetch By Category
 
-        // setProductSpec(productSpecRes.data.result);
-        // setProductInfo(productInfoRes.data.result);
+  const fetchProductCategory = useCallback(
+    async (categoryName, subCategoryName) => {
+      try {
+        const productList = await ProductApi.getProductByCategory(
+          categoryName,
+          subCategoryName
+        );
         dispatch({
-          type: FETCH_PRODUCT_INFO,
-          payload: {
-            productInfo: productInfoRes.data.result,
-            productSpec: productSpecRes.data.result,
-          },
+          type: FETCH_PRODUCT_LIST,
+          payload: {productList: productList.data.result},
         });
       } catch (err) {
+        console.log('Error');
         dispatch({
           type: FETCH_PRODUCT_ERROR,
           payload: err.message,
         });
       }
-    };
-    fetchProductInfo();
+    },
+    [categoryName, subCategoryName]
+  );
+
+  //Fetch Product Info
+
+  const fetchProductInfo = useCallback(async () => {
+    try {
+      const productInfoRes = await ProductApi.getProductInfo(
+        categoryName,
+        subCategoryName,
+        productName
+      );
+      const productSpecRes = await ProductApi.getProductSpec(productName);
+
+      dispatch({
+        type: FETCH_PRODUCT_INFO,
+        payload: {
+          productInfo: productInfoRes.data.result,
+          productSpec: productSpecRes.data.result,
+        },
+      });
+    } catch (err) {
+      dispatch({
+        type: FETCH_PRODUCT_ERROR,
+        payload: err.message,
+      });
+    }
   }, [categoryName, subCategoryName, productName]);
 
   //add new product
@@ -79,11 +98,16 @@ export default function ProductContextProvider({children}) {
   return (
     <ProductContext.Provider
       value={{
+        productList,
         productInfo,
         productSpec,
         newProduct,
         salesProduct,
+        productParams,
         setProductParams,
+        fetchHomeProduct,
+        fetchProductCategory,
+        fetchProductInfo,
         error,
       }}
     >

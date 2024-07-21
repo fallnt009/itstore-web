@@ -11,16 +11,14 @@ export default function NavbarCategory({index, isOpen}) {
     >
       <div className="grid grid-cols-5">
         {Category.map((item) => (
-          <>
-            <div
-              key={item.id}
-              className="flex flex-col my-2 text-xl font-medium text-cerulean-blue-800 p-2 border-l-4 cursor-pointer hover:font-semibold hover:border-cerulean-blue-800"
-            >
-              {item.title}
+          <div
+            key={item.id}
+            className="flex flex-col my-2 text-xl font-medium text-cerulean-blue-800 p-2 border-l-4 cursor-pointer hover:font-semibold hover:border-cerulean-blue-800"
+          >
+            {item.title}
 
-              <NavbarCategoryItem subCategory={item.subCategory} />
-            </div>
-          </>
+            <NavbarCategoryItem subCategory={item.subCategory} />
+          </div>
         ))}
       </div>
     </div>

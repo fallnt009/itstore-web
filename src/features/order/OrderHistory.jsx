@@ -6,10 +6,15 @@ import OrderHistoryList from './OrderHistoryList';
 
 import useOrder from '../../hooks/useOrder';
 import useLoading from '../../hooks/useLoading';
+import {useEffect} from 'react';
 
 export default function OrderHistory() {
-  const {orderFilter} = useOrder();
+  const {orderFilter, fetchMyOrder} = useOrder();
   const {startLoading, stopLoading} = useLoading();
+
+  useEffect(() => {
+    fetchMyOrder();
+  }, [fetchMyOrder]);
 
   const navigate = useNavigate();
 

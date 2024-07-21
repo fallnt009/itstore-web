@@ -1,11 +1,17 @@
+import {useEffect} from 'react';
+
 import CartItem from './CartItem';
 import CartSummaryForm from './CartSummaryForm';
-
-import useCart from '../../hooks/useCart';
 import CartEmpty from './CartEmpty';
 
+import useCart from '../../hooks/useCart';
+
 export default function CartContainer() {
-  const {userCart, changeQtyCartItem, removeCartItem} = useCart();
+  const {userCart, fetchMyCart, changeQtyCartItem, removeCartItem} = useCart();
+
+  useEffect(() => {
+    fetchMyCart();
+  }, [fetchMyCart]);
 
   //calculate total quantity
   const totalItem = userCart.reduce((total, item) => total + item.qty, 0);

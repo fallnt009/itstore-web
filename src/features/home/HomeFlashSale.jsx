@@ -1,6 +1,15 @@
+import {useNavigate} from 'react-router-dom';
+import {SALE_PRODUCT} from '../../config/routing';
+
 import ProductCard from '../../components/ProductCard/ProductCard';
 
 export default function HomeFlashSale({error, salesProduct}) {
+  const navigate = useNavigate();
+
+  const handleRedirect = () => {
+    navigate(SALE_PRODUCT);
+    navigate(0);
+  };
   return (
     <div className="mx-5 mt-10">
       <div className="flex items-center justify-between">
@@ -10,7 +19,8 @@ export default function HomeFlashSale({error, salesProduct}) {
         <div>
           <button
             type="button"
-            className="bg-cerulean-blue-800 p-2 rounded-xl text-white "
+            className="bg-white px-3 py-2 rounded-xl text-cerulean-blue-800 font-semibold border-2 hover:border-cerulean-blue-800"
+            onClick={handleRedirect}
           >
             View All
           </button>

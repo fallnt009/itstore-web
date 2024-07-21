@@ -1,33 +1,24 @@
-import {useState, useEffect} from 'react';
+import {useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 
 import ProductCategory from '../product/ProductCategory';
 
-import * as productApi from '../../apis/product-api';
+import useProduct from '../../hooks/useProduct';
 
 export default function CategoryContainer() {
   const {categoryName, subCategoryName} = useParams();
-  const [product, setProduct] = useState([]);
+  const {productList, fetchProductCategory} = useProduct();
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const res = await productApi.getProductByCategory(
-          categoryName,
-          subCategoryName
-        );
-
-        setProduct(res.data.result);
-      } catch (err) {
-        console.log('Error fetching', err);
-      }
-    };
-    fetchProduct();
-  }, [categoryName, subCategoryName]);
+    fetchProductCategory(categoryName, subCategoryName);
+  }, [categoryName, subCategoryName, fetchProductCategory]);
 
   return (
     <div>
-      <ProductCategory subCategoryName={subCategoryName} product={product} />
+      <ProductCategory
+        subCategoryName={subCategoryName}
+        product={productList}
+      />
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import {useEffect} from 'react';
 import {Outlet} from 'react-router-dom';
 
 import CheckoutBreadCrumb from './CheckoutBreadCrumb';
@@ -9,12 +10,21 @@ import useDrawer from '../../hooks/useDrawer';
 import useCart from '../../hooks/useCart';
 import useAddress from '../../hooks/useAddress';
 import useCheckout from '../../hooks/useCheckout';
+import useAuth from '../../hooks/useAuth';
 
 export default function CheckoutContainer() {
   const {closeDrawer, isOpen, drawerContent} = useDrawer();
   const {userCart} = useCart();
-  const {defaultAddress} = useAddress();
-  const {checkout} = useCheckout();
+  const {defaultAddress, fetchMyAddress} = useAddress();
+  const {checkout, fetchMyCheckout} = useCheckout();
+  const {authenUser} = useAuth();
+
+  useEffect(() => {
+    if (authenUser) {
+      fetchMyAddress();
+      fetchMyCheckout();
+    }
+  }, [authenUser, fetchMyCheckout, fetchMyAddress]);
 
   return (
     <div className="container ">

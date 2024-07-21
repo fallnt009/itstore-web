@@ -1,4 +1,4 @@
-import {createContext, useEffect, useReducer} from 'react';
+import {createContext, useCallback, useReducer} from 'react';
 import * as AddressApi from '../apis/address-api';
 
 import useAuth from '../hooks/useAuth';
@@ -17,26 +17,19 @@ const AddressContext = createContext();
 export default function AddressContextProvider({children}) {
   const [AllAddress, dispatch] = useReducer(addressReducer, INIT_ADDRESS);
 
-  const {authenUser} = useAuth();
-
   //fetch address
-  useEffect(() => {
-    const fetchMyAddress = async () => {
-      try {
-        const res = await AddressApi.getMyAddress();
+  const fetchMyAddress = useCallback(async () => {
+    try {
+      const res = await AddressApi.getMyAddress();
 
-        dispatch({
-          type: FETCH_ADDRESS,
-          payload: {address: res.data?.result},
-        });
-      } catch (err) {
-        console.log('error fetch address');
-      }
-    };
-    if (authenUser) {
-      fetchMyAddress();
+      dispatch({
+        type: FETCH_ADDRESS,
+        payload: {address: res.data?.result},
+      });
+    } catch (err) {
+      console.log('error fetch address');
     }
-  }, [authenUser]);
+  }, []);
 
   //create Address
   const addAddress = async (newAddress) => {
@@ -99,6 +92,7 @@ export default function AddressContextProvider({children}) {
         updateAddress,
         deleteAddress,
         setDefaultAddress,
+        fetchMyAddress,
       }}
     >
       {children}

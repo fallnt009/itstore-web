@@ -27,10 +27,10 @@ export default function ProductCard({product}) {
   ).toLowerCase();
 
   return (
-    <div className="container py-16">
-      <div className="grid mx-7 h-full border">
+    <div className="container">
+      <div className="grid h-full px-2 py-3">
         <Link to={`/categories/${categoryName}/${subCategoryName}/${title}`}>
-          <div className="flex justify-center">
+          <div className="block">
             <ProductPic size="250px" src={productImage} />
           </div>
           {/* Productbox */}
@@ -41,7 +41,7 @@ export default function ProductCard({product}) {
             discount={ProductDiscount?.Discount}
           />
         </Link>
-        <div className="flex items-center gap-5 mt-5">
+        <div className="flex items-center gap-3 mt-5">
           {/* Add to Cart */}
           <button
             type="button"
@@ -51,7 +51,10 @@ export default function ProductCard({product}) {
             <FaCartArrowDown size={25} color="white" />
           </button>
           {/* Add Wishlist */}
-          <button type="button">
+          <button
+            className="rounded-full p-2 hover:bg-stone-400 text-cerulean-blue-800"
+            type="button"
+          >
             <IoMdHeartEmpty size={25} />
           </button>
         </div>
