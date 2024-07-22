@@ -1,29 +1,25 @@
 import {useParams} from 'react-router-dom';
-import ProductCard from '../../components/ProductCard/ProductCard';
 
-export default function ProductCategory({product}) {
+import CategoryHeader from '../category/CategoryHeader';
+import CategoryFilter from '../category/CategoryFilter';
+import CategoryProductItem from '../category/CategoryProductItem';
+import CategoryScrollLoad from '../category/CategoryScrollLoad';
+
+export default function ProductCategory({product, loading, hasMore}) {
   const {categoryName, subCategoryName} = useParams();
 
   return (
-    <>
-      <div className="mx-5 mt-10">
-        <div className="flex items-center justify-between">
-          <h1 className="text-5xl text-cerulean-blue-800 font-semibold ">
-            {categoryName.toUpperCase()}
-          </h1>
-        </div>
-        <div className="flex">
-          <p className=" text-lg ml-1 mt-2 text-cerulean-blue-800">
-            {subCategoryName.toUpperCase()}
-          </p>
-        </div>
-        {/* Product Card */}
-        <div className="grid grid-cols-4 mt-5">
-          {product.map((el) => (
-            <ProductCard key={el.id} product={el} />
-          ))}
-        </div>
+    <div className="container">
+      <div className="py-10 px-24">
+        <CategoryHeader
+          categoryName={categoryName}
+          subCategoryName={subCategoryName}
+        />
+        <CategoryFilter />
+        <CategoryProductItem product={product} loading={loading} />
+        {hasMore && <CategoryScrollLoad />}
+        {!hasMore && <p>No more to Load.</p>}
       </div>
-    </>
+    </div>
   );
 }

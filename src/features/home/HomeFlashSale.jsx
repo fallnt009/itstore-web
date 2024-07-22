@@ -3,7 +3,7 @@ import {SALE_PRODUCT} from '../../config/routing';
 
 import ProductCard from '../../components/ProductCard/ProductCard';
 
-export default function HomeFlashSale({error, salesProduct}) {
+export default function HomeFlashSale({error, salesProduct, loading}) {
   const navigate = useNavigate();
 
   const handleRedirect = () => {
@@ -27,14 +27,16 @@ export default function HomeFlashSale({error, salesProduct}) {
         </div>
       </div>
       {/* Product Card */}
+
       {error ? (
         <div className="flex justify-center py-24"> {error}</div>
       ) : (
-        <div className=" grid grid-cols-4 py-5">
+        <div className="grid grid-cols-4 py-5">
           {salesProduct?.map((item) => (
-            <ProductCard key={item.id} product={item} />
+            <ProductCard key={item.id} product={item} loading={loading} />
           ))}
         </div>
+        //limit 4
       )}
     </div>
   );

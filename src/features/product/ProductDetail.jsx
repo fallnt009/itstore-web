@@ -21,7 +21,7 @@ export default function ProductDetail({productInfo, productSpec}) {
     ProductSubCategory?.BrandCategorySub?.BrandCategory?.Brand?.title ||
     'unknown';
   return (
-    <div className="container p-4">
+    <div className="container py-10 px-24">
       <div className="my-5">
         <BreadCrumb />
       </div>

@@ -1,4 +1,4 @@
-import {createContext, useState, useEffect, useCallback} from 'react';
+import {createContext, useState, useCallback} from 'react';
 import {toast} from 'react-toastify';
 
 import * as CartApi from '../apis/cart-api';
@@ -16,7 +16,6 @@ export default function CartContextProvider({children}) {
   const {startLoading, stopLoading} = useLoading();
 
   //fetch user cart
-
   const fetchMyCart = useCallback(async () => {
     if (!authenUser) {
       return;

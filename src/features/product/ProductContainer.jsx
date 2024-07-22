@@ -7,19 +7,11 @@ import ProductDetail from '../product/ProductDetail';
 
 export default function ProductContainer() {
   const {categoryName, subCategoryName, productName} = useParams();
-  const {fetchProductInfo, productInfo, productSpec, setProductParams} =
-    useProduct();
+  const {fetchProductInfo, productInfo, productSpec} = useProduct();
 
   useEffect(() => {
-    setProductParams({categoryName, subCategoryName, productName});
-    fetchProductInfo();
-  }, [
-    categoryName,
-    subCategoryName,
-    productName,
-    setProductParams,
-    fetchProductInfo,
-  ]);
+    fetchProductInfo(categoryName, subCategoryName, productName);
+  }, [categoryName, subCategoryName, productName, fetchProductInfo]);
 
   return (
     <div>

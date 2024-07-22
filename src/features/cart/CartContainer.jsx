@@ -5,12 +5,25 @@ import CartSummaryForm from './CartSummaryForm';
 import CartEmpty from './CartEmpty';
 
 import useCart from '../../hooks/useCart';
+import useLoading from '../../hooks/useLoading';
 
 export default function CartContainer() {
   const {userCart, fetchMyCart, changeQtyCartItem, removeCartItem} = useCart();
 
+  const {startLoading, stopLoading} = useLoading();
+
   useEffect(() => {
-    fetchMyCart();
+    const loadCart = async () => {
+      startLoading();
+      try {
+        await fetchMyCart();
+      } catch (err) {
+        console.log(err);
+      } finally {
+        stopLoading();
+      }
+    };
+    loadCart();
   }, [fetchMyCart]);
 
   //calculate total quantity

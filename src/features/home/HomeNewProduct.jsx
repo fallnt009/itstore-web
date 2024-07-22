@@ -3,7 +3,7 @@ import {NEW_PRODUCT} from '../../config/routing';
 
 import ProductCard from '../../components/ProductCard/ProductCard';
 
-export default function HomeNewProduct({newProducts, error}) {
+export default function HomeNewProduct({newProducts, error, loading}) {
   const navigate = useNavigate();
 
   const handleRedirect = () => {
@@ -31,7 +31,7 @@ export default function HomeNewProduct({newProducts, error}) {
       ) : (
         <div className="grid grid-cols-4 py-5">
           {newProducts?.map((item) => (
-            <ProductCard key={item.id} product={item} />
+            <ProductCard key={item.id} product={item} loading={loading} />
           ))}
         </div>
       )}

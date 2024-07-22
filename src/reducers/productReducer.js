@@ -7,6 +7,7 @@ export const FETCH_PRODUCT_ERROR = 'FETCH_PRODUCT_ERROR';
 
 export const INIT_PRODUCT = {
   productList: [],
+  productListFilter: [],
   newProduct: [],
   salesProduct: [],
   productInfo: [],
@@ -28,6 +29,7 @@ function productReducer(state, action) {
       return {
         ...state,
         productList: action.payload.productList,
+        hasMore: action.payload.hasMore,
         error: null,
       };
     }
