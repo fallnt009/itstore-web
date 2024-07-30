@@ -11,29 +11,29 @@ export default function PanelMenu() {
         <li>
           <Link to="/admin-panel/manage-product">Manage Product</Link>
           <div className="flex flex-col font-medium pl-5 pt-3 gap-3">
-            <li>Create Product</li>
+            {/* <li>Create Product</li>
             <li>Update Product</li>
-            <li>Delete Product</li>
+            <li>Delete Product</li> */}
           </div>
         </li>
         <li>
           Manage Category
           <div className="flex flex-col font-medium pl-5 pt-3 gap-3">
-            <li>Create Category</li>
+            {/* <li>Create Category</li>
             <li>Update Category</li>
-            <li>Delete Category</li>
+            <li>Delete Category</li> */}
           </div>
         </li>
         <li>
           Manage Brand
           <div className="flex flex-col font-medium pl-5 pt-3 gap-3">
-            <li>Create Brand</li>
+            {/* <li>Create Brand</li>
             <li>Update Brand</li>
-            <li>Delete Brand</li>
+            <li>Delete Brand</li> */}
           </div>
         </li>
-        <li>Manage Discount</li>
-        <li>Manage Orders</li>
+        {/* <li>Manage Discount</li>
+        <li>Manage Orders</li> */}
       </ul>
     </div>
   );

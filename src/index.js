@@ -11,6 +11,8 @@ import AddressContextProvider from './contexts/AddressContext';
 import CheckoutContextProvider from './contexts/CheckoutContext';
 import OrderContextProvider from './contexts/OrderContext';
 import DrawerContextProvider from './contexts/DrawerContext';
+import CategoryContextProvider from './contexts/CategoryContext';
+import AdminContextProvider from './contexts/AdminContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -19,15 +21,19 @@ root.render(
       <DrawerContextProvider>
         <AuthContextProvider>
           <CartContextProvider>
-            <ProductContextProvider>
-              <AddressContextProvider>
-                <CheckoutContextProvider>
-                  <OrderContextProvider>
-                    <App />
-                  </OrderContextProvider>
-                </CheckoutContextProvider>
-              </AddressContextProvider>
-            </ProductContextProvider>
+            <CategoryContextProvider>
+              <ProductContextProvider>
+                <AddressContextProvider>
+                  <CheckoutContextProvider>
+                    <OrderContextProvider>
+                      <AdminContextProvider>
+                        <App />
+                      </AdminContextProvider>
+                    </OrderContextProvider>
+                  </CheckoutContextProvider>
+                </AddressContextProvider>
+              </ProductContextProvider>
+            </CategoryContextProvider>
           </CartContextProvider>
         </AuthContextProvider>
       </DrawerContextProvider>

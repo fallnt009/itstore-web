@@ -2,6 +2,8 @@ import {Navigate} from 'react-router-dom';
 
 import AdminPage from '../pages/AdminPage';
 import ManageProductPage from '../pages/ManageProductPage';
+import PanelProductSpec from '../features/admin/PanelProductSpec';
+import PanelProductMain from '../features/admin/PanelProductMain';
 
 export const adminRoutes = [
   {
@@ -11,6 +13,14 @@ export const adminRoutes = [
   {
     path: 'manage-product',
     element: <ManageProductPage />,
+  },
+  {
+    path: 'prodspec',
+    element: <PanelProductSpec />,
+  },
+  {
+    path: 'product',
+    element: <PanelProductMain />,
   },
   {
     path: '*',

@@ -3,10 +3,11 @@ import {useParams} from 'react-router-dom';
 import CategoryHeader from '../category/CategoryHeader';
 import CategoryFilter from '../category/CategoryFilter';
 import CategoryProductItem from '../category/CategoryProductItem';
-import CategoryScrollLoad from '../category/CategoryScrollLoad';
 
-export default function ProductCategory({product, loading, hasMore}) {
+export default function ProductCategory({product, loading, totalItems}) {
   const {categoryName, subCategoryName} = useParams();
+
+  console.log(product);
 
   return (
     <div className="container">
@@ -14,11 +15,17 @@ export default function ProductCategory({product, loading, hasMore}) {
         <CategoryHeader
           categoryName={categoryName}
           subCategoryName={subCategoryName}
+          totalItems={totalItems}
         />
         <CategoryFilter />
-        <CategoryProductItem product={product} loading={loading} />
-        {hasMore && <CategoryScrollLoad />}
-        {!hasMore && <p>No more to Load.</p>}
+        {totalItems === 0 ? (
+          <div>
+            Sorry! for Inconvenience. We have no product on this Section Right
+            now!
+          </div>
+        ) : (
+          <CategoryProductItem product={product} loading={loading} />
+        )}
       </div>
     </div>
   );

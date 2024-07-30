@@ -80,12 +80,7 @@
       {"id": 2, "title": "Headset"},
       {"id": 3, "title": "Mouse"},
       {"id": 4, "title": "Mouse Pad"},
-      {"id": 5, "title": "Chair"},
-      {"id": 6, "title": "Streaming"},
-      {"id": 7, "title": "Speaker"},
-      {"id": 8, "title": "Microphone"},
-      {"id": 9, "title": "Desk"},
-      {"id": 10, "title": "Accessories"}
+      {"id": 5, "title": "Streaming"}
     ]
   },
   {
@@ -98,22 +93,15 @@
   },
   {
     "id": 4,
-    "title": "Network",
-    "subCategory": [
-      {"id": 1, "title": "LAN"},
-      {"id": 2, "title": "Router"}
-    ]
-  },
-  {
-    "id": 5,
     "title": "Monitor",
     "name": "monitor",
     "pathname": "/categories/com-monitor/monitor"
   },
-  {"id": 6, "title": "UPS"},
-  {"id": 7, "title": "Software"},
-  {"id": 8, "title": "Comset"},
-  {"id": 9, "title": "Accessories"},
-  {"id": 10, "title": "Desktop PC"},
-  {"id": 11, "title": "Console"}
+  {"id": 5, "title": "Desktop PC"},
+  {
+    "id": 6,
+    "title": "Network"
+  },
+  {"id": 7, "title": "UPS"},
+  {"id": 8, "title": "Software"}
 ]

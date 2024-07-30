@@ -9,6 +9,7 @@ import useCart from '../../hooks/useCart';
 
 export default function ProductDetail({productInfo, productSpec}) {
   const {addCartItem} = useCart();
+  console.log(productInfo);
   //Check if product info is defined
   if (!productInfo) {
     return <div>No Product avaliable</div>;

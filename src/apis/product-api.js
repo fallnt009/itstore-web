@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../config/axios';
 
 export const getNewProduct = (page, pageSize) =>
   axios.get('/products/new', {params: {page, pageSize}});
@@ -9,10 +9,11 @@ export const getProductByCategory = (
   categoryName,
   subCategoryName,
   page,
-  pageSize
+  pageSize,
+  filter
 ) =>
   axios.get(`/categories/product/${categoryName}/${subCategoryName}`, {
-    params: {page, pageSize},
+    params: {page, pageSize, filter},
   });
 
 export const getProductInfo = (categoryName, subCategoryName, productName) =>
@@ -20,4 +21,4 @@ export const getProductInfo = (categoryName, subCategoryName, productName) =>
     `/categories/product/${categoryName}/${subCategoryName}/${productName}`
   );
 export const getProductSpec = (productName) =>
-  axios.get(`/products/product-spec/${productName}`);
+  axios.get(`/products/spec-prod/${productName}`);

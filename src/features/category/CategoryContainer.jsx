@@ -1,65 +1,61 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useCallback} from 'react';
 import {useParams} from 'react-router-dom';
 
 import ProductCategory from '../product/ProductCategory';
+import ParginationButton from '../../components/ParginationButton';
 
-import useProduct from '../../hooks/useProduct';
+import useCategory from '../../hooks/useCategory';
 
 export default function CategoryContainer() {
+  const {categoryName, subCategoryName} = useParams();
+  const {
+    categoryItem,
+    totalItems,
+    totalPages,
+    currentPage,
+    error,
+    fetchCategoryItem,
+  } = useCategory();
+
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
-  const [items, setItems] = useState([]);
-  const [hasMore, setHasMore] = useState(true);
 
-  const {categoryName, subCategoryName} = useParams();
-  const {productList, fetchProductCategory} = useProduct();
-
-  useEffect(() => {
-    const loadCategory = async () => {
-      setLoading(true);
-      try {
-        await fetchProductCategory(categoryName, subCategoryName, page, 4);
-        //send params page and pageSize
-        //setItems
-        setItems((prevItems) => [...prevItems, ...productList]);
-        setHasMore(productList.length > 0);
-      } catch (err) {
+  const loadCategory = useCallback(async () => {
+    setLoading(true);
+    try {
+      await fetchCategoryItem(categoryName, subCategoryName, page, 8);
+    } catch (err) {
+      setLoading(false);
+    } finally {
+      setTimeout(() => {
         setLoading(false);
-      } finally {
-        setTimeout(() => {
-          setLoading(false);
-        }, 2000);
-      }
-    };
-    loadCategory();
-  }, [categoryName, subCategoryName, fetchProductCategory]);
+      }, 2000);
+    }
+  }, [categoryName, subCategoryName, fetchCategoryItem, page]);
 
-  //handle Scroll
   useEffect(() => {
-    const handleScroll = () => {
-      if (
-        window.innerHeight + document.documentElement.scrollTop + 1 >=
-        document.documentElement.scrollHeight
-      ) {
-        if (hasMore && !loading) {
-          console.log('Set more page');
-          setPage((prevPage) => prevPage + 1);
-        }
-      }
-    };
+    loadCategory();
+  }, [loadCategory]);
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [hasMore]);
+  const handleChangePage = (newPage) => {
+    setPage(newPage);
+  };
 
   return (
     <div>
       <ProductCategory
         subCategoryName={subCategoryName}
-        product={productList}
+        product={categoryItem}
+        totalItems={totalItems}
         loading={loading}
-        hasMore={hasMore}
       />
+      <div className="flex justify-center gap-2 py-3">
+        <ParginationButton
+          page={page}
+          totalPages={totalPages}
+          handleChange={handleChangePage}
+        />
+      </div>
     </div>
   );
 }

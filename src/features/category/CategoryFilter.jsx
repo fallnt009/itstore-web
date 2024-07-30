@@ -1,4 +1,22 @@
 export default function CategoryFilter() {
+  const cpufilter = [
+    {
+      id: 1,
+      title: 'Brand',
+      option: [
+        {id: 1, name: 'Intel'},
+        {id: 2, name: 'AMD'},
+      ],
+    },
+    {
+      id: 2,
+      title: 'Socket',
+      option: [
+        {id: 1, name: 'LGA 1700'},
+        {id: 2, name: 'AM 5'},
+      ],
+    },
+  ];
   return (
     <div className="py-2">
       <div className="w-full p-5">

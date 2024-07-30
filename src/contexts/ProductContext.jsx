@@ -46,7 +46,8 @@ export default function ProductContextProvider({children}) {
         const productList = await ProductApi.getProductByCategory(
           categoryName,
           subCategoryName,
-          {params: {page, pageSize}}
+          page,
+          pageSize
         );
 
         dispatch({
