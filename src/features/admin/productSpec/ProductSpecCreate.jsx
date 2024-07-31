@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import useAdmin from '../../hooks/useAdmin';
+import useAdmin from '../../../hooks/useAdmin';
 
 export default function ProductSpecCreate() {
   const {specItems, subCategory, fetchSubCategory, fetchSpecItem} = useAdmin();

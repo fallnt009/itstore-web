@@ -49,7 +49,7 @@ export default function CheckoutContextProvider({children}) {
     } catch (err) {
       console.log(err);
     }
-  }, [AllCheckout]);
+  }, []);
 
   //Create Checkout
   const createCheckout = async () => {

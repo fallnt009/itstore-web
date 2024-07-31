@@ -2,8 +2,8 @@ import {Navigate} from 'react-router-dom';
 
 import AdminPage from '../pages/AdminPage';
 import ManageProductPage from '../pages/ManageProductPage';
-import PanelProductSpec from '../features/admin/PanelProductSpec';
-import PanelProductMain from '../features/admin/PanelProductMain';
+import PanelProductSpec from '../features/admin/panel/PanelProductSpec';
+import PanelProductContainer from '../features/admin/panel/PanelProductContainer';
 
 export const adminRoutes = [
   {
@@ -20,7 +20,7 @@ export const adminRoutes = [
   },
   {
     path: 'product',
-    element: <PanelProductMain />,
+    element: <PanelProductContainer />,
   },
   {
     path: '*',

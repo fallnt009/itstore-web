@@ -35,7 +35,8 @@ export default function CheckoutPayment() {
     e.preventDefault();
     startLoading();
     const data = {paymentId: selectedPayment.id};
-    const paymentName = checkout.Payment.name;
+    const paymentName = checkout.Payment?.name;
+
     try {
       //await update by using data
       await updatePayment(checkout.id, data);

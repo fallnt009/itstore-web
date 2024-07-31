@@ -1,3 +1,4 @@
+import {useEffect} from 'react';
 import {VAT_PERCENTAGE} from '../../config/store';
 
 import CheckoutProduct from './CheckoutProduct';
@@ -6,10 +7,9 @@ import CheckoutSummaryService from './CheckoutSummaryService';
 import CSummaryAmount from './CSummaryAmount';
 
 import useCheckout from '../../hooks/useCheckout';
-import {useEffect} from 'react';
 
 export default function CheckoutSummary({defaultAddress, userCart}) {
-  const {checkout, getTotalAmount, amount} = useCheckout();
+  const {checkout, getTotalAmount} = useCheckout();
   const {Service} = checkout;
 
   const serviceFee = Service?.price;
@@ -29,8 +29,6 @@ export default function CheckoutSummary({defaultAddress, userCart}) {
   useEffect(() => {
     getTotalAmount(totalPrice, itemsPrice);
   }, [totalPrice, itemsPrice]);
-
-  console.log(amount);
 
   return (
     <div className="container">

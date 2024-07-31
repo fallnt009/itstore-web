@@ -1,5 +1,7 @@
 import {Link, useNavigate} from 'react-router-dom';
 
+import {HOME} from '../../config/routing';
+
 import useOrder from '../../hooks/useOrder';
 import useCheckout from '../../hooks/useCheckout';
 import useLoading from '../../hooks/useLoading';
@@ -23,6 +25,8 @@ export default function PaymentTransfer() {
       console.log(err);
     } finally {
       stopLoading();
+      navigate(HOME);
+      navigate(0);
     }
   };
   return (

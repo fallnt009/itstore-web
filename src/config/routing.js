@@ -28,3 +28,6 @@ exports.PAYMENT_TRANSFER = '/checkout/transferpay';
 exports.ORDER_DETAIL = (orderNumber) => `/order/details/${orderNumber}`;
 exports.ORDER_HISTORY = '/order/history';
 exports.ORDER_PROOF = '/order/proof';
+
+//for Admin
+exports.ADMIN_PRODUCT = '/admin-panel/product';

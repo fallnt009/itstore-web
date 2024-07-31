@@ -1,4 +1,4 @@
-import PanelContainer from '../features/admin/PanelContainer';
+import PanelContainer from '../features/admin/panel/PanelContainer';
 
 export default function AdminPage() {
   return (

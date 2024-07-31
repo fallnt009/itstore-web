@@ -1,5 +1,5 @@
-import ProductSpecContent from './ProductSpecContent';
-import ProductSpecCreate from './ProductSpecCreate';
+import ProductSpecContent from '../productSpec/ProductSpecContent';
+import ProductSpecCreate from '../productSpec/ProductSpecCreate';
 
 export default function PanelProductSpec() {
   return (

@@ -14,17 +14,18 @@ import useAuth from '../../hooks/useAuth';
 
 export default function CheckoutContainer() {
   const {closeDrawer, isOpen, drawerContent} = useDrawer();
-  const {userCart} = useCart();
+  const {userCart, fetchMyCart} = useCart();
   const {defaultAddress, fetchMyAddress} = useAddress();
   const {checkout, fetchMyCheckout} = useCheckout();
   const {authenUser} = useAuth();
 
   useEffect(() => {
     if (authenUser) {
+      fetchMyCart();
       fetchMyAddress();
       fetchMyCheckout();
     }
-  }, [authenUser, fetchMyCheckout, fetchMyAddress]);
+  }, [authenUser, fetchMyCheckout, fetchMyAddress, fetchMyCart]);
 
   return (
     <div className="container ">

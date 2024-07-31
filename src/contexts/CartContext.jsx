@@ -3,23 +3,18 @@ import {toast} from 'react-toastify';
 
 import * as CartApi from '../apis/cart-api';
 import useLoading from '../hooks/useLoading';
-import useAuth from '../hooks/useAuth';
 
 const CartContext = createContext();
 
 export default function CartContextProvider({children}) {
   const [userCart, setUserCart] = useState([]);
   //authen ?
-  const {authenUser} = useAuth();
 
   //loading
   const {startLoading, stopLoading} = useLoading();
 
   //fetch user cart
   const fetchMyCart = useCallback(async () => {
-    if (!authenUser) {
-      return;
-    }
     try {
       const res = await CartApi.getMyCart();
       const cartItems = res.data.result[0].CartItems;
@@ -27,7 +22,7 @@ export default function CartContextProvider({children}) {
     } catch (err) {
       console.log('Error fetching', err);
     }
-  }, [authenUser]);
+  }, []);
 
   //update qty CartItem
   const changeQtyCartItem = async (itemId, newQty) => {
