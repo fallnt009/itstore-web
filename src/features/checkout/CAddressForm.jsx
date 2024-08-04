@@ -35,7 +35,6 @@ export default function CAddressForm({onClose, addAddress}) {
       } else {
         startLoading();
         setError({});
-        // await create
         await addAddress(input);
         setInput(dataForm);
         stopLoading();

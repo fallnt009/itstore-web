@@ -1,9 +1,35 @@
-import {MdDriveFolderUpload} from 'react-icons/md';
+import {useState} from 'react';
+import {toast} from 'react-toastify';
+
+import useAdmin from '../../../hooks/useAdmin';
 
 import ActiveButton from '../../../components/ActiveButton';
+import MultiUploader from '../../../components/MultiUploader';
 
 export default function PanelProductUpload() {
-  //upload multiple images
+  const {createProductImages} = useAdmin();
+  const [selectedImages, setSelectedImages] = useState([]);
+
+  const handleSubmit = async () => {
+    const formData = new FormData();
+    selectedImages.forEach((imgObj, index) => {
+      formData.append('productImage', imgObj.file);
+    });
+
+    const productId = 1;
+
+    try {
+      //need product id
+      //send API  //need to get brand
+      await createProductImages(productId, formData);
+      //clear image
+      setSelectedImages([]);
+      toast.success('Upload Success');
+    } catch (err) {
+      toast.error(err.response?.data.message);
+    }
+  };
+
   return (
     <div className="px-10 py-5">
       <div className="grid pb-5">
@@ -17,17 +43,18 @@ export default function PanelProductUpload() {
             </h1>
           </div>
           <div className="flex flex-col py-5 px-2">
-            <div className="flex justify-center flex-col border-2 border-dashed py-11 cursor-pointer">
-              <div className="flex flex-col justify-center items-center ">
-                <MdDriveFolderUpload size={50} />
-                <h1>Click to Upload</h1>
-              </div>
+            <div className="py-5">
+              <MultiUploader
+                select={selectedImages}
+                setSelect={setSelectedImages}
+              />
             </div>
             <div className="py-2 px-5">
               <ActiveButton
                 activeTitle="Submit"
                 inActiveTitle="Submit"
                 select={true}
+                onClick={handleSubmit}
               />
             </div>
           </div>

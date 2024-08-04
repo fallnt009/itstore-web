@@ -83,6 +83,18 @@ export default function AdminContextProvider({children}) {
     },
     [dispatch]
   );
+
+  const createProductImages = async (productId, formData) => {
+    try {
+      await AdminApi.createProductImages(productId, formData);
+    } catch (err) {
+      dispatch({
+        type: SET_ERROR,
+        payload: err.message,
+      });
+    }
+  };
+
   return (
     <AdminContext.Provider
       value={{
@@ -94,6 +106,7 @@ export default function AdminContextProvider({children}) {
         fetchSpecItem,
         fetchBrand,
         fetchBrandTag,
+        createProductImages,
       }}
     >
       {children}
