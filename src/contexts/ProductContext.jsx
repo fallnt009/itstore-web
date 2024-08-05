@@ -7,13 +7,22 @@ import productReducer, {
   FETCH_PRODUCT_ERROR,
   FETCH_PRODUCT_INFO,
   INIT_PRODUCT,
+  FETCH_PRODUCT_IMAGE,
 } from '../reducers/productReducer';
 
 const ProductContext = createContext();
 
 export default function ProductContextProvider({children}) {
   const [
-    {productList, newProduct, salesProduct, productInfo, productSpec, error},
+    {
+      productList,
+      newProduct,
+      salesProduct,
+      productInfo,
+      productSpec,
+      productImages,
+      error,
+    },
     dispatch,
   ] = useReducer(productReducer, INIT_PRODUCT);
 
@@ -36,7 +45,7 @@ export default function ProductContextProvider({children}) {
         payload: err.message,
       });
     }
-  }, []);
+  }, [dispatch]);
 
   //Fetch By Category
 
@@ -92,7 +101,28 @@ export default function ProductContextProvider({children}) {
         });
       }
     },
-    []
+    [dispatch]
+  );
+  //fetch productImage
+  const fetchProductImage = useCallback(
+    async (productName) => {
+      try {
+        const productImageRes = await ProductApi.getProductInfoImage(
+          productName
+        );
+        const images = productImageRes.data.result.ProductImages;
+        dispatch({
+          type: FETCH_PRODUCT_IMAGE,
+          payload: {productImages: images},
+        });
+      } catch (err) {
+        dispatch({
+          type: FETCH_PRODUCT_ERROR,
+          payload: err.message,
+        });
+      }
+    },
+    [dispatch]
   );
 
   //add new product
@@ -104,11 +134,13 @@ export default function ProductContextProvider({children}) {
         productList,
         productInfo,
         productSpec,
+        productImages,
         newProduct,
         salesProduct,
         fetchHomeProduct,
         fetchProductCategory,
         fetchProductInfo,
+        fetchProductImage,
         error,
       }}
     >

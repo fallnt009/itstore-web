@@ -22,3 +22,6 @@ export const getProductInfo = (categoryName, subCategoryName, productName) =>
   );
 export const getProductSpec = (productName) =>
   axios.get(`/products/spec-prod/${productName}`);
+
+export const getProductInfoImage = (productName) =>
+  axios.get(`/products/image/${productName}`);

@@ -3,6 +3,7 @@
 export const FETCH_HOME_PRODUCT = 'FETCH_HOME_PRODUCT';
 export const FETCH_PRODUCT_LIST = 'FETCH_PRODUCT_LIST';
 export const FETCH_PRODUCT_INFO = 'FETCH_PRODUCT_INFO';
+export const FETCH_PRODUCT_IMAGE = 'FETCH_PRODUCT_IMAGE';
 export const FETCH_PRODUCT_ERROR = 'FETCH_PRODUCT_ERROR';
 
 export const INIT_PRODUCT = {
@@ -10,7 +11,8 @@ export const INIT_PRODUCT = {
   productListFilter: [],
   newProduct: [],
   salesProduct: [],
-  productInfo: [],
+  productInfo: {},
+  productImages: [],
   productSpec: [],
   error: null,
 };
@@ -41,13 +43,18 @@ function productReducer(state, action) {
         error: null,
       };
     }
+    case FETCH_PRODUCT_IMAGE: {
+      return {
+        ...state,
+        productImages: action.payload.productImages,
+      };
+    }
     case FETCH_PRODUCT_ERROR: {
       return {
         ...state,
         error: action.payload,
       };
     }
-
     default:
       return state;
   }

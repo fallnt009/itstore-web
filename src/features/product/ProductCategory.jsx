@@ -7,8 +7,6 @@ import CategoryProductItem from '../category/CategoryProductItem';
 export default function ProductCategory({product, loading, totalItems}) {
   const {categoryName, subCategoryName} = useParams();
 
-  console.log(product);
-
   return (
     <div className="container">
       <div className="py-10 px-24">

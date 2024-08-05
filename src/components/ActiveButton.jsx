@@ -12,13 +12,13 @@ export default function ActiveButton({
       {select ? (
         <Link
           to={to}
-          className={`flex justify-center rounded-full border-2 py-4 px-5 text-white bg-cerulean-blue-800`}
+          className={`flex justify-center rounded-full border-2 py-4 px-5  text-cerulean-blue-800 font-semibold hover:border-cerulean-blue-800`}
           onClick={onClick}
         >
           {activeTitle}
         </Link>
       ) : (
-        <div className="flex justify-center rounded-full border-2 py-4 px-5  bg-stone-300 text-stone-500 ">
+        <div className="flex justify-center rounded-full border-2 py-4 px-5  bg-stone-300 text-stone-500 font-semibold ">
           {inActiveTitle}
         </div>
       )}

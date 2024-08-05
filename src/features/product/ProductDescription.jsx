@@ -1,12 +1,12 @@
-// import {MdCheck} from 'react-icons/md';
+import {MdCheck} from 'react-icons/md';
 
 export default function ProductDescription({description}) {
   return (
     <div>
       <div className="flex items-center">
-        {/* <span>
+        <span>
           <MdCheck />
-        </span> */}
+        </span>
         <p>{description}</p>
       </div>
     </div>

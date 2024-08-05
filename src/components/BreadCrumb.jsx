@@ -14,15 +14,15 @@ export default function BreadCrumb() {
 
   //Home / CPU / productname
   return (
-    <div>
+    <div className="text-stone-500">
       <ul className="flex gap-3 font-semibold">
         <Link to="/">HOME</Link>
         {pathname.includes('/categories') && (
           <div className="flex gap-4 items-center">
             <div>{'/'}</div>
             <Link to={`/categories/${categoryName}/${subCategoryName}`}>
-              {categoryName.toUpperCase()}
-              {':'}
+              {/* {categoryName.toUpperCase()}
+              {' > '} */}
               {subCategoryName.toUpperCase()}
             </Link>
           </div>
