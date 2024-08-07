@@ -126,6 +126,19 @@ export default function ProductContextProvider({children}) {
   );
 
   //add new product
+  const addNewProduct = async (bcsId, data) => {
+    try {
+      //call api
+      const response = await ProductApi.createProduct(bcsId, data);
+      const newCreateProduct = response.data.result;
+      return newCreateProduct;
+    } catch (err) {
+      dispatch({
+        type: FETCH_PRODUCT_ERROR,
+        payload: err.message,
+      });
+    }
+  };
   //update product
   //delete product
   return (
@@ -137,6 +150,7 @@ export default function ProductContextProvider({children}) {
         productImages,
         newProduct,
         salesProduct,
+        addNewProduct,
         fetchHomeProduct,
         fetchProductCategory,
         fetchProductInfo,

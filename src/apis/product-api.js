@@ -25,3 +25,6 @@ export const getProductSpec = (productName) =>
 
 export const getProductInfoImage = (productName) =>
   axios.get(`/products/image/${productName}`);
+
+export const createProduct = (bcsId, data) =>
+  axios.post(`/products/create/${bcsId}`, data);

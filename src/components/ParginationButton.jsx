@@ -1,5 +1,4 @@
 export default function ParginationButton({page, totalPages, handleChange}) {
-  console.log(page);
   const buttons = [];
   for (let i = 1; i <= totalPages; i++) {
     buttons.push(

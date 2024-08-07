@@ -15,6 +15,8 @@ const AdminContext = createContext();
 export default function AdminContextProvider({children}) {
   const [AllAdmin, dispatch] = useReducer(adminReducer, INTT_ADMIN);
 
+  //fetch category
+
   //fetch subCategory
   const fetchSubCategory = useCallback(async () => {
     try {

@@ -6,17 +6,17 @@ import useAdmin from '../../../hooks/useAdmin';
 import ActiveButton from '../../../components/ActiveButton';
 import MultiUploader from '../../../components/MultiUploader';
 
-export default function PanelProductUpload() {
+export default function PanelProductUpload({productId}) {
   const {createProductImages} = useAdmin();
   const [selectedImages, setSelectedImages] = useState([]);
+
+  //after create send product that create to this
 
   const handleSubmit = async () => {
     const formData = new FormData();
     selectedImages.forEach((imgObj, index) => {
       formData.append('productImage', imgObj.file);
     });
-
-    const productId = 1;
 
     try {
       //need product id

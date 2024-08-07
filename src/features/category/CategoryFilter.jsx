@@ -24,7 +24,7 @@ export default function CategoryFilter() {
           <div>
             <label>Brand </label>
             <select className="p-2 rounded-md border-2">
-              <option selected>Choose brand</option>
+              <option value={0}>Choose brand</option>
               <option>Intel</option>
               <option>Amd</option>
             </select>
@@ -32,7 +32,7 @@ export default function CategoryFilter() {
           <div>
             <label>Socket</label>
             <select className="p-2 rounded-md border-2">
-              <option selected>Choose brand</option>
+              <option value={0}>Choose brand</option>
               <option>Intel</option>
               <option>Amd</option>
             </select>
@@ -40,7 +40,7 @@ export default function CategoryFilter() {
           <div>
             <label>Chipset</label>
             <select className="p-2 rounded-md border-2">
-              <option selected>Choose brand</option>
+              <option value={0}>Choose brand</option>
               <option>Intel</option>
               <option>Amd</option>
             </select>

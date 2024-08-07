@@ -1,7 +1,7 @@
 import {useNavigate} from 'react-router-dom';
 import {MdDashboard, MdLibraryBooks, MdChecklist} from 'react-icons/md';
 
-import {HOME, ADMIN_PRODUCT} from '../../../config/routing';
+import {HOME, ADMIN_PRODUCT_CREATE} from '../../../config/routing';
 
 import PanelMenuItem from './PanelMenuItem';
 
@@ -9,13 +9,12 @@ export default function PanelMenu() {
   const navigate = useNavigate();
 
   const handleNavigate = (route) => {
-    console.log(route);
     switch (route) {
       case 'dashboard':
         navigate('/');
         break;
       case 'product':
-        navigate(ADMIN_PRODUCT);
+        navigate(ADMIN_PRODUCT_CREATE);
         break;
       case 'order':
         navigate('/');

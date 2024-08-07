@@ -6,13 +6,14 @@ import useDrawer from '../../../hooks/useDrawer';
 
 import BrandTagList from '../brandTags/BrandTagList';
 
-import ActiveButton from '../../../components/ActiveButton';
+import BrandForm from '../forms/BrandForm';
+import CategoryForm from '../forms/CategoryForm';
+import SubCategoryForm from '../forms/SubCategoryForm';
 
-export default function PanelProductMain({setBcsData}) {
+export default function PanelProductMain({bcsId, setBcsId, setBcsData}) {
   const {brands, fetchBrand, fetchBrandTag} = useAdmin();
   const {openDrawerWithContent, closeDrawer} = useDrawer();
   const [selectedId, setSelectedId] = useState('');
-  const [bcsId, setBcsId] = useState('');
 
   useEffect(() => {
     fetchBrand();
@@ -32,13 +33,13 @@ export default function PanelProductMain({setBcsData}) {
   };
 
   const handleManageBrand = () => {
-    openDrawerWithContent();
+    openDrawerWithContent(<BrandForm brands={brands} />);
   };
   const handleManageCategory = () => {
-    openDrawerWithContent();
+    openDrawerWithContent(<CategoryForm />);
   };
   const handleManageSubCategory = () => {
-    openDrawerWithContent();
+    openDrawerWithContent(<SubCategoryForm />);
   };
   //now we have bcs id
   //create product first and use this bcs id to create product sub
@@ -68,19 +69,28 @@ export default function PanelProductMain({setBcsData}) {
             </select>
           </div>
           <div className=" grid grid-cols-3 gap-x-2 py-3">
-            <button className="flex items-center gap-2 font-semibold border-2 p-2 rounded-md text-cerulean-blue-800 hover:border-cerulean-blue-800">
+            <button
+              className="flex items-center gap-2 font-semibold border-2 p-2 rounded-md text-cerulean-blue-800 hover:border-cerulean-blue-800"
+              onClick={handleManageBrand}
+            >
               <span>
                 <MdAdd size={25} />
               </span>
               Manage Brand
             </button>
-            <button className="flex items-center gap-2 font-semibold border-2 p-2 rounded-md text-cerulean-blue-800 hover:border-cerulean-blue-800">
+            <button
+              className="flex items-center gap-2 font-semibold border-2 p-2 rounded-md text-cerulean-blue-800 hover:border-cerulean-blue-800"
+              onClick={handleManageCategory}
+            >
               <span>
                 <MdAdd size={25} />
               </span>
               Manage Category
             </button>
-            <button className="flex items-center gap-2 font-semibold border-2 p-2 rounded-md text-cerulean-blue-800 hover:border-cerulean-blue-800">
+            <button
+              className="flex items-center gap-2 font-semibold border-2 p-2 rounded-md text-cerulean-blue-800 hover:border-cerulean-blue-800"
+              onClick={handleManageSubCategory}
+            >
               <span>
                 <MdAdd size={25} />
               </span>
@@ -98,13 +108,13 @@ export default function PanelProductMain({setBcsData}) {
         </h1>
       </div>
       <BrandTagList active={bcsId} handleOnClick={handleOnClick} />
-      <div className="py-5 px-5">
+      {/* <div className="py-5 px-5">
         <ActiveButton
           activeTitle="Proceed to next"
           inActiveTitle="Proceed to next"
           select={true}
         />
-      </div>
+      </div> */}
     </div>
   );
 }

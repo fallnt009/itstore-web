@@ -30,4 +30,6 @@ exports.ORDER_HISTORY = '/order/history';
 exports.ORDER_PROOF = '/order/proof';
 
 //for Admin
-exports.ADMIN_PRODUCT = '/admin-panel/product';
+exports.ADMIN_PRODUCT_MANAGE = '/admin-panel/product/manage';
+exports.ADMIN_PRODUCT_CREATE = '/admin-panel/product/create';
+exports.ADMIN_PRODUCT_UPLOAD = '/admin-panel/product/upload';

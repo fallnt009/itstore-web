@@ -4,6 +4,7 @@ import AdminPage from '../pages/AdminPage';
 import ManageProductPage from '../pages/ManageProductPage';
 import PanelProductSpec from '../features/admin/panel/PanelProductSpec';
 import PanelProductContainer from '../features/admin/panel/PanelProductContainer';
+import PanelProductUpload from '../features/admin/panel/PanelProductUpload';
 
 export const adminRoutes = [
   {
@@ -19,8 +20,12 @@ export const adminRoutes = [
     element: <PanelProductSpec />,
   },
   {
-    path: 'product',
+    path: 'product/create',
     element: <PanelProductContainer />,
+  },
+  {
+    path: 'product/upload',
+    element: <PanelProductUpload />,
   },
   {
     path: '*',

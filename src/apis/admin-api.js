@@ -1,4 +1,5 @@
 import axios from '../config/axios';
+export const getAllCategory = () => axios.get('/categories/category');
 export const getSubCategory = () => axios.get('/categories/sub-category');
 export const getAllBrand = () => axios.get('/categories/brand');
 

@@ -8,7 +8,6 @@ export default function DrawerContextProvider({children}) {
   const openDrawerWithContent = (content) => {
     setDrawerContent(content);
     setIsOpen(true);
-    console.log('open');
   };
   const closeDrawer = () => {
     setIsOpen(false);
