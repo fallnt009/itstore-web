@@ -7,8 +7,6 @@ import useDrawer from '../../../hooks/useDrawer';
 import BrandTagList from '../brandTags/BrandTagList';
 
 import BrandForm from '../forms/BrandForm';
-import CategoryForm from '../forms/CategoryForm';
-import SubCategoryForm from '../forms/SubCategoryForm';
 
 export default function PanelProductMain({bcsId, setBcsId, setBcsData}) {
   const {brands, fetchBrand, fetchBrandTag} = useAdmin();
@@ -33,13 +31,15 @@ export default function PanelProductMain({bcsId, setBcsId, setBcsData}) {
   };
 
   const handleManageBrand = () => {
-    openDrawerWithContent(<BrandForm brands={brands} />);
+    openDrawerWithContent(
+      <BrandForm brands={brands} closeDrawer={closeDrawer} />
+    );
   };
   const handleManageCategory = () => {
-    openDrawerWithContent(<CategoryForm />);
+    openDrawerWithContent();
   };
   const handleManageSubCategory = () => {
-    openDrawerWithContent(<SubCategoryForm />);
+    openDrawerWithContent();
   };
   //now we have bcs id
   //create product first and use this bcs id to create product sub

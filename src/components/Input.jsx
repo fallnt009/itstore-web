@@ -21,7 +21,7 @@ export default function Input({
         onChange={onChange}
         maxLength={maxLength}
       />
-      {error && <div className="text-red-500">{error}</div>}
+      {error && <div className="px-2 py-2 text-red-500">*{error}</div>}
     </>
   );
 }

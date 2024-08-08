@@ -6,7 +6,6 @@ import useProduct from '../../../hooks/useProduct';
 import validateProduct from '../../../validators/validate-product';
 
 import Input from '../../../components/Input';
-import ActiveButton from '../../../components/ActiveButton';
 
 const dataForm = {
   title: '',

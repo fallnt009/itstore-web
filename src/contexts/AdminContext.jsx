@@ -97,6 +97,16 @@ export default function AdminContextProvider({children}) {
     }
   };
 
+  //create brand
+  //create main category
+  //create subCategory
+  //create brand tag
+
+  //edit brand
+  //edit main category
+  //edit subCategory
+  //edit brand tag
+
   return (
     <AdminContext.Provider
       value={{
