@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {toast} from 'react-toastify';
 
 import validateCategory from '../../../validators/validate-category';
@@ -13,14 +13,18 @@ import FormCreate from './FormCreate';
 
 const dataForm = {title: ''};
 
-export default function BrandForm({closeDrawer}) {
+export default function CategoryForm({closeDrawer}) {
   const [input, setInput] = useState(dataForm);
   const [error, setError] = useState({});
   const [isSelect, setIsSelect] = useState(null);
   const [expandSection, setExpandSection] = useState(null);
 
-  const {brands, addBrand, editBrand, fetchBrand} = useAdmin();
+  const {mainCategory, addCategory, editCategory, fetchCategory} = useAdmin();
   const {startLoading, stopLoading} = useLoading();
+
+  useEffect(() => {
+    fetchCategory();
+  }, [fetchCategory]);
 
   const handleExpand = (section) => {
     setExpandSection((prevSection) =>
@@ -42,10 +46,10 @@ export default function BrandForm({closeDrawer}) {
         setError(result);
       } else {
         setError({});
-        const res = await editBrand(isSelect.id, input);
-        toast.success('Brand Updated Success');
+        const res = await editCategory(isSelect.id, input);
+        toast.success('Category Updated Success');
 
-        await fetchBrand();
+        await fetchCategory();
 
         setIsSelect(res);
         setExpandSection(null);
@@ -68,11 +72,11 @@ export default function BrandForm({closeDrawer}) {
       } else {
         setError({});
         //call api
-        await addBrand(input);
-        toast.success('Brand Created Success');
+        await addCategory(input);
+        toast.success('Category Created Success');
 
         // call fetch again
-        await fetchBrand();
+        await fetchCategory();
 
         //clear data form
         setExpandSection(null);
@@ -87,17 +91,17 @@ export default function BrandForm({closeDrawer}) {
 
   return (
     <div className="flex flex-col gap-5 px-5 py-5">
-      <FormHeader title="Manage Brand" closeDrawer={closeDrawer} />
+      <FormHeader title="Manage Category" closeDrawer={closeDrawer} />
       <div className="flex flex-col gap-5 px-5">
         <FormContent
-          data={brands}
-          title="Brand Lists"
-          desc="Select brand to edit"
+          data={mainCategory}
+          title="Category Lists"
+          desc="Select category to edit"
           isSelect={isSelect}
           setIsSelect={setIsSelect}
         />
         <FormPreview
-          title="Brand"
+          title="Category"
           input={input}
           error={error}
           isSelect={isSelect}
@@ -107,7 +111,7 @@ export default function BrandForm({closeDrawer}) {
           expandSection={expandSection}
         />
         <FormCreate
-          title="Brand"
+          title="Category"
           input={input}
           error={error}
           isSelect={isSelect}
