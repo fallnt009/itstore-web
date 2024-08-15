@@ -1,10 +1,10 @@
 import {Navigate} from 'react-router-dom';
 
 import AdminPage from '../pages/AdminPage';
-import ManageProductPage from '../pages/ManageProductPage';
-import PanelProductSpec from '../features/admin/panel/PanelProductSpec';
-import PanelProductContainer from '../features/admin/panel/PanelProductContainer';
-import PanelProductUpload from '../features/admin/panel/PanelProductUpload';
+import PanelProductSpec from '../features/admin/product/create/main/PanelProductSpec';
+import PanelProductContainer from '../features/admin/product/create/main/PanelProductContainer';
+import PanelProductUpload from '../features/admin/product/create/main/PanelProductUpload';
+import ProductManage from '../features/admin/main/ProductManage';
 
 export const adminRoutes = [
   {
@@ -12,8 +12,8 @@ export const adminRoutes = [
     element: <AdminPage />,
   },
   {
-    path: 'manage-product',
-    element: <ManageProductPage />,
+    path: 'product/manage',
+    element: <ProductManage />,
   },
   {
     path: 'prodspec',

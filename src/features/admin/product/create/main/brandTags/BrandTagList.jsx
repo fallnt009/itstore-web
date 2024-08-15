@@ -1,9 +1,13 @@
 import {MdAdd} from 'react-icons/md';
-import useAdmin from '../../../hooks/useAdmin';
+import useAdmin from '../../../../../../hooks/useAdmin';
 
 import BrandTagItem from './BrandTagItem';
 
-export default function BrandTagList({handleOnClick, active}) {
+export default function BrandTagList({
+  handleOnClick,
+  handleManageTags,
+  active,
+}) {
   const {brandTag} = useAdmin();
 
   return (
@@ -28,11 +32,14 @@ export default function BrandTagList({handleOnClick, active}) {
         ))}
       </div>
       <div className="py-4">
-        <button className="flex items-center gap-2 font-semibold border-2 p-2 rounded-md text-cerulean-blue-800 hover:border-cerulean-blue-800">
+        <button
+          className="flex items-center gap-2 font-semibold border-2 p-2 rounded-md text-cerulean-blue-800 hover:border-cerulean-blue-800"
+          onClick={handleManageTags}
+        >
           <span>
             <MdAdd size={25} />
           </span>
-          Manage Tags
+          Create Tags
         </button>
         <p className="text-sm text-stone-500 pt-2">
           *brand tag is not exist? create new one

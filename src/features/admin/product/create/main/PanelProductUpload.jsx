@@ -1,10 +1,10 @@
 import {useState} from 'react';
 import {toast} from 'react-toastify';
 
-import useAdmin from '../../../hooks/useAdmin';
+import useAdmin from '../../../../../hooks/useAdmin';
 
-import ActiveButton from '../../../components/ActiveButton';
-import MultiUploader from '../../../components/MultiUploader';
+import ActiveButton from '../../../../../components/ActiveButton';
+import MultiUploader from '../../../../../components/MultiUploader';
 
 export default function PanelProductUpload({productId}) {
   const {createProductImages} = useAdmin();

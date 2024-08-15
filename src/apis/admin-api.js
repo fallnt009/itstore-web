@@ -3,6 +3,9 @@ export const getAllCategory = () => axios.get('/categories/category');
 export const getSubCategory = () => axios.get('/categories/sub-category');
 export const getAllBrand = () => axios.get('/categories/brand');
 
+// export const getSubCategoryByCategoryId = (categoryId) =>
+//   axios.get(`/categories/sub-category/${categoryId}`);
+
 export const getBrandTag = (brandId) =>
   axios.get(`/categories/brandtag/${brandId}`);
 export const getSpecByCategory = (subCategoryId) =>
@@ -15,7 +18,8 @@ export const createCategory = (data) =>
   axios.post('/categories/category', data);
 export const createSubCategory = (data) =>
   axios.post('/categories/sub-category', data);
-export const createBrandTag = () => {};
+export const createBrandTag = (data) =>
+  axios.post('/categories/brandtag', data);
 
 export const updateBrand = (brandId, data) =>
   axios.patch(`/categories/brand/${brandId}`, data);

@@ -1,30 +1,32 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {toast} from 'react-toastify';
 
-import validateCategory from '../../../validators/validate-category';
+import validateCategory from '../../../../../../validators/validate-category';
 
-import useAdmin from '../../../hooks/useAdmin';
-import useLoading from '../../../hooks/useLoading';
+import useAdmin from '../../../../../../hooks/useAdmin';
+import useLoading from '../../../../../../hooks/useLoading';
 
 import FormHeader from './FormHeader';
 import FormContent from './FormContent';
 import FormPreview from './FormPreview';
 import FormCreate from './FormCreate';
 
+import {
+  CREATE_SUCCESS,
+  UPDATE_SUCCESS,
+  UNEXPECTED_ERROR,
+} from '../../../../../../config/messages';
+
 const dataForm = {title: ''};
 
-export default function CategoryForm({closeDrawer}) {
+export default function BrandForm({closeDrawer}) {
   const [input, setInput] = useState(dataForm);
   const [error, setError] = useState({});
   const [isSelect, setIsSelect] = useState(null);
   const [expandSection, setExpandSection] = useState(null);
 
-  const {mainCategory, addCategory, editCategory, fetchCategory} = useAdmin();
+  const {brands, addBrand, editBrand, fetchBrand} = useAdmin();
   const {startLoading, stopLoading} = useLoading();
-
-  useEffect(() => {
-    fetchCategory();
-  }, [fetchCategory]);
 
   const handleExpand = (section) => {
     setExpandSection((prevSection) =>
@@ -46,17 +48,21 @@ export default function CategoryForm({closeDrawer}) {
         setError(result);
       } else {
         setError({});
-        const res = await editCategory(isSelect.id, input);
-        toast.success('Category Updated Success');
+        const res = await editBrand(isSelect.id, input);
+        if (res) {
+          toast.error(res);
+        } else {
+          toast.success(UPDATE_SUCCESS);
+        }
 
-        await fetchCategory();
+        await fetchBrand();
 
-        setIsSelect(res);
+        setIsSelect(null);
         setExpandSection(null);
         setInput(dataForm);
       }
     } catch (err) {
-      toast.error(err.response?.data.message);
+      toast.error(UNEXPECTED_ERROR);
     } finally {
       stopLoading();
     }
@@ -72,18 +78,22 @@ export default function CategoryForm({closeDrawer}) {
       } else {
         setError({});
         //call api
-        await addCategory(input);
-        toast.success('Category Created Success');
+        const res = await addBrand(input);
+        if (res) {
+          toast.error(res);
+        } else {
+          toast.success(CREATE_SUCCESS);
+        }
 
         // call fetch again
-        await fetchCategory();
+        await fetchBrand();
 
         //clear data form
         setExpandSection(null);
         setInput(dataForm);
       }
     } catch (err) {
-      toast.error(err.response?.data.message);
+      toast.error(UNEXPECTED_ERROR);
     } finally {
       stopLoading();
     }
@@ -91,17 +101,17 @@ export default function CategoryForm({closeDrawer}) {
 
   return (
     <div className="flex flex-col gap-5 px-5 py-5">
-      <FormHeader title="Manage Category" closeDrawer={closeDrawer} />
+      <FormHeader title="Manage Brand" closeDrawer={closeDrawer} />
       <div className="flex flex-col gap-5 px-5">
         <FormContent
-          data={mainCategory}
-          title="Category Lists"
-          desc="Select category to edit"
+          data={brands}
+          title="Brand Lists"
+          desc="Select brand to edit"
           isSelect={isSelect}
           setIsSelect={setIsSelect}
         />
         <FormPreview
-          title="Category"
+          title="Brand"
           input={input}
           error={error}
           isSelect={isSelect}
@@ -111,7 +121,7 @@ export default function CategoryForm({closeDrawer}) {
           expandSection={expandSection}
         />
         <FormCreate
-          title="Category"
+          title="Brand"
           input={input}
           error={error}
           isSelect={isSelect}

@@ -1,11 +1,11 @@
 import {useState} from 'react';
 import {toast} from 'react-toastify';
 
-import useProduct from '../../../hooks/useProduct';
+import useProduct from '../../../../../hooks/useProduct';
 
-import validateProduct from '../../../validators/validate-product';
+import validateProduct from '../../../../../validators/validate-product';
 
-import Input from '../../../components/Input';
+import Input from '../../../../../components/Input';
 
 const dataForm = {
   title: '',

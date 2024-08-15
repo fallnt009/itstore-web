@@ -1,11 +1,11 @@
 import {useState} from 'react';
 
-import SideDrawer from '../../../components/SideDrawer';
+import SideDrawer from '../../../../../components/SideDrawer';
 
-import useDrawer from '../../../hooks/useDrawer';
+import useDrawer from '../../../../../hooks/useDrawer';
 
 import PanelProductMain from './PanelProductMain';
-import PanelProductSummary from './PanelProductSummary';
+// import PanelProductSummary from './PanelProductSummary';
 import PanelProductCreate from './PanelProductCreate';
 import PanelProductUpload from './PanelProductUpload';
 
@@ -18,8 +18,8 @@ export default function PanelProductContainer() {
   const [submitStatus, setSubmitStatus] = useState(false);
 
   return (
-    <div className="grid grid-cols-[4fr_2fr]">
-      <div>
+    <div className="px-40">
+      <div className="border-r border-l">
         <PanelProductMain
           bcsId={bcsId}
           setBcsData={setBcsData}
@@ -35,7 +35,7 @@ export default function PanelProductContainer() {
         )}
         {submitStatus && <PanelProductUpload productId={productId} />}
       </div>
-      <PanelProductSummary bcsData={bcsData} />
+      {/* <PanelProductSummary bcsData={bcsData} /> */}
       <SideDrawer isOpen={isOpen} onClose={closeDrawer}>
         {drawerContent}
       </SideDrawer>

@@ -1,6 +1,6 @@
 import {MdRemove, MdEdit} from 'react-icons/md';
 
-import Input from '../../../components/Input';
+import Input from '../../../../../../components/Input';
 
 export default function FormPreview({
   isSelect,
@@ -22,7 +22,7 @@ export default function FormPreview({
             {isSelect ? (
               <>
                 <p>ID : {isSelect?.id || ''}</p>
-                <p>Title : {input.title || isSelect?.title || ''}</p>
+                <p>Title : {isSelect?.title || ''}</p>
               </>
             ) : (
               <p> No {title} selected</p>
@@ -58,7 +58,7 @@ export default function FormPreview({
                     type="text"
                     name="title"
                     width="45"
-                    value={input.title || isSelect?.title}
+                    value={input.title}
                     error={error.title}
                     onChange={onChange}
                   />

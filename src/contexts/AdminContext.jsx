@@ -7,7 +7,6 @@ import adminReducer, {
   FETCH_SPEC_ITEM,
   FETCH_BRAND,
   FETCH_BRAND_TAG,
-  SET_ERROR,
   ADD_BRAND,
   ADD_CATEGORY,
   ADD_SUBCATEGORY,
@@ -15,6 +14,7 @@ import adminReducer, {
   FETCH_CATEGORY,
   EDIT_CATEGORY,
   EDIT_SUBCATEGORY,
+  ADD_BRANDTAG,
 } from '../reducers/adminReducer';
 
 const AdminContext = createContext();
@@ -31,10 +31,7 @@ export default function AdminContextProvider({children}) {
         payload: {category: res.data.result},
       });
     } catch (err) {
-      dispatch({
-        type: SET_ERROR,
-        payload: err.message,
-      });
+      return err.response.data.descEn;
     }
   }, [dispatch]);
 
@@ -47,10 +44,7 @@ export default function AdminContextProvider({children}) {
         payload: {subCategory: res.data.result},
       });
     } catch (err) {
-      dispatch({
-        type: SET_ERROR,
-        payload: err.message,
-      });
+      return err.response.data.descEn;
     }
   }, [dispatch]);
   //fetch specItem of that category
@@ -63,10 +57,7 @@ export default function AdminContextProvider({children}) {
           payload: {specItems: res.data.result},
         });
       } catch (err) {
-        dispatch({
-          type: SET_ERROR,
-          payload: err.message,
-        });
+        return err.response.data.descEn;
       }
     },
     [dispatch]
@@ -81,13 +72,9 @@ export default function AdminContextProvider({children}) {
         payload: {brands: res.data.result},
       });
     } catch (err) {
-      dispatch({
-        type: SET_ERROR,
-        payload: err.message,
-      });
+      return err.response.data.descEn;
     }
   }, [dispatch]);
-  // fetch BC from brand Id
 
   const fetchBrandTag = useCallback(
     async (brandId) => {
@@ -98,10 +85,7 @@ export default function AdminContextProvider({children}) {
           payload: {brandTag: res.data.result},
         });
       } catch (err) {
-        dispatch({
-          type: SET_ERROR,
-          payload: err.message,
-        });
+        return err.response.data.descEn;
       }
     },
     [dispatch]
@@ -111,10 +95,7 @@ export default function AdminContextProvider({children}) {
     try {
       await AdminApi.createProductImages(productId, formData);
     } catch (err) {
-      dispatch({
-        type: SET_ERROR,
-        payload: err.message,
-      });
+      return err.response.data.descEn;
     }
   };
 
@@ -127,10 +108,7 @@ export default function AdminContextProvider({children}) {
         payload: {newBrands: res.data.result},
       });
     } catch (err) {
-      dispatch({
-        type: SET_ERROR,
-        payload: err.message,
-      });
+      return err.response.data.descEn;
     }
   };
   //create main category
@@ -142,10 +120,7 @@ export default function AdminContextProvider({children}) {
         payload: {newCategory: res.data.result},
       });
     } catch (err) {
-      dispatch({
-        type: SET_ERROR,
-        payload: err.message,
-      });
+      return err.response.data.descEn;
     }
   };
   //create subCategory
@@ -157,20 +132,19 @@ export default function AdminContextProvider({children}) {
         payload: {newSubCategory: res.data.result},
       });
     } catch (err) {
-      dispatch({
-        type: SET_ERROR,
-        payload: err.message,
-      });
+      return err.response.data.descEn;
     }
   };
   //create brand tag
   const addBrandTags = async (data) => {
     try {
-    } catch (err) {
+      const res = await AdminApi.createBrandTag(data);
       dispatch({
-        type: SET_ERROR,
-        payload: err.message,
+        type: ADD_BRANDTAG,
+        payload: {brandTags: res.data.result},
       });
+    } catch (err) {
+      return err.response.data.descEn;
     }
   };
 
@@ -183,12 +157,8 @@ export default function AdminContextProvider({children}) {
         type: EDIT_BRAND,
         payload: {id: brandId, updatedBrand: updateBrand},
       });
-      return updateBrand;
     } catch (err) {
-      dispatch({
-        type: SET_ERROR,
-        payload: err.message,
-      });
+      return err.response.data.descEn;
     }
   };
   //edit main category
@@ -200,12 +170,8 @@ export default function AdminContextProvider({children}) {
         type: EDIT_CATEGORY,
         payload: {id: categoryId, updatedCategory: updateCategory},
       });
-      return updateCategory;
     } catch (err) {
-      dispatch({
-        type: SET_ERROR,
-        payload: err.message,
-      });
+      return err.response.data.descEn;
     }
   };
   //edit subCategory
@@ -217,12 +183,8 @@ export default function AdminContextProvider({children}) {
         type: EDIT_SUBCATEGORY,
         payload: {id: subCategoryId, updatedSubCategory: updateSubCategory},
       });
-      return updateSubCategory;
     } catch (err) {
-      dispatch({
-        type: SET_ERROR,
-        payload: err.message,
-      });
+      return err.response.data.descEn;
     }
   };
   //edit brand tag
@@ -230,6 +192,7 @@ export default function AdminContextProvider({children}) {
   return (
     <AdminContext.Provider
       value={{
+        error: AllAdmin.error,
         subCategory: AllAdmin.subCategory,
         specItems: AllAdmin.specItems,
         brands: AllAdmin.brands,
@@ -244,6 +207,7 @@ export default function AdminContextProvider({children}) {
         addBrand,
         addCategory,
         addSubCategory,
+        addBrandTags,
         editBrand,
         editCategory,
         editSubCategory,

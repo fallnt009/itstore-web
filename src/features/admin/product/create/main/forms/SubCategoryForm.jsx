@@ -1,15 +1,21 @@
 import {useEffect, useState} from 'react';
 import {toast} from 'react-toastify';
 
-import validateCategory from '../../../validators/validate-category';
+import validateCategory from '../../../../../../validators/validate-category';
 
-import useAdmin from '../../../hooks/useAdmin';
-import useLoading from '../../../hooks/useLoading';
+import useAdmin from '../../../../../../hooks/useAdmin';
+import useLoading from '../../../../../../hooks/useLoading';
 
 import FormHeader from './FormHeader';
 import FormContent from './FormContent';
 import FormPreview from './FormPreview';
 import FormCreate from './FormCreate';
+
+import {
+  CREATE_SUCCESS,
+  UPDATE_SUCCESS,
+  UNEXPECTED_ERROR,
+} from '../../../../../../config/messages';
 
 const dataForm = {title: ''};
 
@@ -48,16 +54,20 @@ export default function SubCategoryForm({closeDrawer}) {
       } else {
         setError({});
         const res = await editSubCategory(isSelect.id, input);
-        toast.success('Brand Updated Success');
+        if (res) {
+          toast.error(res);
+        } else {
+          toast.success(UPDATE_SUCCESS);
+        }
 
         await fetchSubCategory();
 
-        setIsSelect(res);
+        setIsSelect(null);
         setExpandSection(null);
         setInput(dataForm);
       }
     } catch (err) {
-      toast.error(err.response?.data.message);
+      toast.error(UNEXPECTED_ERROR);
     } finally {
       stopLoading();
     }
@@ -73,8 +83,12 @@ export default function SubCategoryForm({closeDrawer}) {
       } else {
         setError({});
         //call api
-        await addSubCategory(input);
-        toast.success('Brand Created Success');
+        const res = await addSubCategory(input);
+        if (res) {
+          toast.error(res);
+        } else {
+          toast.success(CREATE_SUCCESS);
+        }
 
         // call fetch again
         await fetchSubCategory();
@@ -84,7 +98,7 @@ export default function SubCategoryForm({closeDrawer}) {
         setInput(dataForm);
       }
     } catch (err) {
-      toast.error(err.response?.data.message);
+      toast.error(UNEXPECTED_ERROR);
     } finally {
       stopLoading();
     }
