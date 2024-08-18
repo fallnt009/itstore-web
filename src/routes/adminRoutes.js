@@ -5,6 +5,8 @@ import PanelProductSpec from '../features/admin/product/create/main/PanelProduct
 import PanelProductContainer from '../features/admin/product/create/main/PanelProductContainer';
 import PanelProductUpload from '../features/admin/product/create/main/PanelProductUpload';
 import ProductManage from '../features/admin/main/ProductManage';
+import ManageEdit from '../features/admin/product/manage/ManageEdit';
+import ManageCreate from '../features/admin/product/manage/ManageCreate';
 
 export const adminRoutes = [
   {
@@ -21,7 +23,11 @@ export const adminRoutes = [
   },
   {
     path: 'product/create',
-    element: <PanelProductContainer />,
+    element: <ManageCreate />,
+  },
+  {
+    path: 'product/edit',
+    element: <ManageEdit />,
   },
   {
     path: 'product/upload',

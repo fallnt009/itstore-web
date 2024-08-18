@@ -129,14 +129,10 @@ export default function ProductContextProvider({children}) {
   const addNewProduct = async (bcsId, data) => {
     try {
       //call api
-      const response = await ProductApi.createProduct(bcsId, data);
-      const newCreateProduct = response.data.result;
-      return newCreateProduct;
+      await ProductApi.createProduct(bcsId, data);
+      // const newCreateProduct = response.data.result;
     } catch (err) {
-      dispatch({
-        type: FETCH_PRODUCT_ERROR,
-        payload: err.message,
-      });
+      return err.response.data.descEn;
     }
   };
   //update product

@@ -99,7 +99,7 @@ export default function PanelProductCreate({
                   error={error.description}
                 />
               </div>
-              <div className="flex flex-col  gap-1">
+              <div className="flex flex-col gap-1">
                 <h4 className="text-stone-600">Quantity</h4>
                 <Input
                   width="24"

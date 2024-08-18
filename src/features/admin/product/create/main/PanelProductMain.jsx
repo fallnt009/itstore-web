@@ -1,5 +1,8 @@
 import {useEffect, useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 import {MdAdd, MdArrowBackIos} from 'react-icons/md';
+
+import {ADMIN_PRODUCT_MANAGE} from '../../../../../config/routing';
 
 import useAdmin from '../../../../../hooks/useAdmin';
 import useDrawer from '../../../../../hooks/useDrawer';
@@ -16,6 +19,8 @@ export default function PanelProductMain({bcsId, setBcsId, setBcsData}) {
   const {openDrawerWithContent, closeDrawer} = useDrawer();
   const [selectedId, setSelectedId] = useState('');
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     fetchBrand();
   }, [fetchBrand, closeDrawer]);
@@ -31,6 +36,10 @@ export default function PanelProductMain({bcsId, setBcsId, setBcsData}) {
   const handleOnClick = (id, data) => {
     setBcsId(id);
     setBcsData(data);
+  };
+
+  const handleNavigate = () => {
+    navigate(ADMIN_PRODUCT_MANAGE);
   };
 
   const handleManageBrand = () => {
@@ -53,7 +62,10 @@ export default function PanelProductMain({bcsId, setBcsId, setBcsData}) {
     <div className="px-10 py-5">
       <div className="grid pb-5">
         <div>
-          <button className="flex items-center gap-1 border-2 rounded-lg py-2 px-4 text-cerulean-blue-800 hover:border-cerulean-blue-800 hover:font-semibold">
+          <button
+            className="flex items-center gap-1 border-2 rounded-lg py-2 px-4 text-cerulean-blue-800 hover:border-cerulean-blue-800 hover:font-semibold"
+            onClick={handleNavigate}
+          >
             <span>
               <MdArrowBackIos />
             </span>

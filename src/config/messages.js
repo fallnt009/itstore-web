@@ -1,5 +1,5 @@
 //default_error
-exports.UNEXPECTED_ERROR = 'An unexpected error occurred.';
+exports.UNEXPECTED_ERROR = 'An unexpected error occurred. Please try again.';
 
 // Create,update and delete
 exports.CREATE_SUCCESS = 'Created Success';

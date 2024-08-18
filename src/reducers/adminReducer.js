@@ -3,6 +3,7 @@ export const FETCH_CATEGORY = 'FETCH_CATEGORY';
 export const FETCH_SPEC_ITEM = 'FETCH_SPEC_ITEM';
 export const FETCH_BRAND = 'FETCH_BRAND';
 export const FETCH_BRAND_TAG = 'FETCH_BRAND_TAG';
+export const FETCH_PRODUCT = 'FETCH_PRODUCT';
 export const ADD_BRAND = 'ADD_BRAND';
 export const ADD_CATEGORY = 'ADD_CATEGORY';
 export const ADD_SUBCATEGORY = 'ADD_SUBCATEGORY';
@@ -12,6 +13,7 @@ export const EDIT_CATEGORY = 'EDIT_CATEGORY';
 export const EDIT_SUBCATEGORY = 'EDIT_SUBCATEGORY';
 
 export const INTT_ADMIN = {
+  products: [],
   subCategory: [],
   specItems: [],
   brands: [],
@@ -35,6 +37,9 @@ function adminReducer(state, action) {
     }
     case FETCH_BRAND_TAG: {
       return {...state, brandTag: action.payload.brandTag};
+    }
+    case FETCH_PRODUCT: {
+      return {...state, products: action.payload.products};
     }
     case ADD_BRAND: {
       const newBrandsList = [action.payload.newBrands, ...state.brands];

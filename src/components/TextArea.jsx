@@ -1,16 +1,16 @@
-export default function Input({
+export default function TextArea({
   type,
   placeholder,
   name,
   value,
   onChange,
   error,
-  maxLength,
+  rows,
   width = 'full',
 }) {
   return (
     <>
-      <input
+      <textarea
         className={`rounded-lg border shadow-inner p-2 bg-gray-50 w-${width} focus:outline-none  ${
           error ? 'border-red-500 ' : 'focus:border-blue-500'
         }`}
@@ -19,7 +19,7 @@ export default function Input({
         name={name}
         value={value}
         onChange={onChange}
-        maxLength={maxLength}
+        rows={rows}
       />
       {error && <div className=" text-red-500">*{error}</div>}
     </>

@@ -2,6 +2,17 @@ import axios from '../config/axios';
 export const getAllCategory = () => axios.get('/categories/category');
 export const getSubCategory = () => axios.get('/categories/sub-category');
 export const getAllBrand = () => axios.get('/categories/brand');
+export const getAllProduct = (
+  page,
+  pageSize,
+  order,
+  brandId,
+  categoryId,
+  subCategoryId
+) =>
+  axios.get('/products/all', {
+    params: {page, pageSize, order, brandId, categoryId, subCategoryId},
+  });
 
 // export const getSubCategoryByCategoryId = (categoryId) =>
 //   axios.get(`/categories/sub-category/${categoryId}`);

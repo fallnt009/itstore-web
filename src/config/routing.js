@@ -32,4 +32,5 @@ exports.ORDER_PROOF = '/order/proof';
 //for Admin
 exports.ADMIN_PRODUCT_MANAGE = '/admin-panel/product/manage';
 exports.ADMIN_PRODUCT_CREATE = '/admin-panel/product/create';
+exports.ADMIN_PRODUCT_EDIT = '/admin-panel/product/edit';
 exports.ADMIN_PRODUCT_UPLOAD = '/admin-panel/product/upload';
