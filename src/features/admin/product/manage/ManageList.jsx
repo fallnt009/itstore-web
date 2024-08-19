@@ -16,8 +16,8 @@ export default function ManageList({
     setOrder((prevOrder) => (prevOrder === 'ASC' ? 'DESC' : 'ASC'));
   };
   return (
-    <div className="px-10 py-5">
-      <div className="grid grid-cols-[0.5fr_6fr_2fr_2fr_1.5fr]  bg-stone-100 p-2 rounded-lg text-stone-600 font-semibold text-sm">
+    <div className="px-10">
+      <div className="grid grid-cols-[0.5fr_6fr_2fr_2fr_1.5fr]  bg-gray-200 p-2 rounded-lg text-gray-600 font-semibold text-sm">
         <div className="flex gap-1">
           Id
           <button onClick={handleClickOrder}>

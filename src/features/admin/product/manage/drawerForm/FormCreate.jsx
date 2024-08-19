@@ -1,6 +1,6 @@
 import {MdRemove, MdAdd} from 'react-icons/md';
 
-import Input from '../../../../../../components/Input';
+import Input from '../../../../../components/Input';
 
 export default function FormCreate({
   onChange,

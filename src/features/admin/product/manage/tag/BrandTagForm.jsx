@@ -1,15 +1,19 @@
 import {useEffect, useState} from 'react';
 import {toast} from 'react-toastify';
 
-import useAdmin from '../../../../../../hooks/useAdmin';
+import useAdmin from '../../../../../hooks/useAdmin';
+import useLoading from '../../../../../hooks/useLoading';
 
-import FormHeader from './FormHeader';
-import BrandTagBC from '../brandTags/BrandTagBC';
-import BrandTagBCS from '../brandTags/BrandTagBCS';
+import FormHeader from '../drawerForm/FormHeader';
+import BrandTagBC from './BrandTagBC';
+import BrandTagBCS from './BrandTagBCS';
+
+import {CREATE_SUCCESS, UNEXPECTED_ERROR} from '../../../../../config/messages';
 
 export default function BrandTagForm({closeDrawer}) {
   const {fetchBrand, fetchCategory, fetchSubCategory, addBrandTags} =
     useAdmin();
+  const {startLoading, stopLoading} = useLoading();
 
   const [isShow, setIsShow] = useState(true);
   const [selectBrand, setSelectBrand] = useState('');
@@ -37,22 +41,27 @@ export default function BrandTagForm({closeDrawer}) {
     setIsShow((prev) => !prev);
   };
 
-  const handleSubmitCreate = async () => {
+  const handleSubmitCreate = async (e) => {
+    e.preventDefault();
+
     const data = {
       brandId: selectBrand,
       categoryId: selectCategory,
       subCategoryId: selectSubCategory,
     };
+    startLoading();
     try {
       const res = await addBrandTags(data);
       if (res) {
-        toast.error('Tag already exist');
+        toast.error(res);
       } else {
-        toast.success('created success');
+        toast.success(CREATE_SUCCESS);
         closeDrawer();
       }
     } catch (err) {
-      toast.error('An unexpected error occurred. Please try again.');
+      toast.error(UNEXPECTED_ERROR);
+    } finally {
+      stopLoading();
     }
   };
 

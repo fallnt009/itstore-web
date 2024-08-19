@@ -45,15 +45,15 @@ export default function ManageFilter({
   return (
     <div className="px-10 py-5 text-sm ">
       <form className="text-stone-700">
-        <h1 className="flex items-center gap-1 py-2 text-xl font-semibold">
+        <h1 className="flex items-center gap-1 py-2 text-xl font-semibold text-indigo-600">
           <span>
             <MdFilterAlt />
           </span>
           Filter
         </h1>
-        <div className="flex rounded-lg gap-2 items-center p-2 bg-stone-100 ">
+        <div className="flex rounded-lg gap-2 items-center p-2 bg-gray-200 ">
           <div>
-            <select className="rounded-lg p-2" onChange={handleChangeBrand}>
+            <select className="rounded-lg p-2 " onChange={handleChangeBrand}>
               <option value="">Choose Brand</option>
               {brands?.map((item) => (
                 <option key={item.id} value={item.id}>
@@ -86,7 +86,7 @@ export default function ManageFilter({
             </select>
           </div>
           <button
-            className="p-2 hover:text-cerulean-blue-800 hover:font-semibold"
+            className="p-2 text-indigo-600 hover:text-gray-500 font-semibold"
             onClick={handleOnClickClear}
           >
             Clear

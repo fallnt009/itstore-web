@@ -1,21 +1,21 @@
 import {useState} from 'react';
 import {toast} from 'react-toastify';
 
-import validateCategory from '../../../../../../validators/validate-category';
+import validateCategory from '../../../../../validators/validate-category';
 
-import useAdmin from '../../../../../../hooks/useAdmin';
-import useLoading from '../../../../../../hooks/useLoading';
+import useAdmin from '../../../../../hooks/useAdmin';
+import useLoading from '../../../../../hooks/useLoading';
 
-import FormHeader from './FormHeader';
-import FormContent from './FormContent';
-import FormPreview from './FormPreview';
-import FormCreate from './FormCreate';
+import FormHeader from '../drawerForm/FormHeader';
+import FormContent from '../drawerForm/FormContent';
+import FormPreview from '../drawerForm/FormPreview';
+import FormCreate from '../drawerForm/FormCreate';
 
 import {
   CREATE_SUCCESS,
   UPDATE_SUCCESS,
   UNEXPECTED_ERROR,
-} from '../../../../../../config/messages';
+} from '../../../../../config/messages';
 
 const dataForm = {title: ''};
 
@@ -37,7 +37,6 @@ export default function BrandForm({closeDrawer}) {
   const handleChangeInput = (e) => {
     setInput({...input, [e.target.name]: e.target.value});
   };
-
   const handleSubmitEdit = async (e) => {
     try {
       e.preventDefault();
@@ -98,7 +97,6 @@ export default function BrandForm({closeDrawer}) {
       stopLoading();
     }
   };
-
   return (
     <div className="flex flex-col gap-5 px-5 py-5">
       <FormHeader title="Manage Brand" closeDrawer={closeDrawer} />

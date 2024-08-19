@@ -16,7 +16,7 @@ export default function ParginationButton({page, totalPages, handleChange}) {
     buttons.push(
       <button
         className={`rounded-xl py-2 px-3 text-base ${
-          page === 1 ? 'bg-cerulean-blue-700 text-white font-semibold' : ''
+          page === 1 ? 'bg-indigo-600 text-white font-semibold' : ''
         } hover:bg-stone-400 hover:text-white hover:font-semibold`}
         key={1}
         onClick={() => handleChange(1)}
@@ -43,7 +43,7 @@ export default function ParginationButton({page, totalPages, handleChange}) {
     buttons.push(
       <button
         className={`rounded-xl py-2 px-3 text-base ${
-          page === i ? 'bg-cerulean-blue-700 text-white font-semibold' : ''
+          page === i ? 'bg-indigo-600 text-white font-semibold' : ''
         } hover:bg-stone-400 hover:text-white hover:font-semibold`}
         key={i}
         onClick={() => handleChange(i)}
@@ -67,9 +67,7 @@ export default function ParginationButton({page, totalPages, handleChange}) {
     buttons.push(
       <button
         className={`rounded-xl py-2 px-3 text-base  ${
-          page === totalPages
-            ? 'bg-cerulean-blue-700 text-white font-semibold'
-            : ''
+          page === totalPages ? 'bg-indigo-600 text-white font-semibold' : ''
         } hover:bg-stone-400 hover:text-white hover:font-semibold`}
         key={totalPages}
         onClick={() => handleChange(totalPages)}
@@ -81,6 +79,6 @@ export default function ParginationButton({page, totalPages, handleChange}) {
   }
 
   return (
-    <div className="flex gap-2 rounded-lg px-4 bg-stone-100 ">{buttons}</div>
+    <div className="flex gap-2 rounded-lg px-4 bg-gray-100 ">{buttons}</div>
   );
 }

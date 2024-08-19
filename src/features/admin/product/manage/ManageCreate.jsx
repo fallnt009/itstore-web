@@ -15,7 +15,7 @@ import TagPreview from './tag/TagPreview';
 
 import useProduct from '../../../../hooks/useProduct';
 import useLoading from '../../../../hooks/useLoading';
-import useAdmin from '../../../../hooks/useAdmin';
+import useDrawer from '../../../../hooks/useDrawer';
 
 import validateProduct from '../../../../validators/validate-product';
 import UploadContent from './uploader/UploadContent';
@@ -36,7 +36,8 @@ export default function ManageCreate() {
   const [error, setError] = useState({});
 
   const {addNewProduct} = useProduct();
-  const {createProductImages} = useAdmin();
+  const {openDrawerWithContent, closeDrawer} = useDrawer();
+
   const {startLoading, stopLoading} = useLoading();
 
   const navigate = useNavigate();

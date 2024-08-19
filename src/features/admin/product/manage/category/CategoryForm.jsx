@@ -1,37 +1,36 @@
 import {useEffect, useState} from 'react';
 import {toast} from 'react-toastify';
 
-import validateCategory from '../../../../../../validators/validate-category';
+import validateCategory from '../../../../../validators/validate-category';
 
-import useAdmin from '../../../../../../hooks/useAdmin';
-import useLoading from '../../../../../../hooks/useLoading';
+import useAdmin from '../../../../../hooks/useAdmin';
+import useLoading from '../../../../../hooks/useLoading';
 
-import FormHeader from './FormHeader';
-import FormContent from './FormContent';
-import FormPreview from './FormPreview';
-import FormCreate from './FormCreate';
+import FormHeader from '../drawerForm/FormHeader';
+import FormContent from '../drawerForm/FormContent';
+import FormPreview from '../drawerForm/FormPreview';
+import FormCreate from '../drawerForm/FormCreate';
 
 import {
   CREATE_SUCCESS,
   UPDATE_SUCCESS,
   UNEXPECTED_ERROR,
-} from '../../../../../../config/messages';
+} from '../../../../../config/messages';
 
 const dataForm = {title: ''};
 
-export default function SubCategoryForm({closeDrawer}) {
+export default function CategoryForm({closeDrawer}) {
   const [input, setInput] = useState(dataForm);
   const [error, setError] = useState({});
   const [isSelect, setIsSelect] = useState(null);
   const [expandSection, setExpandSection] = useState(null);
 
-  const {subCategory, addSubCategory, editSubCategory, fetchSubCategory} =
-    useAdmin();
+  const {mainCategory, addCategory, editCategory, fetchCategory} = useAdmin();
   const {startLoading, stopLoading} = useLoading();
 
   useEffect(() => {
-    fetchSubCategory();
-  }, [fetchSubCategory]);
+    fetchCategory();
+  }, [fetchCategory]);
 
   const handleExpand = (section) => {
     setExpandSection((prevSection) =>
@@ -53,14 +52,14 @@ export default function SubCategoryForm({closeDrawer}) {
         setError(result);
       } else {
         setError({});
-        const res = await editSubCategory(isSelect.id, input);
+        const res = await editCategory(isSelect.id, input);
         if (res) {
           toast.error(res);
         } else {
           toast.success(UPDATE_SUCCESS);
         }
 
-        await fetchSubCategory();
+        await fetchCategory();
 
         setIsSelect(null);
         setExpandSection(null);
@@ -83,7 +82,7 @@ export default function SubCategoryForm({closeDrawer}) {
       } else {
         setError({});
         //call api
-        const res = await addSubCategory(input);
+        const res = await addCategory(input);
         if (res) {
           toast.error(res);
         } else {
@@ -91,7 +90,7 @@ export default function SubCategoryForm({closeDrawer}) {
         }
 
         // call fetch again
-        await fetchSubCategory();
+        await fetchCategory();
 
         //clear data form
         setExpandSection(null);
@@ -106,17 +105,17 @@ export default function SubCategoryForm({closeDrawer}) {
 
   return (
     <div className="flex flex-col gap-5 px-5 py-5">
-      <FormHeader title="Manage Sub Category" closeDrawer={closeDrawer} />
+      <FormHeader title="Manage Category" closeDrawer={closeDrawer} />
       <div className="flex flex-col gap-5 px-5">
         <FormContent
-          data={subCategory}
-          title="Sub Category Lists"
-          desc="Select Sub Category to edit"
+          data={mainCategory}
+          title="Category Lists"
+          desc="Select category to edit"
           isSelect={isSelect}
           setIsSelect={setIsSelect}
         />
         <FormPreview
-          title="Sub Category"
+          title="Category"
           input={input}
           error={error}
           isSelect={isSelect}
@@ -126,7 +125,7 @@ export default function SubCategoryForm({closeDrawer}) {
           expandSection={expandSection}
         />
         <FormCreate
-          title="Sub Category"
+          title="Category"
           input={input}
           error={error}
           isSelect={isSelect}

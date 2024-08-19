@@ -1,10 +1,13 @@
 import {useState, useEffect} from 'react';
+
 import useAdmin from '../../../hooks/useAdmin';
 import useLoading from '../../../hooks/useLoading';
+import useDrawer from '../../../hooks/useDrawer';
 
-import ManageHeader from '../product/manage/ManageHeader';
+import ManageHeader from '../product/manage/header/ManageHeader';
 import ManageList from '../product/manage/ManageList';
 import ManageFilter from '../product/manage/ManageFilter';
+import SideDrawer from '../../../components/SideDrawer';
 
 export default function ProductManage() {
   const {
@@ -15,6 +18,8 @@ export default function ProductManage() {
     fetchSubCategory,
   } = useAdmin();
   const {startLoading, stopLoading} = useLoading();
+  const {closeDrawer, isOpen, drawerContent} = useDrawer();
+
   //pages and order
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
@@ -84,6 +89,9 @@ export default function ProductManage() {
           setOrder={setOrder}
         />
       </div>
+      <SideDrawer isOpen={isOpen} onClose={closeDrawer}>
+        {drawerContent}
+      </SideDrawer>
     </div>
   );
 }

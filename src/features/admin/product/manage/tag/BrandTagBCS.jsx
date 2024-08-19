@@ -1,6 +1,6 @@
-import useAdmin from '../../../../../../hooks/useAdmin';
+import useAdmin from '../../../../../hooks/useAdmin';
 
-import CompleteStatus from '../../../../../../components/CompleteStatus';
+import CompleteStatus from '../../../../../components/CompleteStatus';
 
 export default function BrandTagBCS({
   selectSubCategory,
