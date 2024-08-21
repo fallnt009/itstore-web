@@ -1,6 +1,7 @@
 import {createContext, useReducer, useCallback} from 'react';
 
 import * as ProductApi from '../apis/product-api';
+import * as AdminApi from '../apis/admin-api';
 import productReducer, {
   FETCH_HOME_PRODUCT,
   FETCH_PRODUCT_LIST,
@@ -125,6 +126,24 @@ export default function ProductContextProvider({children}) {
     [dispatch]
   );
 
+  const fetchProductById = useCallback(async (productId) => {
+    try {
+      const res = await ProductApi.getProductById(productId);
+      return res;
+    } catch (err) {
+      return err.response;
+    }
+  }, []);
+
+  const fetchBrandTagByBcsId = useCallback(async (bcsId) => {
+    try {
+      const res = await AdminApi.getBrandTagByBcsId(bcsId);
+      return res.data.result;
+    } catch (err) {
+      return err.response;
+    }
+  }, []);
+
   //add new product
   const addNewProduct = async (bcsId, data) => {
     try {
@@ -136,6 +155,13 @@ export default function ProductContextProvider({children}) {
     }
   };
   //update product
+  const updateProduct = async (productId, data) => {
+    try {
+      await ProductApi.updateProduct(productId, data);
+    } catch (err) {
+      return err.response.data.descEn;
+    }
+  };
   //delete product
   return (
     <ProductContext.Provider
@@ -147,10 +173,13 @@ export default function ProductContextProvider({children}) {
         newProduct,
         salesProduct,
         addNewProduct,
+        updateProduct,
         fetchHomeProduct,
         fetchProductCategory,
         fetchProductInfo,
         fetchProductImage,
+        fetchProductById,
+        fetchBrandTagByBcsId,
         error,
       }}
     >

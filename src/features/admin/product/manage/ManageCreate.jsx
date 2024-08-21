@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {toast} from 'react-toastify';
 
-import {MdArrowBack, MdKeyboardArrowRight} from 'react-icons/md';
+import {MdArrowBack} from 'react-icons/md';
 import {ADMIN_PRODUCT_MANAGE} from '../../../../config/routing';
 import {UNEXPECTED_ERROR, CREATE_SUCCESS} from '../../../../config/messages';
 
@@ -11,11 +11,11 @@ import Input from '../../../../components/Input';
 import TextArea from '../../../../components/TextArea';
 
 import ManageTag from './tag/ManageTag';
+import ManageBreadCrumb from './breadcrumb/ManageBreadCrumb';
 import TagPreview from './tag/TagPreview';
 
 import useProduct from '../../../../hooks/useProduct';
 import useLoading from '../../../../hooks/useLoading';
-import useDrawer from '../../../../hooks/useDrawer';
 
 import validateProduct from '../../../../validators/validate-product';
 import UploadContent from './uploader/UploadContent';
@@ -36,11 +36,13 @@ export default function ManageCreate() {
   const [error, setError] = useState({});
 
   const {addNewProduct} = useProduct();
-  const {openDrawerWithContent, closeDrawer} = useDrawer();
 
   const {startLoading, stopLoading} = useLoading();
 
   const navigate = useNavigate();
+
+  //need to fetchProductTag
+  //setBscData that fetch
 
   const handleOnClickBack = () => {
     navigate(ADMIN_PRODUCT_MANAGE);
@@ -106,17 +108,7 @@ export default function ManageCreate() {
   return (
     <div className="px-40 pb-10">
       <div>
-        <div className="py-5 flex items-center text-sm gap-2">
-          <p className="text-cerulean-blue-600">Dashboard</p>
-          <span className="text-cerulean-blue-600">
-            <MdKeyboardArrowRight />
-          </span>
-          <p className="text-cerulean-blue-600">Product</p>
-          <span>
-            <MdKeyboardArrowRight />
-          </span>
-          <p>Create</p>
-        </div>
+        <ManageBreadCrumb />
         <div className="py-5 px-10 border rounded-lg text-stone-800 shadow-md">
           <div className="flex gap-1 items-center py-5">
             <button

@@ -30,7 +30,10 @@ exports.ORDER_HISTORY = '/order/history';
 exports.ORDER_PROOF = '/order/proof';
 
 //for Admin
-exports.ADMIN_PRODUCT_MANAGE = '/admin-panel/product/manage';
+exports.ADMIN_PRODUCT_MANAGE = '/admin-panel/product';
 exports.ADMIN_PRODUCT_CREATE = '/admin-panel/product/create';
-exports.ADMIN_PRODUCT_EDIT = '/admin-panel/product/edit';
+exports.ADMIN_PRODUCT_EDIT = (productId) =>
+  `/admin-panel/product/edit/${productId}`;
+exports.ADMIN_PRODUCT_PREVIEW = (productId) =>
+  `/admin-panel/product/preview/${productId}`;
 exports.ADMIN_PRODUCT_UPLOAD = '/admin-panel/product/upload';

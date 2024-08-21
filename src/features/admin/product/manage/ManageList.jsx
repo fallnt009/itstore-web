@@ -11,6 +11,7 @@ export default function ManageList({
   order,
   onChangePage,
   setOrder,
+  setSelectProduct,
 }) {
   const handleClickOrder = () => {
     setOrder((prevOrder) => (prevOrder === 'ASC' ? 'DESC' : 'ASC'));

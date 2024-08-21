@@ -5,13 +5,32 @@ import useAdmin from '../../../../../hooks/useAdmin';
 
 import TagList from './TagList';
 
-export default function ManageTag({onClose, setBcsId, setBcsData, bcsId}) {
+export default function ManageTag({
+  onClose,
+  setBcsId,
+  bcsData,
+  setBcsData,
+  bcsId,
+}) {
   const {brands, fetchBrand, fetchBrandTag} = useAdmin();
   const [selectBrandId, setSelectBrandId] = useState('');
 
   useEffect(() => {
     fetchBrand();
   }, [fetchBrand]);
+
+  //if bcsData have data inside proceed to show that already selected
+  useEffect(() => {
+    const loadBrandTag = async () => {
+      if (bcsData) {
+        const getBrandId = bcsData.BrandCategory.brandId;
+        setSelectBrandId(getBrandId);
+
+        await fetchBrandTag(getBrandId);
+      }
+    };
+    loadBrandTag();
+  }, [bcsData, fetchBrandTag]);
 
   const handleSelectBrand = async (e) => {
     const brandId = e.target.value;
@@ -26,6 +45,7 @@ export default function ManageTag({onClose, setBcsId, setBcsData, bcsId}) {
     setBcsId(id);
     setBcsData(data);
   };
+
   return (
     <div className="w-96 px-5 py-2">
       <div className="flex justify-between items-center text-sm">

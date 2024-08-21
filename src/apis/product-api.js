@@ -26,5 +26,12 @@ export const getProductSpec = (productName) =>
 export const getProductInfoImage = (productName) =>
   axios.get(`/products/image/${productName}`);
 
+//get product by id
+export const getProductById = (productId) =>
+  axios.get(`/products/${productId}`);
+
 export const createProduct = (bcsId, data) =>
   axios.post(`/products/create/${bcsId}`, data);
+
+export const updateProduct = (productId, data) =>
+  axios.patch(`/products/${productId}`, data);

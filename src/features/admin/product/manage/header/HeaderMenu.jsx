@@ -23,7 +23,7 @@ export default function HeaderMenu() {
     openDrawerWithContent(<BrandTagForm closeDrawer={closeDrawer} />);
   };
   return (
-    <div className="flex gap-5 text-sm bg-gray-200 p-2 rounded-lg">
+    <div className="flex gap-5 text-sm px-2 rounded-lg">
       <button
         type="button"
         className="flex items-center gap-1 p-2 border rounded-lg font-semibold text-white bg-indigo-600 hover:bg-white hover:border-indigo-600 hover:text-indigo-600 shadow"

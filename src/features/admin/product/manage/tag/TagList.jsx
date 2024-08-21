@@ -26,6 +26,7 @@ export default function TagList({active, handleOnClick, onClose}) {
       </div>
       <div className="pt-5 pb-2">
         <button
+          type="button"
           onClick={onClose}
           className="p-2 border rounded-lg border-cerulean-blue-800 text-cerulean-blue-800 hover:font-semibold w-28 h-8"
         >

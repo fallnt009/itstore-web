@@ -1,3 +1,5 @@
+import {NumericFormat} from 'react-number-format';
+
 import ManageAction from './ManageAction';
 
 export default function ManageListItem({products}) {
@@ -10,14 +12,20 @@ export default function ManageListItem({products}) {
         >
           <div>{item.id}</div>
           <div>{item.title}</div>
-          <div>{item.price}</div>
+          <div>
+            <NumericFormat
+              value={item.price}
+              displayType={'text'}
+              thousandSeparator={true}
+            />
+          </div>
           <div>
             {/* Sub Category */}
             {item.ProductSubCategory.BrandCategorySub.SubCategory.title ||
               'Not assign'}
           </div>
           <div>
-            <ManageAction />
+            <ManageAction id={item.id} />
           </div>
         </div>
       ))}

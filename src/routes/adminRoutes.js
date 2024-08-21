@@ -2,11 +2,12 @@ import {Navigate} from 'react-router-dom';
 
 import AdminPage from '../pages/AdminPage';
 import PanelProductSpec from '../features/admin/product/create/main/PanelProductSpec';
-import PanelProductContainer from '../features/admin/product/create/main/PanelProductContainer';
+
 import PanelProductUpload from '../features/admin/product/create/main/PanelProductUpload';
 import ProductManage from '../features/admin/main/ProductManage';
 import ManageEdit from '../features/admin/product/manage/ManageEdit';
 import ManageCreate from '../features/admin/product/manage/ManageCreate';
+import ManagePreview from '../features/admin/product/manage/ManagePreview';
 
 export const adminRoutes = [
   {
@@ -14,7 +15,7 @@ export const adminRoutes = [
     element: <AdminPage />,
   },
   {
-    path: 'product/manage',
+    path: 'product',
     element: <ProductManage />,
   },
   {
@@ -26,8 +27,12 @@ export const adminRoutes = [
     element: <ManageCreate />,
   },
   {
-    path: 'product/edit',
+    path: 'product/edit/:id',
     element: <ManageEdit />,
+  },
+  {
+    path: 'product/preview/:id',
+    element: <ManagePreview />,
   },
   {
     path: 'product/upload',
