@@ -35,3 +35,10 @@ export const createProduct = (bcsId, data) =>
 
 export const updateProduct = (productId, data) =>
   axios.patch(`/products/${productId}`, data);
+
+export const getSpecItemById = (specId) =>
+  axios.get(`/products/spec-items/${specId}`);
+export const createSpecItem = (data) =>
+  axios.post('/products/spec-items', data);
+export const updateSpecItem = (specId, data) =>
+  axios.patch(`/products/spec-items/${specId}`, data);

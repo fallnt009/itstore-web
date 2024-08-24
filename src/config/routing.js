@@ -32,8 +32,13 @@ exports.ORDER_PROOF = '/order/proof';
 //for Admin
 exports.ADMIN_PRODUCT_MANAGE = '/admin-panel/product';
 exports.ADMIN_PRODUCT_CREATE = '/admin-panel/product/create';
+exports.ADMIN_PRODUCT_UPLOAD = '/admin-panel/product/upload';
 exports.ADMIN_PRODUCT_EDIT = (productId) =>
   `/admin-panel/product/edit/${productId}`;
 exports.ADMIN_PRODUCT_PREVIEW = (productId) =>
   `/admin-panel/product/preview/${productId}`;
-exports.ADMIN_PRODUCT_UPLOAD = '/admin-panel/product/upload';
+
+//for admin-spec
+exports.SPEC_ITEM_MAIN = '/admin-panel/productspec';
+exports.SPEC_ITEM_CREATE = '/admin-panel/productspec/create';
+exports.SPEC_ITEM_EDIT = (specId) => `/admin-panel/productspec/edit/${specId}`;

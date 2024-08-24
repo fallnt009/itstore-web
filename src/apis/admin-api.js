@@ -25,6 +25,10 @@ export const getBrandTagByBcsId = (bcsId) =>
 
 export const getSpecByCategory = (subCategoryId) =>
   axios.get(`/products/spec-items/${subCategoryId}`);
+export const getAllSpecItems = (page, pageSize, subCategoryId) =>
+  axios.get('/products/spec-items', {
+    params: {page, pageSize, subCategoryId},
+  });
 
 export const createProductImages = (productId, formData) =>
   axios.post(`/products/img/${productId}`, formData);

@@ -163,6 +163,36 @@ export default function ProductContextProvider({children}) {
     }
   };
   //delete product
+
+  //fetchSpecItem by id
+  const fetchSpecItemById = async (specId) => {
+    try {
+      const res = await ProductApi.getSpecItemById(specId);
+      return res.data.result;
+    } catch (err) {
+      return err.response.data.descEn;
+    }
+  };
+
+  //add spec items
+
+  const createSpecItem = async (data) => {
+    try {
+      await ProductApi.createSpecItem(data);
+    } catch (err) {
+      return err.response.data.descEn;
+    }
+  };
+  //update spec items
+  const updateSpecItem = async (specId, data) => {
+    try {
+      await ProductApi.updateSpecItem(specId, data);
+    } catch (err) {
+      return err.response.data.descEn;
+    }
+  };
+  //delete spec items
+  const deleteSpecItem = async () => {};
   return (
     <ProductContext.Provider
       value={{
@@ -180,6 +210,9 @@ export default function ProductContextProvider({children}) {
         fetchProductImage,
         fetchProductById,
         fetchBrandTagByBcsId,
+        fetchSpecItemById,
+        createSpecItem,
+        updateSpecItem,
         error,
       }}
     >

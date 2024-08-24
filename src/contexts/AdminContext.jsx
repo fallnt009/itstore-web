@@ -64,6 +64,22 @@ export default function AdminContextProvider({children}) {
     [dispatch]
   );
 
+  const fetchAllSpecItem = useCallback(
+    async (page, limit, order) => {
+      try {
+        const res = await AdminApi.getAllSpecItems(page, limit, order);
+        dispatch({
+          type: FETCH_SPEC_ITEM,
+          payload: {specItems: res.data.result},
+        });
+        return res.data.totalPages;
+      } catch (err) {
+        return err.response.data.descEn;
+      }
+    },
+    [dispatch]
+  );
+
   //fetch Brand
   const fetchBrand = useCallback(async () => {
     try {
@@ -222,6 +238,7 @@ export default function AdminContextProvider({children}) {
         brands: AllAdmin.brands,
         brandTag: AllAdmin.brandTag,
         mainCategory: AllAdmin.mainCategory,
+        fetchAllSpecItem,
         fetchSubCategory,
         fetchSpecItem,
         fetchBrand,

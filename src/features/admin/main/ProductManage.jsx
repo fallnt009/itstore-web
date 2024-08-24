@@ -1,4 +1,7 @@
 import {useState, useEffect} from 'react';
+import {toast} from 'react-toastify';
+
+import {UNEXPECTED_ERROR} from '../../../config/messages';
 
 import useAdmin from '../../../hooks/useAdmin';
 import useLoading from '../../../hooks/useLoading';
@@ -47,6 +50,7 @@ export default function ProductManage() {
         );
         setTotalPage(res);
       } catch (err) {
+        toast.error(UNEXPECTED_ERROR);
         //error handler
       } finally {
         stopLoading();
