@@ -12,7 +12,7 @@ export default function TextArea({
     <>
       <textarea
         className={`rounded-lg border shadow-inner p-2 bg-gray-50 w-${width} focus:outline-none  ${
-          error ? 'border-red-500 ' : 'focus:border-blue-500'
+          error ? 'border-red-500 ' : 'focus:border-indigo-600'
         }`}
         type={type || 'text'}
         placeholder={placeholder}

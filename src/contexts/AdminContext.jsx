@@ -50,9 +50,9 @@ export default function AdminContextProvider({children}) {
   }, [dispatch]);
   //fetch specItem of that category
   const fetchSpecItem = useCallback(
-    async (subCategoryName) => {
+    async (subCategoryId) => {
       try {
-        const res = await AdminApi.getSpecByCategory(subCategoryName);
+        const res = await AdminApi.getSpecByCategory(subCategoryId);
         dispatch({
           type: FETCH_SPEC_ITEM,
           payload: {specItems: res.data.result},
@@ -109,14 +109,13 @@ export default function AdminContextProvider({children}) {
   );
 
   const fetchAllProduct = useCallback(
-    async (page, limit, order, brandId, categoryId, subCategoryId) => {
+    async (page, limit, order, brandId, subCategoryId) => {
       try {
         const res = await AdminApi.getAllProduct(
           page,
           limit,
           order,
           brandId,
-          categoryId,
           subCategoryId
         );
         dispatch({

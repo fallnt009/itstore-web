@@ -10,7 +10,7 @@ export default function SpecAction({id}) {
     navigate(SPEC_ITEM_EDIT(id));
   };
   return (
-    <div className="grid grid-cols-2">
+    <div className="grid ">
       <button
         className="flex justify-center hover:text-cerulean-blue-800"
         onClick={() => handleClickEdit(id)}
@@ -20,9 +20,9 @@ export default function SpecAction({id}) {
       {/* <button className="flex justify-center hover:text-cerulean-blue-800">
         <MdOutlineRemoveRedEye />
       </button> */}
-      <button className=" flex justify-center text-red-500 hover:text-stone-500">
+      {/* <button className=" flex justify-center text-red-500 hover:text-stone-500">
         <MdDelete />
-      </button>
+      </button> */}
     </div>
   );
 }

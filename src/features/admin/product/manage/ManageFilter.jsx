@@ -6,13 +6,11 @@ import useLoading from '../../../../hooks/useLoading';
 
 export default function ManageFilter({
   selectBrand,
-  selectCategory,
   selectSubCategory,
   setSelectBrand,
-  setSelectCategory,
   setSelectSubCategory,
 }) {
-  const {brands, mainCategory, subCategory} = useAdmin();
+  const {brands, subCategory} = useAdmin();
   const {startLoading, stopLoading} = useLoading();
 
   const handleChangeBrand = (e) => {
@@ -24,23 +22,18 @@ export default function ManageFilter({
   const handleOnClickClear = () => {
     startLoading();
     setSelectBrand('');
-    setSelectCategory('');
     setSelectSubCategory('');
   };
 
   //check if state change ,stopLoading
   useEffect(() => {
-    if (
-      selectBrand === '' &&
-      selectCategory === '' &&
-      selectSubCategory === ''
-    ) {
+    if (selectBrand === '' && selectSubCategory === '') {
       stopLoading();
     }
-  }, [selectBrand, selectCategory, selectSubCategory]);
+  }, [selectBrand, selectSubCategory]);
 
   return (
-    <div className="px-10 py-5 text-sm ">
+    <div className="px-10 py-4 text-sm ">
       <form className="text-stone-700">
         <h1 className="flex items-center gap-1 py-2 text-xl font-semibold text-indigo-600">
           <span>

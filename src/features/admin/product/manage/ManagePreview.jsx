@@ -10,13 +10,16 @@ import useProduct from '../../../../hooks/useProduct';
 
 import ManageBreadCrumb from './breadcrumb/ManageBreadCrumb';
 import PreviewImages from './preview/PreviewImages';
+import SpecProductContent from './spec-product/SpecProductContent';
 
 export default function ManagePreview() {
   const {id} = useParams();
   const [images, setImages] = useState([]);
   const [product, setProduct] = useState({});
+  const [bcs, setBcs] = useState({});
 
   const {fetchProductById} = useProduct();
+  const navigate = useNavigate();
 
   //fetch product + productImage
   useEffect(() => {
@@ -27,16 +30,13 @@ export default function ManagePreview() {
         const productData = product.data.result;
         setProduct(productData);
         setImages(productData.ProductImages);
-
-        console.log(productData);
+        setBcs(productData.ProductSubCategory.BrandCategorySub);
       } catch (err) {
         toast.error(UNEXPECTED_ERROR);
       }
     };
     fetchData();
   }, [fetchProductById]);
-
-  const navigate = useNavigate();
 
   const handleOnClickBack = () => {
     navigate(ADMIN_PRODUCT_MANAGE);
@@ -60,31 +60,55 @@ export default function ManagePreview() {
           <div>
             <PreviewImages images={images} />
           </div>
-          <div className="pt-5">
+          <div className="py-5">
             <h1 className="font-bold">Product Information</h1>
-            <div className="py-2 px-5 text-sm">
-              <div className="flex flex-col gap-2 py-2">
-                <h4 className="font-semibold">Name</h4>
-                <p>{product.title}</p>
-              </div>
-              <div className="flex flex-col gap-2">
-                <h4 className="font-semibold">Price</h4>
-                <p>{product.price}</p>
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <h4 className="font-semibold">Quantity</h4>
-                <p>{product.qtyInStock}</p>
-              </div>
-              <div className="flex flex-col gap-2">
-                <h4 className="font-semibold">Description</h4>
-                <p>{product.description}</p>
+          </div>
+          <div className="grid grid-cols-[1.5fr_7fr_2fr] gap-2 bg-gray-200 p-2 rounded-lg text-gray-600 font-semibold text-sm">
+            <h1>Title</h1>
+            <h1>Description</h1>
+          </div>
+          <div className="flex flex-col gap-2 py-5 px-2 border-b">
+            <div className="grid grid-cols-[1.5fr_7fr_2fr] gap-2 text-sm">
+              <h4 className="flex items-center font-semibold">Name</h4>
+              <div className="flex flex-col gap-1 text-xs">
+                <div className="flex items-center gap-2">{product.title}</div>
               </div>
             </div>
           </div>
+          <div className="flex flex-col gap-2 py-5 px-2 border-b">
+            <div className="grid grid-cols-[1.5fr_7fr_2fr] gap-2 text-sm">
+              <h4 className="flex items-center font-semibold">Price</h4>
+              <div className="flex flex-col gap-1 text-xs">
+                <div className="flex items-center gap-2">{product.price}</div>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col gap-2 py-5 px-2 border-b">
+            <div className="grid grid-cols-[1.5fr_7fr_2fr] gap-2 text-sm">
+              <h4 className="flex items-center font-semibold">Quantity</h4>
+              <div className="flex flex-col gap-1 text-xs">
+                <div className="flex items-center gap-2">
+                  {product.qtyInStock}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col gap-2 py-5 px-2 border-b">
+            <div className="grid grid-cols-[1.5fr_7fr_2fr] gap-2 text-sm">
+              <h4 className="flex items-center font-semibold">Description</h4>
+              <div className="flex flex-col gap-1 text-xs">
+                <div className="flex items-center gap-2">
+                  {product.description}
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="py-5">
             <h1 className="font-bold">Product Specification</h1>
-            <div className="py-2 px-5 text-sm">Spec Content</div>
+            <div className="text-sm">
+              <SpecProductContent bcs={bcs} product={product} />
+            </div>
           </div>
         </div>
       </div>

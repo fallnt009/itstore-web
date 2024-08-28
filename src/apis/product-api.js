@@ -42,3 +42,10 @@ export const createSpecItem = (data) =>
   axios.post('/products/spec-items', data);
 export const updateSpecItem = (specId, data) =>
   axios.patch(`/products/spec-items/${specId}`, data);
+
+//Product Spec
+export const getAllProductSpec = (page, pageSize, filter) =>
+  axios.get('/products/product-spec/', {params: {page, pageSize, filter}});
+
+export const getProductSpecByProductId = (productId) =>
+  axios.get(`/products/product-spec/${productId}`);

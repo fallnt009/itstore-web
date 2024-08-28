@@ -23,6 +23,7 @@ export default function ProductSpecManage() {
     const fetchData = async () => {
       try {
         await fetchSubCategory();
+        //fetch product with All Spec
         const res = await fetchAllSpecItem(page, 15, selectSubCategory);
         setTotalPage(res);
       } catch (err) {

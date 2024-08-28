@@ -16,23 +16,22 @@ export default function ManageAction({id}) {
   const handleOnClickPreview = (id) => {
     navigate(ADMIN_PRODUCT_PREVIEW(id));
   };
-  const handleOnClickDelete = () => {};
   return (
-    <div className="grid grid-cols-3">
+    <div className="flex justify-center gap-5 items-center">
       <button
-        className="flex justify-center hover:text-cerulean-blue-800"
+        className="flex justify-center items-center hover:text-cerulean-blue-800"
         onClick={() => handleOnClickEdit(id)}
       >
-        <MdEdit />
+        <MdEdit size={15} />
       </button>
       <button
-        className="flex justify-center hover:text-cerulean-blue-800"
+        className="flex justify-center items-center hover:text-cerulean-blue-800"
         onClick={() => handleOnClickPreview(id)}
       >
-        <MdOutlineRemoveRedEye />
+        <MdOutlineRemoveRedEye size={15} />
       </button>
-      <button className=" flex justify-center text-red-500 hover:text-stone-500">
-        <MdDelete />
+      <button className=" flex justify-center items-center text-red-500 hover:text-stone-500">
+        <MdDelete size={15} />
       </button>
     </div>
   );

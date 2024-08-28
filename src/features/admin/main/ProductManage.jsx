@@ -10,6 +10,7 @@ import useDrawer from '../../../hooks/useDrawer';
 import ManageHeader from '../product/manage/header/ManageHeader';
 import ManageList from '../product/manage/ManageList';
 import ManageFilter from '../product/manage/ManageFilter';
+import ManageBreadCrumb from '../product/manage/breadcrumb/ManageBreadCrumb';
 import SideDrawer from '../../../components/SideDrawer';
 
 export default function ProductManage() {
@@ -30,7 +31,6 @@ export default function ProductManage() {
 
   //selected
   const [selectBrand, setSelectBrand] = useState('');
-  const [selectCategory, setSelectCategory] = useState('');
   const [selectSubCategory, setSelectSubCategory] = useState('');
 
   useEffect(() => {
@@ -45,7 +45,6 @@ export default function ProductManage() {
           8,
           order,
           selectBrand,
-          selectCategory,
           selectSubCategory
         );
         setTotalPage(res);
@@ -65,23 +64,22 @@ export default function ProductManage() {
     page,
     order,
     selectBrand,
-    selectCategory,
     selectSubCategory,
   ]);
 
   const handleChangePage = (newPage) => {
     setPage(newPage);
   };
+
   return (
-    <div className="px-40">
-      <div className="border-r border-l">
+    <div className="px-40 pb-10">
+      <ManageBreadCrumb />
+      <div className="border rounded-lg shadow-md">
         <ManageHeader />
         <ManageFilter
           selectBrand={selectBrand}
-          selectCategory={selectCategory}
           selectSubCategory={selectSubCategory}
           setSelectBrand={setSelectBrand}
-          setSelectCategory={setSelectCategory}
           setSelectSubCategory={setSelectSubCategory}
         />
         <ManageList

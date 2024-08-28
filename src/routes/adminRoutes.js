@@ -33,6 +33,7 @@ export const adminRoutes = [
     path: 'productspec/edit/:id',
     element: <SpecEdit />,
   },
+
   {
     path: 'product/create',
     element: <ManageCreate />,

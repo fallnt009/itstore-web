@@ -162,7 +162,6 @@ export default function ProductContextProvider({children}) {
       return err.response.data.descEn;
     }
   };
-  //delete product
 
   //fetchSpecItem by id
   const fetchSpecItemById = async (specId) => {
@@ -191,8 +190,16 @@ export default function ProductContextProvider({children}) {
       return err.response.data.descEn;
     }
   };
-  //delete spec items
-  const deleteSpecItem = async () => {};
+
+  const fetchProductSpecByProductId = async (productId) => {
+    try {
+      const res = await ProductApi.getProductSpecByProductId(productId);
+      return res.data.result;
+    } catch (err) {
+      return err.response.data.descEn;
+    }
+  };
+
   return (
     <ProductContext.Provider
       value={{
@@ -213,6 +220,7 @@ export default function ProductContextProvider({children}) {
         fetchSpecItemById,
         createSpecItem,
         updateSpecItem,
+        fetchProductSpecByProductId,
         error,
       }}
     >
