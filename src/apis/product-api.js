@@ -1,5 +1,6 @@
 import axios from '../config/axios';
 
+//HOME + PRODUCT PAGE
 export const getNewProduct = (page, pageSize) =>
   axios.get('/products/new', {params: {page, pageSize}});
 export const getSalesProduct = (page, pageSize) =>
@@ -26,7 +27,7 @@ export const getProductSpec = (productName) =>
 export const getProductInfoImage = (productName) =>
   axios.get(`/products/image/${productName}`);
 
-//get product by id
+//PRODUCT
 export const getProductById = (productId) =>
   axios.get(`/products/${productId}`);
 
@@ -36,16 +37,27 @@ export const createProduct = (bcsId, data) =>
 export const updateProduct = (productId, data) =>
   axios.patch(`/products/${productId}`, data);
 
+//SPEC ITEM
+export const getSpecBySubCategory = (subCategoryId) =>
+  axios.get(`/products/spec-items/${subCategoryId}`);
+
+//?
 export const getSpecItemById = (specId) =>
   axios.get(`/products/spec-items/${specId}`);
+
 export const createSpecItem = (data) =>
   axios.post('/products/spec-items', data);
 export const updateSpecItem = (specId, data) =>
   axios.patch(`/products/spec-items/${specId}`, data);
 
-//Product Spec
+//PRODUCT SPEC
 export const getAllProductSpec = (page, pageSize, filter) =>
   axios.get('/products/product-spec/', {params: {page, pageSize, filter}});
 
-export const getProductSpecByProductId = (productId) =>
-  axios.get(`/products/product-spec/${productId}`);
+//SUB SPEC for details info
+export const getSpecDetail = (productId) =>
+  axios.get(`/products/subspec/${productId}`); // use this
+
+//SPEC PRODUCT
+export const getSpecProductByItemId = (specItemId) =>
+  axios.get(`/products/spec-product/${specItemId}`);

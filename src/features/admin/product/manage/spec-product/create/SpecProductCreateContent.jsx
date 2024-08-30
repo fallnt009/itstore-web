@@ -5,7 +5,7 @@ import CreateContentItem from './item/CreateContentItem';
 export default function SpecProductCreateContent({
   specItems,
   specDetail,
-  onOpenPopup,
+  onSelect,
 }) {
   //Click Edit to show popup
   //in Popup
@@ -37,7 +37,7 @@ export default function SpecProductCreateContent({
             <button
               type="button"
               className="hover:text-indigo-500"
-              onClick={onOpenPopup}
+              onClick={() => onSelect(item)}
             >
               <MdEdit size={20} />
             </button>

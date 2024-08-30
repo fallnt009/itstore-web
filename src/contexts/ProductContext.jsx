@@ -9,6 +9,8 @@ import productReducer, {
   FETCH_PRODUCT_INFO,
   INIT_PRODUCT,
   FETCH_PRODUCT_IMAGE,
+  FETCH_SPEC_PRODUCT,
+  FETCH_PRODUCT_PREVIEW,
 } from '../reducers/productReducer';
 
 const ProductContext = createContext();
@@ -22,6 +24,10 @@ export default function ProductContextProvider({children}) {
       productInfo,
       productSpec,
       productImages,
+      specItems,
+      specProduct,
+      specDetail,
+      productPreview,
       error,
     },
     dispatch,
@@ -126,14 +132,36 @@ export default function ProductContextProvider({children}) {
     [dispatch]
   );
 
-  const fetchProductById = useCallback(async (productId) => {
-    try {
-      const res = await ProductApi.getProductById(productId);
-      return res;
-    } catch (err) {
-      return err.response;
-    }
-  }, []);
+  //fetch product preview //admin panel
+  const fetchProductPreview = useCallback(
+    async (productId) => {
+      try {
+        const productPreview = await ProductApi.getProductById(productId);
+
+        const product = productPreview.data.result;
+        const subCategoryId =
+          product.ProductSubCategory.BrandCategorySub.subCategoryId;
+
+        const [specItem, specDetail] = await Promise.all([
+          ProductApi.getSpecBySubCategory(subCategoryId),
+          ProductApi.getSpecDetail(productId),
+        ]);
+
+        dispatch({
+          type: FETCH_PRODUCT_PREVIEW,
+          payload: {
+            productPreview: productPreview.data.result,
+            specItems: specItem.data.result,
+            specDetail: specDetail.data.result,
+          },
+        });
+        // return res;
+      } catch (err) {
+        return err.response;
+      }
+    },
+    [dispatch]
+  );
 
   const fetchBrandTagByBcsId = useCallback(async (bcsId) => {
     try {
@@ -169,12 +197,11 @@ export default function ProductContextProvider({children}) {
       const res = await ProductApi.getSpecItemById(specId);
       return res.data.result;
     } catch (err) {
-      return err.response.data.descEn;
+      return err.response;
     }
   };
 
   //add spec items
-
   const createSpecItem = async (data) => {
     try {
       await ProductApi.createSpecItem(data);
@@ -191,13 +218,31 @@ export default function ProductContextProvider({children}) {
     }
   };
 
-  const fetchProductSpecByProductId = async (productId) => {
-    try {
-      const res = await ProductApi.getProductSpecByProductId(productId);
-      return res.data.result;
-    } catch (err) {
-      return err.response.data.descEn;
-    }
+  //SPEC PRODUCT
+  const fetchSpecProduct = useCallback(
+    async (specItemId) => {
+      try {
+        const res = await AdminApi.getSpecProductByItemId(specItemId);
+        dispatch({
+          type: FETCH_SPEC_PRODUCT,
+          payload: {specProduct: res.data.result},
+        });
+        return res;
+      } catch (err) {
+        return err.response;
+      }
+    },
+    [dispatch]
+  );
+
+  const addSpecProduct = (specProductId, productId) => {
+    //specProductId + productId
+    //create
+    //response
+  };
+  const deleteSpecProduct = () => {
+    //delete
+    //response
   };
 
   return (
@@ -209,18 +254,22 @@ export default function ProductContextProvider({children}) {
         productImages,
         newProduct,
         salesProduct,
+        specItems,
+        specProduct,
+        specDetail,
+        productPreview,
         addNewProduct,
         updateProduct,
         fetchHomeProduct,
         fetchProductCategory,
         fetchProductInfo,
         fetchProductImage,
-        fetchProductById,
+        fetchProductPreview,
         fetchBrandTagByBcsId,
         fetchSpecItemById,
+        fetchSpecProduct,
         createSpecItem,
         updateSpecItem,
-        fetchProductSpecByProductId,
         error,
       }}
     >

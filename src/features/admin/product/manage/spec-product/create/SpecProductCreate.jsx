@@ -1,53 +1,31 @@
-import {useEffect, useState} from 'react';
-import {toast} from 'react-toastify';
+import {useState} from 'react';
 
-import useAdmin from '../../../../../../hooks/useAdmin';
 import useProduct from '../../../../../../hooks/useProduct';
-import useLoading from '../../../../../../hooks/useLoading';
-
-import {UNEXPECTED_ERROR} from '../../../../../../config/messages';
 
 import SpecProductCreateContent from './SpecProductCreateContent';
 import CreatePopupContent from './popup/CreatePopupContent';
 
 import Popup from '../../../../../../components/Popup';
 
-export default function SpecProductCreate({bcs, product}) {
-  const {specItems, fetchSpecItem} = useAdmin();
-  const {fetchProductSpecByProductId} = useProduct();
-  const {startLoading, stopLoading} = useLoading();
+export default function SpecProductCreate() {
+  const {specItems, specDetail} = useProduct();
 
-  const [specDetail, setSpecDetail] = useState([]);
   const [isPopupOpen, setPopupOpen] = useState(false);
 
-  const productId = product?.id;
-  const subCategoryId = bcs?.subCategoryId;
-
-  useEffect(() => {
-    const fetchSpec = async () => {
-      startLoading();
-      try {
-        if (subCategoryId) {
-          await fetchSpecItem(subCategoryId);
-        }
-        if (productId) {
-          const res = await fetchProductSpecByProductId(productId);
-          setSpecDetail(res.ProductSubSpecs);
-        }
-      } catch (err) {
-        toast.error(UNEXPECTED_ERROR);
-      } finally {
-        stopLoading();
-      }
-    };
-    fetchSpec();
-  }, [fetchSpecItem, fetchProductSpecByProductId, subCategoryId, productId]);
+  //selected
+  const [selectedSpec, setSelectedSpec] = useState({});
 
   const handleOpenPopup = () => {
     setPopupOpen(true);
   };
   const handleClosePopup = () => {
     setPopupOpen(false);
+  };
+  const handleSelectSpec = (item) => {
+    //setSelect
+    setSelectedSpec(item);
+    //and open popup with selectedSpec
+    setPopupOpen(true);
   };
 
   return (
@@ -56,9 +34,14 @@ export default function SpecProductCreate({bcs, product}) {
         specItems={specItems}
         specDetail={specDetail}
         onOpenPopup={handleOpenPopup}
+        onSelect={handleSelectSpec}
       />
       <Popup isOpen={isPopupOpen} onClose={handleClosePopup}>
-        <CreatePopupContent onClose={handleClosePopup} />
+        <CreatePopupContent
+          onClose={handleClosePopup}
+          selectedSpec={selectedSpec}
+          specDetail={specDetail}
+        />
       </Popup>
     </div>
   );

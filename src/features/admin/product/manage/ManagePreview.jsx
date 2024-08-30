@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import {toast} from 'react-toastify';
 
@@ -6,7 +6,9 @@ import {MdArrowBack} from 'react-icons/md';
 
 import {ADMIN_PRODUCT_MANAGE} from '../../../../config/routing';
 import {UNEXPECTED_ERROR} from '../../../../config/messages';
+
 import useProduct from '../../../../hooks/useProduct';
+import useLoading from '../../../../hooks/useLoading';
 
 import ManageBreadCrumb from './breadcrumb/ManageBreadCrumb';
 import PreviewImages from './preview/PreviewImages';
@@ -14,29 +16,35 @@ import SpecProductContent from './spec-product/SpecProductContent';
 
 export default function ManagePreview() {
   const {id} = useParams();
-  const [images, setImages] = useState([]);
-  const [product, setProduct] = useState({});
-  const [bcs, setBcs] = useState({});
 
-  const {fetchProductById} = useProduct();
+  const {productPreview, fetchProductPreview} = useProduct();
+  const {startLoading, stopLoading} = useLoading();
+
   const navigate = useNavigate();
 
-  //fetch product + productImage
+  const {
+    title,
+    price,
+    qtyInStock,
+    description,
+    ProductImages,
+    ProductSubCategory,
+  } = productPreview;
+
   useEffect(() => {
     const fetchData = async () => {
+      startLoading();
       try {
-        const product = await fetchProductById(id);
-
-        const productData = product.data.result;
-        setProduct(productData);
-        setImages(productData.ProductImages);
-        setBcs(productData.ProductSubCategory.BrandCategorySub);
+        //productId
+        await fetchProductPreview(id);
       } catch (err) {
         toast.error(UNEXPECTED_ERROR);
+      } finally {
+        stopLoading();
       }
     };
     fetchData();
-  }, [fetchProductById]);
+  }, [fetchProductPreview, id]);
 
   const handleOnClickBack = () => {
     navigate(ADMIN_PRODUCT_MANAGE);
@@ -58,7 +66,7 @@ export default function ManagePreview() {
             <h1 className="font-bold">Preview Product</h1>
           </div>
           <div>
-            <PreviewImages images={images} />
+            <PreviewImages images={ProductImages} />
           </div>
           <div className="py-5">
             <h1 className="font-bold">Product Information</h1>
@@ -71,7 +79,7 @@ export default function ManagePreview() {
             <div className="grid grid-cols-[1.5fr_7fr_2fr] gap-2 text-sm">
               <h4 className="flex items-center font-semibold">Name</h4>
               <div className="flex flex-col gap-1 text-xs">
-                <div className="flex items-center gap-2">{product.title}</div>
+                <div className="flex items-center gap-2">{title}</div>
               </div>
             </div>
           </div>
@@ -79,7 +87,7 @@ export default function ManagePreview() {
             <div className="grid grid-cols-[1.5fr_7fr_2fr] gap-2 text-sm">
               <h4 className="flex items-center font-semibold">Price</h4>
               <div className="flex flex-col gap-1 text-xs">
-                <div className="flex items-center gap-2">{product.price}</div>
+                <div className="flex items-center gap-2">{price}</div>
               </div>
             </div>
           </div>
@@ -87,9 +95,7 @@ export default function ManagePreview() {
             <div className="grid grid-cols-[1.5fr_7fr_2fr] gap-2 text-sm">
               <h4 className="flex items-center font-semibold">Quantity</h4>
               <div className="flex flex-col gap-1 text-xs">
-                <div className="flex items-center gap-2">
-                  {product.qtyInStock}
-                </div>
+                <div className="flex items-center gap-2">{qtyInStock}</div>
               </div>
             </div>
           </div>
@@ -97,9 +103,7 @@ export default function ManagePreview() {
             <div className="grid grid-cols-[1.5fr_7fr_2fr] gap-2 text-sm">
               <h4 className="flex items-center font-semibold">Description</h4>
               <div className="flex flex-col gap-1 text-xs">
-                <div className="flex items-center gap-2">
-                  {product.description}
-                </div>
+                <div className="flex items-center gap-2">{description}</div>
               </div>
             </div>
           </div>
@@ -107,7 +111,10 @@ export default function ManagePreview() {
           <div className="py-5">
             <h1 className="font-bold">Product Specification</h1>
             <div className="text-sm">
-              <SpecProductContent bcs={bcs} product={product} />
+              <SpecProductContent
+                bcs={ProductSubCategory?.BrandCategorySub}
+                product={productPreview}
+              />
             </div>
           </div>
         </div>

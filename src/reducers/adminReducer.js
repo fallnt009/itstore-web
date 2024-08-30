@@ -41,6 +41,7 @@ function adminReducer(state, action) {
     case FETCH_PRODUCT: {
       return {...state, products: action.payload.products};
     }
+
     case ADD_BRAND: {
       const newBrandsList = [action.payload.newBrands, ...state.brands];
       return {

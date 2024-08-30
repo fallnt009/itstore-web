@@ -6,6 +6,10 @@ export const FETCH_PRODUCT_INFO = 'FETCH_PRODUCT_INFO';
 export const FETCH_PRODUCT_IMAGE = 'FETCH_PRODUCT_IMAGE';
 export const FETCH_PRODUCT_ERROR = 'FETCH_PRODUCT_ERROR';
 
+//fetch for admin
+export const FETCH_PRODUCT_PREVIEW = 'FETCH_PRODUCT_PREVIEW';
+export const FETCH_SPEC_PRODUCT = 'FETCH_SPEC_PRODUCT';
+
 export const INIT_PRODUCT = {
   productList: [],
   productListFilter: [],
@@ -14,6 +18,10 @@ export const INIT_PRODUCT = {
   productInfo: {},
   productImages: [],
   productSpec: [],
+  specItems: [],
+  specDetail: [],
+  specProduct: [],
+  productPreview: {},
   error: null,
 };
 
@@ -55,6 +63,23 @@ function productReducer(state, action) {
         error: action.payload,
       };
     }
+
+    case FETCH_PRODUCT_PREVIEW: {
+      return {
+        ...state,
+        productPreview: action.payload.productPreview,
+        specItems: action.payload.specItems,
+        specDetail: action.payload.specDetail,
+      };
+    }
+
+    case FETCH_SPEC_PRODUCT: {
+      return {
+        ...state,
+        specProduct: action.payload.specProduct,
+      };
+    }
+
     default:
       return state;
   }

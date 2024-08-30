@@ -2,29 +2,39 @@ import {MdClose, MdAdd} from 'react-icons/md';
 
 import CreatePopupList from './list/CreatePopupList';
 import CreatePopupAdd from './actions/CreatePopupAdd';
-import CreatePopupEdit from './actions/CreatePopupEdit';
+// import CreatePopupEdit from './actions/CreatePopupEdit';
 
-export default function CreatePopupContent({onClose}) {
+export default function CreatePopupContent({
+  onClose,
+  selectedSpec,
+  specDetail,
+}) {
   //tomorrow
   //create state isShow between add and edit
   //make popup more dynamic on width
   //
+
   return (
     <div className="w-full px-5 py-2 pb-5 text-gray-600">
       <div className="flex justify-between text-base font-semibold pb-4">
-        <h1>Manage %TITLE%</h1>
+        <h1>Manage {selectedSpec?.title}</h1>
         <button onClick={onClose}>
           <MdClose />
         </button>
       </div>
       <div>
-        <div className="grid grid-cols-[1fr_6fr_1fr] gap-2 bg-gray-200 px-2 py-1 rounded-lg text-gray-600 font-semibold text-sm pr-6">
+        <div className="grid grid-cols-[0.5fr_1fr_0.5fr_6fr_1fr] bg-gray-200 px-2 py-1 rounded-lg text-gray-600 font-semibold text-sm pr-5">
+          <h1>Id</h1>
           <h1 className="flex justify-center">Value</h1>
+          <div></div>
           <h1>Text</h1>
           <h1 className="flex justify-center">Actions</h1>
         </div>
         <div>
-          <CreatePopupList />
+          <CreatePopupList
+            specDetail={specDetail}
+            selectedSpec={selectedSpec}
+          />
         </div>
       </div>
       <div className="py-4">
@@ -39,7 +49,7 @@ export default function CreatePopupContent({onClose}) {
         </button>
       </div>
       <div>
-        <CreatePopupAdd />
+        <CreatePopupAdd specItemId={selectedSpec.id} />
         {/* <CreatePopupEdit /> */}
       </div>
     </div>
