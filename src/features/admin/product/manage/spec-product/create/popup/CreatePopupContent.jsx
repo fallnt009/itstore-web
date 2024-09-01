@@ -8,6 +8,7 @@ export default function CreatePopupContent({
   onClose,
   selectedSpec,
   specDetail,
+  product,
 }) {
   //tomorrow
   //create state isShow between add and edit
@@ -34,6 +35,7 @@ export default function CreatePopupContent({
           <CreatePopupList
             specDetail={specDetail}
             selectedSpec={selectedSpec}
+            product={product}
           />
         </div>
       </div>
@@ -49,7 +51,7 @@ export default function CreatePopupContent({
         </button>
       </div>
       <div>
-        <CreatePopupAdd specItemId={selectedSpec.id} />
+        <CreatePopupAdd specItemId={selectedSpec.id} product={product} />
         {/* <CreatePopupEdit /> */}
       </div>
     </div>

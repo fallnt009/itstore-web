@@ -1,9 +1,10 @@
-import CreatePopupListItem from './CreatePopupListItem';
-export default function CreatePopupList({specDetail, selectedSpec}) {
-  // console.log(specDetail);
-  // console.log(selectedSpec);
+import useProduct from '../../../../../../../../hooks/useProduct';
 
-  //fetchOnly item that Selected on Spec Main
+import CreatePopupListItem from './CreatePopupListItem';
+
+export default function CreatePopupList({selectedSpec, product}) {
+  const {specDetail} = useProduct();
+
   return (
     <div className="overflow-y-scroll scroll-smooth h-32">
       {specDetail
@@ -13,7 +14,12 @@ export default function CreatePopupList({specDetail, selectedSpec}) {
             selectedSpec.SpecSubcategory.id
         )
         .map((filtered) => (
-          <CreatePopupListItem key={filtered.id} item={filtered.SpecProduct} />
+          <CreatePopupListItem
+            key={filtered.id}
+            item={filtered.SpecProduct}
+            specDetailId={filtered.id}
+            productId={product.id}
+          />
         ))}
     </div>
   );

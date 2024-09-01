@@ -11,6 +11,8 @@ import productReducer, {
   FETCH_PRODUCT_IMAGE,
   FETCH_SPEC_PRODUCT,
   FETCH_PRODUCT_PREVIEW,
+  ADD_SPEC_DETAIL,
+  DELETE_SPEC_DETAIL,
 } from '../reducers/productReducer';
 
 const ProductContext = createContext();
@@ -235,14 +237,37 @@ export default function ProductContextProvider({children}) {
     [dispatch]
   );
 
-  const addSpecProduct = (specProductId, productId) => {
-    //specProductId + productId
-    //create
-    //response
-  };
-  const deleteSpecProduct = () => {
+  const addSpecDetail = useCallback(
+    async (specProductId, productId) => {
+      //specProductId + productId
+      //create
+      //response
+      try {
+        const res = await ProductApi.createSubSpec(specProductId, productId);
+
+        dispatch({
+          type: ADD_SPEC_DETAIL,
+          payload: {newSpecDetail: res.data.result},
+        });
+        return res;
+      } catch (err) {
+        return err.response;
+      }
+    },
+    [dispatch]
+  );
+  const deleteSpecDetail = async (specDetailId, specProductId, productId) => {
     //delete
     //response
+    try {
+      await ProductApi.deleteSubSpec(specProductId, productId);
+      dispatch({
+        type: DELETE_SPEC_DETAIL,
+        payload: {id: specDetailId},
+      });
+    } catch (err) {
+      return err.response;
+    }
   };
 
   return (
@@ -270,6 +295,8 @@ export default function ProductContextProvider({children}) {
         fetchSpecProduct,
         createSpecItem,
         updateSpecItem,
+        addSpecDetail,
+        deleteSpecDetail,
         error,
       }}
     >

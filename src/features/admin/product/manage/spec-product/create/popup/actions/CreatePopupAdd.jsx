@@ -1,21 +1,33 @@
 import {useState, useEffect} from 'react';
+import {toast} from 'react-toastify';
 import {MdWarning} from 'react-icons/md';
 
 import useProduct from '../../../../../../../../hooks/useProduct';
 
 // import Input from '../../../../../../../../components/Input';
 // import TextArea from '../../../../../../../../components/TextArea';
+import {
+  UNEXPECTED_ERROR,
+  CREATE_SUCCESS,
+} from '../../../../../../../../config/messages';
 
-export default function CreatePopupAdd({specItemId}) {
-  const {specProduct, fetchSpecProduct} = useProduct();
+export default function CreatePopupAdd({specItemId, product}) {
+  const {specProduct, fetchSpecProduct, addSpecDetail} = useProduct();
 
   const [error, setError] = useState('');
+
+  //selectedSpecProductId
+  const [selectProductId, setProductId] = useState(null);
+  const [selectSpId, setSpId] = useState(null);
 
   //fetch data here
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await fetchSpecProduct(specItemId);
+        if (product) {
+          setProductId(product.id);
+        }
         if (res.status === 200) {
           setError('');
         } else {
@@ -23,22 +35,40 @@ export default function CreatePopupAdd({specItemId}) {
         }
       } catch (err) {
         //network error
-        console.log(err);
+        console.log(UNEXPECTED_ERROR);
       }
     };
     fetchData();
-  }, [fetchSpecProduct, specItemId]);
+  }, [fetchSpecProduct, specItemId, product]);
 
   const handleOnChangeOption = (e) => {
-    console.log(e.target.value);
+    setSpId(e.target.value);
   };
 
-  const handleSubmitAdd = async () => {
+  const handleSubmitAdd = async (e) => {
     // get specProductId / and productId
+    //create
+    e.preventDefault();
+    try {
+      const res = await addSpecDetail(selectSpId, selectProductId);
+
+      if (res.status === 200) {
+        setError('');
+        toast.success(CREATE_SUCCESS);
+      } else {
+        setError(res.data.descEn);
+        toast.error(res.data.descEn);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
-    <form className="border px-2 py-3 rounded-lg shadow-md">
+    <form
+      className="border px-2 py-3 rounded-lg shadow-md"
+      onSubmit={handleSubmitAdd}
+    >
       <div className="px-2 font-semibold py-2">
         <h1>Add new</h1>
       </div>
@@ -83,12 +113,21 @@ export default function CreatePopupAdd({specItemId}) {
           </div> */}
         </div>
         <div className="flex justify-end pt-3">
-          <button
-            type="submit"
-            className="p-2 border rounded-lg font-semibold text-white bg-indigo-600 hover:bg-white hover:border-indigo-600 hover:text-indigo-600 shadow"
-          >
-            Add
-          </button>
+          {selectProductId && selectSpId ? (
+            <button
+              type="submit"
+              className="p-2 px-4 border rounded-lg font-semibold text-white bg-indigo-600 hover:bg-white hover:border-indigo-600 hover:text-indigo-600 shadow"
+            >
+              Add
+            </button>
+          ) : (
+            <div
+              type="submit"
+              className="p-2 px-4 border rounded-lg font-semibold text-white bg-gray-400 shadow"
+            >
+              Add
+            </div>
+          )}
         </div>
       </div>
     </form>
