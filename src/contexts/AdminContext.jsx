@@ -16,6 +16,7 @@ import adminReducer, {
   EDIT_SUBCATEGORY,
   ADD_BRANDTAG,
   FETCH_PRODUCT,
+  FETCH_SPEC_PRODUCT,
 } from '../reducers/adminReducer';
 
 const AdminContext = createContext();
@@ -228,6 +229,24 @@ export default function AdminContextProvider({children}) {
   };
   //edit brand tag
 
+  //spec product
+  const fetchSpecProduct = useCallback(
+    async (specItemId, subCategoryId) => {
+      try {
+        const res = await AdminApi.getSpecProduct(specItemId, subCategoryId);
+
+        //dispatch
+        dispatch({
+          type: FETCH_SPEC_PRODUCT,
+          payload: {specProduct: res.data.result},
+        });
+      } catch (err) {
+        return err.response;
+      }
+    },
+    [dispatch]
+  );
+
   return (
     <AdminContext.Provider
       value={{
@@ -237,6 +256,7 @@ export default function AdminContextProvider({children}) {
         brands: AllAdmin.brands,
         brandTag: AllAdmin.brandTag,
         mainCategory: AllAdmin.mainCategory,
+        specProduct: AllAdmin.specProduct,
         fetchAllSpecItem,
         fetchSubCategory,
         fetchSpecItem,
@@ -244,6 +264,7 @@ export default function AdminContextProvider({children}) {
         fetchCategory,
         fetchBrandTag,
         fetchAllProduct,
+        fetchSpecProduct,
         createProductImages,
         addBrand,
         addCategory,

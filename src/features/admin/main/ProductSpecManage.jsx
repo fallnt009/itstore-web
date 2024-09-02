@@ -17,33 +17,36 @@ export default function ProductSpecManage() {
   const [totalPage, setTotalPage] = useState(1);
 
   //selected filter
-  const [selectSubCategory, setSelectSubCategory] = useState('');
+  const [selectSubCategoryId, setSelectSubCategoryId] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         await fetchSubCategory();
         //fetch product with All Spec
-        const res = await fetchAllSpecItem(page, 15, selectSubCategory);
+        const res = await fetchAllSpecItem(page, 15, selectSubCategoryId);
         setTotalPage(res);
       } catch (err) {
         toast.error(UNEXPECTED_ERROR);
       }
     };
     fetchData();
-  }, [fetchAllSpecItem, fetchSubCategory, selectSubCategory, page]);
+  }, [fetchAllSpecItem, fetchSubCategory, selectSubCategoryId, page]);
 
   const handleChangePage = (newPage) => {
     setPage(newPage);
   };
+
   return (
     <div className="px-40">
       <div className="border-r border-l">
         <SpecHeader />
-        <SpecFilter
-          selectSubCategory={selectSubCategory}
-          setSelectSubCategory={setSelectSubCategory}
-        />
+        <div className="px-10">
+          <SpecFilter
+            selectSubCategory={selectSubCategoryId}
+            setSelectSubCategory={setSelectSubCategoryId}
+          />
+        </div>
         <SpecLists
           specItems={specItems}
           page={page}

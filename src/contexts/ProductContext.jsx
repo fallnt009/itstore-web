@@ -239,9 +239,6 @@ export default function ProductContextProvider({children}) {
 
   const addSpecDetail = useCallback(
     async (specProductId, productId) => {
-      //specProductId + productId
-      //create
-      //response
       try {
         const res = await ProductApi.createSubSpec(specProductId, productId);
 
@@ -257,8 +254,6 @@ export default function ProductContextProvider({children}) {
     [dispatch]
   );
   const deleteSpecDetail = async (specDetailId, specProductId, productId) => {
-    //delete
-    //response
     try {
       await ProductApi.deleteSubSpec(specProductId, productId);
       dispatch({

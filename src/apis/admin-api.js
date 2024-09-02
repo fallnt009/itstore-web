@@ -11,6 +11,7 @@ export const getAllProduct = (page, pageSize, order, brandId, subCategoryId) =>
 
 // export const getSubCategoryByCategoryId = (categoryId) =>
 //   axios.get(`/categories/sub-category/${categoryId}`);
+
 export const getBrandTag = (brandId) =>
   axios.get(`/categories/brandtag/${brandId}`);
 
@@ -47,3 +48,7 @@ export const updateCategory = (categoryId, data) =>
   axios.patch(`/categories/category/${categoryId}`, data);
 export const updateSubCategory = (subCategoryId, data) =>
   axios.patch(`/categories/sub-category/${subCategoryId}`, data);
+
+//SPEC PRODUCT
+export const getSpecProduct = (specItemId, subCategoryId) =>
+  axios.get(`/products/specproduct/${specItemId}`, {params: {subCategoryId}});

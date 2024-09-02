@@ -42,3 +42,5 @@ exports.ADMIN_PRODUCT_PREVIEW = (productId) =>
 exports.SPEC_ITEM_MAIN = '/admin-panel/productspec';
 exports.SPEC_ITEM_CREATE = '/admin-panel/productspec/create';
 exports.SPEC_ITEM_EDIT = (specId) => `/admin-panel/productspec/edit/${specId}`;
+exports.SPEC_ITEM_PREVIEW = (specId) =>
+  `/admin-panel/productspec/preview/${specId}`;

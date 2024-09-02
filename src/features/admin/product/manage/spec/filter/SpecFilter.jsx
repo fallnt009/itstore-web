@@ -24,7 +24,7 @@ export default function SpecFilter({selectSubCategory, setSelectSubCategory}) {
   }, [selectSubCategory]);
 
   return (
-    <div className="px-10 pt-5 text-sm ">
+    <div className="pt-5 text-sm ">
       <form className="text-stone-700">
         <h1 className="flex items-center gap-1 py-2 text-xl font-semibold text-indigo-600">
           <span>

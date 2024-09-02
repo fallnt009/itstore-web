@@ -11,6 +11,7 @@ import ManagePreview from '../features/admin/product/manage/ManagePreview';
 
 import SpecCreate from '../features/admin/product/manage/spec/create/SpecCreate';
 import SpecEdit from '../features/admin/product/manage/spec/edit/SpecEdit';
+import SpecPreview from '../features/admin/product/manage/spec/preview/SpecPreview';
 
 export const adminRoutes = [
   {
@@ -32,6 +33,10 @@ export const adminRoutes = [
   {
     path: 'productspec/edit/:id',
     element: <SpecEdit />,
+  },
+  {
+    path: 'productspec/preview/:id',
+    element: <SpecPreview />,
   },
 
   {
