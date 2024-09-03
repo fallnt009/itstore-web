@@ -20,58 +20,70 @@ import useLoading from '../../../../hooks/useLoading';
 import validateProduct from '../../../../validators/validate-product';
 import UploadContent from './uploader/UploadContent';
 
-const dataForm = {
-  title: '',
-  price: '',
-  description: '',
-  qtyInStock: 0,
-};
-
 export default function ManageEdit() {
   const {id} = useParams();
+  const {product, fetchProductById, fetchBrandTagByBcsId, updateProduct} =
+    useProduct();
+  const {startLoading, stopLoading} = useLoading();
 
   const [selectImage, setSelectImage] = useState([]);
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [bcsId, setBcsId] = useState(null);
   const [bcsData, setBcsData] = useState(null);
-  const [input, setInput] = useState(dataForm);
+  const [input, setInput] = useState({
+    title: '',
+    price: '',
+    description: '',
+    qtyInStock: 0,
+  });
   const [error, setError] = useState({});
-
-  const {fetchProductById, fetchBrandTagByBcsId, updateProduct} = useProduct();
-
-  const {startLoading, stopLoading} = useLoading();
 
   const navigate = useNavigate();
   //fetch by useEffect
   useEffect(() => {
     const fetchData = async () => {
+      startLoading();
       try {
         //fetch product by id
-        const product = await fetchProductById(id);
-
-        const productData = product.data.result;
-        const brandCategoryId =
-          productData.ProductSubCategory.brandCategorySubId;
-        //setBcsId
-        setBcsId(brandCategoryId);
-        // Populate the input state with fetched product data
-        setInput({
-          title: productData.title,
-          price: productData.price,
-          description: productData.description,
-          qtyInStock: productData.qtyInStock,
-        });
-        //fetchBrandTag and setBrandTagData
-        if (brandCategoryId) {
-          const brandTag = await fetchBrandTagByBcsId(brandCategoryId);
-          setBcsData(brandTag);
-        }
+        await fetchProductById(id);
       } catch (err) {
         toast.error(UNEXPECTED_ERROR);
+      } finally {
+        stopLoading();
       }
     };
     fetchData();
-  }, [fetchProductById, fetchBrandTagByBcsId, id]);
+  }, [fetchProductById, id]);
+
+  //handle product state
+  useEffect(() => {
+    if (product) {
+      const brandCategoryId = product.ProductSubCategory?.brandCategorySubId;
+      //setBcsId
+      setBcsId(brandCategoryId);
+      // Populate the input state with fetched product data
+      setInput({
+        title: product.title || '',
+        price: product.price || '',
+        description: product.description || '',
+        qtyInStock: product.qtyInStock || 0,
+      });
+
+      const fetchBrandTag = async () => {
+        try {
+          //fetchBrandTag and setBrandTagData
+          if (brandCategoryId) {
+            const brandTag = await fetchBrandTagByBcsId(brandCategoryId);
+            setBcsData(brandTag);
+          }
+        } catch (err) {
+          //err
+        }
+      };
+
+      fetchBrandTag();
+    }
+  }, [product, fetchBrandTagByBcsId]);
 
   const handleOnClickBack = () => {
     navigate(ADMIN_PRODUCT_MANAGE);

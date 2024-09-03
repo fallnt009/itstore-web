@@ -7,6 +7,7 @@ export const FETCH_PRODUCT_IMAGE = 'FETCH_PRODUCT_IMAGE';
 export const FETCH_PRODUCT_ERROR = 'FETCH_PRODUCT_ERROR';
 
 //fetch for admin
+export const FETCH_PRODUCT_SINGLE = 'FETCH_PRODUCT_SINGLE';
 export const FETCH_PRODUCT_PREVIEW = 'FETCH_PRODUCT_PREVIEW';
 export const FETCH_SPEC_PRODUCT = 'FETCH_SPEC_PRODUCT';
 
@@ -14,6 +15,7 @@ export const ADD_SPEC_DETAIL = 'ADD_SPEC_DETAIL';
 export const DELETE_SPEC_DETAIL = 'DELETE_SPEC_DETAIL';
 
 export const INIT_PRODUCT = {
+  product: {},
   productList: [],
   productListFilter: [],
   newProduct: [],
@@ -78,6 +80,12 @@ function productReducer(state, action) {
       return {
         ...state,
         specProduct: action.payload.specProduct,
+      };
+
+    case FETCH_PRODUCT_SINGLE:
+      return {
+        ...state,
+        product: action.payload.product,
       };
 
     case ADD_SPEC_DETAIL:

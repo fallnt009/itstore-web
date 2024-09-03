@@ -7,6 +7,7 @@ export default function Input({
   error,
   maxLength,
   width = 'full',
+  min,
 }) {
   return (
     <>
@@ -20,6 +21,7 @@ export default function Input({
         value={value}
         onChange={onChange}
         maxLength={maxLength}
+        min={min}
       />
       {error && <div className=" text-red-500">*{error}</div>}
     </>

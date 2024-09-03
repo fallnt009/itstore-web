@@ -7,8 +7,8 @@ import CreatePopupContent from './popup/CreatePopupContent';
 
 import Popup from '../../../../../../components/Popup';
 
-export default function SpecProductCreate({product}) {
-  const {specItems, specDetail} = useProduct();
+export default function SpecProductCreate() {
+  const {productPreview, specItems, specDetail} = useProduct();
 
   const [isPopupOpen, setPopupOpen] = useState(false);
 
@@ -41,7 +41,7 @@ export default function SpecProductCreate({product}) {
           onClose={handleClosePopup}
           selectedSpec={selectedSpec}
           specDetail={specDetail}
-          product={product}
+          product={productPreview}
         />
       </Popup>
     </div>

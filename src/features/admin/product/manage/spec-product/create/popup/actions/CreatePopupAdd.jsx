@@ -4,30 +4,30 @@ import {MdWarning} from 'react-icons/md';
 
 import useProduct from '../../../../../../../../hooks/useProduct';
 
-// import Input from '../../../../../../../../components/Input';
-// import TextArea from '../../../../../../../../components/TextArea';
+import Input from '../../../../../../../../components/Input';
 import {
   UNEXPECTED_ERROR,
   CREATE_SUCCESS,
 } from '../../../../../../../../config/messages';
 
-export default function CreatePopupAdd({specItemId, product}) {
+export default function CreatePopupAdd({specItemObj, product}) {
   const {specProduct, fetchSpecProduct, addSpecDetail} = useProduct();
-
+  const [input, setInput] = useState({value: '', specProductId: ''});
   const [error, setError] = useState('');
-
   //selectedSpecProductId
-  const [selectProductId, setProductId] = useState(null);
-  const [selectSpId, setSpId] = useState(null);
+  const [selectSpecProductId, setSpecProductId] = useState(null);
+
+  const {id: SpecItemId} = specItemObj;
+  const {id: ProductId} = product;
+
+  // const specSubCategoryId = SpecSubcategory.id;
 
   //fetch data here
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetchSpecProduct(specItemId);
-        if (product) {
-          setProductId(product.id);
-        }
+        const res = await fetchSpecProduct(SpecItemId);
+
         if (res.status === 200) {
           setError('');
         } else {
@@ -39,10 +39,17 @@ export default function CreatePopupAdd({specItemId, product}) {
       }
     };
     fetchData();
-  }, [fetchSpecProduct, specItemId, product]);
+  }, [fetchSpecProduct, SpecItemId]);
 
-  const handleOnChangeOption = (e) => {
-    setSpId(e.target.value);
+  const handleChangeInput = (e) => {
+    const {name, value, type} = e.target;
+
+    if (type === 'select-one') {
+      setSpecProductId(value);
+      setInput((prevState) => ({...prevState, specProductId: value}));
+    } else {
+      setInput({...input, [name]: value});
+    }
   };
 
   const handleSubmitAdd = async (e) => {
@@ -50,7 +57,7 @@ export default function CreatePopupAdd({specItemId, product}) {
     //create
     e.preventDefault();
     try {
-      const res = await addSpecDetail(selectSpId, selectProductId);
+      const res = await addSpecDetail(ProductId, input);
 
       if (res.status === 200) {
         setError('');
@@ -74,13 +81,23 @@ export default function CreatePopupAdd({specItemId, product}) {
       </div>
       <div className="px-2">
         <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-1 w-24">
+            <h4>Value</h4>
+            <Input
+              type="number"
+              name="value"
+              value={input.value}
+              onChange={handleChangeInput}
+              min="0"
+            />
+          </div>
           <div className="flex flex-col gap-1 ">
             <h4>Select Text</h4>
             <select
               className={`border rounded-lg p-2 ${
                 error && 'border-red-500 border-2'
               }`}
-              onChange={handleOnChangeOption}
+              onChange={handleChangeInput}
             >
               <option value="">Choose Text</option>
               {specProduct?.map((item) => (
@@ -103,17 +120,9 @@ export default function CreatePopupAdd({specItemId, product}) {
               )}
             </div>
           </div>
-          {/* <div className="flex flex-col gap-1 w-24">
-            <h4>Value</h4>
-            <Input type="number" />
-          </div>
-          <div className="flex flex-col gap-1">
-            <h4>Text</h4>
-            <TextArea type="text" rows={2} />
-          </div> */}
         </div>
         <div className="flex justify-end pt-3">
-          {selectProductId && selectSpId ? (
+          {selectSpecProductId ? (
             <button
               type="submit"
               className="p-2 px-4 border rounded-lg font-semibold text-white bg-indigo-600 hover:bg-white hover:border-indigo-600 hover:text-indigo-600 shadow"

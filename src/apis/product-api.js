@@ -57,10 +57,8 @@ export const getAllProductSpec = (page, pageSize, filter) =>
 //SUB SPEC for details info
 export const getSpecDetail = (productId) =>
   axios.get(`/products/subspec/${productId}`); // use this
-export const createSubSpec = (specProductId, productId) =>
-  axios.post(`/products/subspec/${productId}`, {
-    data: {specProductId: specProductId},
-  });
+export const createSubSpec = (productId, data) =>
+  axios.post(`/products/subspec/${productId}`, data);
 export const deleteSubSpec = (specProductId, productId) =>
   axios.delete(`/products/subspec/${productId}`, {
     data: {specProductId: specProductId},

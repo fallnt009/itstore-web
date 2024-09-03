@@ -13,6 +13,7 @@ import productReducer, {
   FETCH_PRODUCT_PREVIEW,
   ADD_SPEC_DETAIL,
   DELETE_SPEC_DETAIL,
+  FETCH_PRODUCT_SINGLE,
 } from '../reducers/productReducer';
 
 const ProductContext = createContext();
@@ -30,6 +31,7 @@ export default function ProductContextProvider({children}) {
       specProduct,
       specDetail,
       productPreview,
+      product,
       error,
     },
     dispatch,
@@ -165,6 +167,21 @@ export default function ProductContextProvider({children}) {
     [dispatch]
   );
 
+  const fetchProductById = useCallback(
+    async (id) => {
+      try {
+        const res = await ProductApi.getProductById(id);
+        dispatch({
+          type: FETCH_PRODUCT_SINGLE,
+          payload: {product: res.data.result},
+        });
+      } catch (err) {
+        return err.response;
+      }
+    },
+    [dispatch]
+  );
+
   const fetchBrandTagByBcsId = useCallback(async (bcsId) => {
     try {
       const res = await AdminApi.getBrandTagByBcsId(bcsId);
@@ -224,7 +241,7 @@ export default function ProductContextProvider({children}) {
   const fetchSpecProduct = useCallback(
     async (specItemId) => {
       try {
-        const res = await AdminApi.getSpecProductByItemId(specItemId);
+        const res = await ProductApi.getSpecProductByItemId(specItemId);
         dispatch({
           type: FETCH_SPEC_PRODUCT,
           payload: {specProduct: res.data.result},
@@ -238,9 +255,9 @@ export default function ProductContextProvider({children}) {
   );
 
   const addSpecDetail = useCallback(
-    async (specProductId, productId) => {
+    async (productId, data) => {
       try {
-        const res = await ProductApi.createSubSpec(specProductId, productId);
+        const res = await ProductApi.createSubSpec(productId, data);
 
         dispatch({
           type: ADD_SPEC_DETAIL,
@@ -278,6 +295,7 @@ export default function ProductContextProvider({children}) {
         specProduct,
         specDetail,
         productPreview,
+        product,
         addNewProduct,
         updateProduct,
         fetchHomeProduct,
@@ -288,6 +306,7 @@ export default function ProductContextProvider({children}) {
         fetchBrandTagByBcsId,
         fetchSpecItemById,
         fetchSpecProduct,
+        fetchProductById,
         createSpecItem,
         updateSpecItem,
         addSpecDetail,

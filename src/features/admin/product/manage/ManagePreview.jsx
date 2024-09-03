@@ -111,10 +111,7 @@ export default function ManagePreview() {
           <div className="py-5">
             <h1 className="font-bold">Product Specification</h1>
             <div className="text-sm">
-              <SpecProductContent
-                bcs={ProductSubCategory?.BrandCategorySub}
-                product={productPreview}
-              />
+              <SpecProductContent bcs={ProductSubCategory?.BrandCategorySub} />
             </div>
           </div>
         </div>

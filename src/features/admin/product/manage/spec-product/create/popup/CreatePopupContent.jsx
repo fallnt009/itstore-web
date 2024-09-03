@@ -51,7 +51,7 @@ export default function CreatePopupContent({
         </button>
       </div>
       <div>
-        <CreatePopupAdd specItemId={selectedSpec.id} product={product} />
+        <CreatePopupAdd specItemObj={selectedSpec} product={product} />
         {/* <CreatePopupEdit /> */}
       </div>
     </div>
