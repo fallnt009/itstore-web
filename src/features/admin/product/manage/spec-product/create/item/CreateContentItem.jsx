@@ -1,6 +1,4 @@
 export default function CreateContentItem({item}) {
-  console.log(item);
-
   const data = item.SpecProduct;
 
   return (

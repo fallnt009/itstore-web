@@ -16,13 +16,11 @@ import validateCategory from '../../../../../../validators/validate-category';
 
 import useProduct from '../../../../../../hooks/useProduct';
 
-const dataForm = {
-  title: '',
-};
-
 export default function SpecEdit() {
   const {id} = useParams();
-  const [input, setInput] = useState(dataForm);
+  const [input, setInput] = useState({
+    title: '',
+  });
   const [error, setError] = useState({});
   const navigate = useNavigate();
 
@@ -34,14 +32,15 @@ export default function SpecEdit() {
       try {
         //fetch spec items
         const specItem = await fetchSpecItemById(id);
+
         //setInput title
-        setInput({title: specItem.title});
+        setInput({title: specItem.title || ''});
       } catch (err) {
         toast.error(UNEXPECTED_ERROR);
       }
     };
     fetchData();
-  }, [fetchSpecItemById]);
+  }, [fetchSpecItemById, id]);
 
   const handleClickBack = () => {
     navigate(SPEC_ITEM_MAIN);

@@ -17,6 +17,9 @@ import adminReducer, {
   ADD_BRANDTAG,
   FETCH_PRODUCT,
   FETCH_SPEC_PRODUCT,
+  ADD_SPEC_PRODUCT,
+  EDIT_SPEC_PRODUCT,
+  DELETE_SPEC_PRODUCT,
 } from '../reducers/adminReducer';
 
 const AdminContext = createContext();
@@ -247,6 +250,44 @@ export default function AdminContextProvider({children}) {
     [dispatch]
   );
 
+  const addSpecProduct = async (data) => {
+    try {
+      const res = await AdminApi.createSpecProduct(data);
+
+      dispatch({
+        type: ADD_SPEC_PRODUCT,
+        payload: {specProduct: res.data.result},
+      });
+    } catch (err) {
+      return err.response;
+    }
+  };
+  const editSpecProduct = async (specProductId, data) => {
+    try {
+      const res = await AdminApi.updateSpecProduct(specProductId, data);
+      dispatch({
+        type: EDIT_SPEC_PRODUCT,
+        payload: {id: specProductId, updatedProductSpec: res.data.result},
+      });
+
+      return res;
+    } catch (err) {
+      return err.response;
+    }
+  };
+  const deleteSpecProduct = async (specProductId) => {
+    try {
+      const res = await AdminApi.deleteSpecProduct(specProductId);
+      dispatch({
+        type: DELETE_SPEC_PRODUCT,
+        payload: {id: specProductId},
+      });
+      return res;
+    } catch (err) {
+      return err.response;
+    }
+  };
+
   return (
     <AdminContext.Provider
       value={{
@@ -270,9 +311,12 @@ export default function AdminContextProvider({children}) {
         addCategory,
         addSubCategory,
         addBrandTags,
+        addSpecProduct,
         editBrand,
         editCategory,
         editSubCategory,
+        editSpecProduct,
+        deleteSpecProduct,
       }}
     >
       {children}

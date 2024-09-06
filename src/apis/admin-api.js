@@ -52,3 +52,10 @@ export const updateSubCategory = (subCategoryId, data) =>
 //SPEC PRODUCT
 export const getSpecProduct = (specItemId, subCategoryId) =>
   axios.get(`/products/specproduct/${specItemId}`, {params: {subCategoryId}});
+
+export const createSpecProduct = (data) =>
+  axios.post('/products/specproduct', data);
+export const updateSpecProduct = (specProductId, data) =>
+  axios.patch(`/products/specproduct/${specProductId}`, data);
+export const deleteSpecProduct = (specProductId) =>
+  axios.delete(`/products/specproduct/${specProductId}`);

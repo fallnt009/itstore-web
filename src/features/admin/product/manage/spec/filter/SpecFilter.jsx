@@ -24,9 +24,9 @@ export default function SpecFilter({selectSubCategory, setSelectSubCategory}) {
   }, [selectSubCategory]);
 
   return (
-    <div className="pt-5 text-sm ">
+    <div className="text-sm ">
       <form className="text-stone-700">
-        <h1 className="flex items-center gap-1 py-2 text-xl font-semibold text-indigo-600">
+        <h1 className="flex items-center gap-1 py-2 text-lg font-semibold text-indigo-600">
           <span>
             <MdFilterAlt />
           </span>

@@ -42,8 +42,8 @@ export const getSpecBySubCategory = (subCategoryId) =>
   axios.get(`/products/spec-items/${subCategoryId}`);
 
 //?
-export const getSpecItemById = (specId) =>
-  axios.get(`/products/spec-items/${specId}`);
+export const getSpecItemById = (specItemId) =>
+  axios.get(`/products/spec-items/${specItemId}`);
 
 export const createSpecItem = (data) =>
   axios.post('/products/spec-items', data);

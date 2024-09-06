@@ -213,6 +213,7 @@ export default function ProductContextProvider({children}) {
   //fetchSpecItem by id
   const fetchSpecItemById = async (specId) => {
     try {
+      //fetch for edit
       const res = await ProductApi.getSpecItemById(specId);
       return res.data.result;
     } catch (err) {
@@ -254,6 +255,7 @@ export default function ProductContextProvider({children}) {
     [dispatch]
   );
 
+  //SUB SPEC
   const addSpecDetail = useCallback(
     async (productId, data) => {
       try {

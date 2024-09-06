@@ -1,5 +1,3 @@
-import useAdmin from '../../../../../../hooks/useAdmin';
-
 import SpecAction from './SpecAction';
 
 export default function SpecListItem({specItems}) {
@@ -14,7 +12,7 @@ export default function SpecListItem({specItems}) {
               {item.SpecSubcategory?.SubCategory?.title || 'Not Assign'}
             </div>
             <div>
-              <SpecAction id={item.id} />
+              <SpecAction id={item.id} item={item} />
             </div>
           </div>
         </div>

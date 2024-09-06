@@ -10,10 +10,14 @@ export const ADD_BRAND = 'ADD_BRAND';
 export const ADD_CATEGORY = 'ADD_CATEGORY';
 export const ADD_SUBCATEGORY = 'ADD_SUBCATEGORY';
 export const ADD_BRANDTAG = 'ADD_BRANDTAG';
+export const ADD_SPEC_PRODUCT = 'ADD_SPEC_PRODUCT';
 
 export const EDIT_BRAND = 'EDIT_BRAND';
 export const EDIT_CATEGORY = 'EDIT_CATEGORY';
 export const EDIT_SUBCATEGORY = 'EDIT_SUBCATEGORY';
+export const EDIT_SPEC_PRODUCT = 'EDIT_SPEC_PRODUCT';
+
+export const DELETE_SPEC_PRODUCT = 'DELETE_SPEC_PRODUCT';
 
 export const INTT_ADMIN = {
   products: [],
@@ -76,6 +80,13 @@ function adminReducer(state, action) {
       return {...state, brandTag: newBrandTag};
     }
 
+    case ADD_SPEC_PRODUCT:
+      const newSpecProduct = [action.payload.specProduct, ...state.specProduct];
+      return {
+        ...state,
+        specProduct: newSpecProduct,
+      };
+
     case EDIT_BRAND: {
       const {id, updatedBrand} = action.payload;
       const getIndex = state.brands.findIndex((brand) => brand.id === id);
@@ -116,6 +127,39 @@ function adminReducer(state, action) {
       );
       return {...state, subCategory: updateSubCategoryList};
     }
+
+    case EDIT_SPEC_PRODUCT:
+      const {id, updatedProductSpec} = action.payload;
+
+      const getIndex = state.specProduct.findIndex(
+        (specProduct) => specProduct.SpecProduct.id === id
+      );
+
+      if (getIndex === -1) return state;
+      const specProductList = [...state.specProduct];
+
+      specProductList[getIndex] = {
+        ...specProductList[getIndex],
+        SpecProduct: {
+          ...specProductList[getIndex].SpecProduct,
+          ...updatedProductSpec,
+        },
+      };
+
+      return {
+        ...state,
+        specProduct: specProductList,
+      };
+
+    case DELETE_SPEC_PRODUCT:
+      const {id: specProductId} = action.payload;
+      const updatedSpecProduct = state.specProduct.filter(
+        (item) => item.SpecProduct.id !== specProductId
+      );
+      return {
+        ...state,
+        specProduct: updatedSpecProduct,
+      };
     default: {
       return state;
     }
