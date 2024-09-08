@@ -1,4 +1,4 @@
-import SpecAction from './SpecAction';
+import SpecAction from './actions/SpecAction';
 
 export default function SpecListItem({specItems}) {
   return (

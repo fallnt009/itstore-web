@@ -10,6 +10,7 @@ export default function EditPopup({
   dataForm,
   title,
 }) {
+  //EXAMPLE NOT USE
   const [input, setInput] = useState(dataForm);
   const [error, setError] = useState({});
   //use Edit

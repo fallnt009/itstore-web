@@ -143,6 +143,7 @@ export default function ProductContextProvider({children}) {
         const productPreview = await ProductApi.getProductById(productId);
 
         const product = productPreview.data.result;
+
         const subCategoryId =
           product.ProductSubCategory.BrandCategorySub.subCategoryId;
 

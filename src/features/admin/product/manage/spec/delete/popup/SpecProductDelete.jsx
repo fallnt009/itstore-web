@@ -1,10 +1,8 @@
 import {MdClose} from 'react-icons/md';
 
-export default function DeletePopup({name, prevData, onClose, onSubmit}) {
-  //EXAMPLE
-  //Confirm that one need to delete
+export default function SpecProductDelete({name, prevData, onClose, onSubmit}) {
   return (
-    <div className="w-62 h-34 ">
+    <div className="w-62 h-36 ">
       <div className="flex justify-between text-base font-semibold pb-4">
         <h1>
           Delete {name} "{prevData.text || ''}"
@@ -17,7 +15,7 @@ export default function DeletePopup({name, prevData, onClose, onSubmit}) {
         <p>Are you sure you want to delete this?</p>
         <p>This action cannot be undone.</p>
       </div>
-      <div className="flex justify-center gap-1 py-5 font-semibold text-sm">
+      <div className="flex justify-center gap-1 pt-5 font-semibold text-sm">
         <button
           type="button"
           className="flex-1 border p-2 px-4 rounded-lg bg-gray-200 text-gray-500 hover:border-gray-500 hover:bg-white"

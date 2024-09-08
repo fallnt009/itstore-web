@@ -17,7 +17,7 @@ export default function SpecPreviewContent({onEdit, onDelete, onSelect}) {
       </div>
       <div className="px-2">
         {specProduct.length !== 0 ? (
-          specProduct.map((item) => (
+          specProduct?.map((item) => (
             <div key={item.SpecProduct?.id}>
               <SpecProductItem
                 item={item}

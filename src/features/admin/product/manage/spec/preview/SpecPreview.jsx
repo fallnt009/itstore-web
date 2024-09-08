@@ -10,8 +10,9 @@ import ManageBreadCrumb from '../../breadcrumb/ManageBreadCrumb';
 import SpecFilter from '../filter/SpecFilter';
 import SpecPreviewContent from './SpecPreviewContent';
 import SpecProductEdit from '../edit/popup/SpecProductEdit';
+import SpecProductDelete from '../delete/popup/SpecProductDelete';
+
 import Popup from '../../../../../../components/Popup';
-import DeletePopup from '../../../../../../components/Popup/DeletePopup';
 
 import {SPEC_ITEM_MAIN} from '../../../../../../config/routing';
 import {
@@ -35,6 +36,8 @@ export default function SpecPreview() {
   //popup
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [activePopup, setActivePopup] = useState(null);
+
+  console.log(id, selectSubCategory);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -128,7 +131,7 @@ export default function SpecPreview() {
           />
         )}
         {activePopup === 'delete' && (
-          <DeletePopup
+          <SpecProductDelete
             name="Text"
             prevData={selectSpecProduct.SpecProduct}
             onClose={handleClosePopup}

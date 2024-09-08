@@ -1,19 +1,20 @@
 import {useState, useEffect} from 'react';
 import {toast} from 'react-toastify';
 
-import {UNEXPECTED_ERROR} from '../../../config/messages';
+import {UNEXPECTED_ERROR} from '../../../../config/messages';
 
-import useAdmin from '../../../hooks/useAdmin';
-import useLoading from '../../../hooks/useLoading';
-import useDrawer from '../../../hooks/useDrawer';
+import useAdmin from '../../../../hooks/useAdmin';
+import useLoading from '../../../../hooks/useLoading';
+import useDrawer from '../../../../hooks/useDrawer';
 
-import ManageHeader from '../product/manage/create/header/ManageHeader';
-import ManageList from '../product/manage/create/ManageList';
-import ManageFilter from '../product/manage/utils/ManageFilter';
-import ManageBreadCrumb from '../product/manage/utils/ManageBreadCrumb';
-import SideDrawer from '../../../components/SideDrawer';
+import ManageHeader from '../manage/create/header/ManageHeader';
+import ManageList from '../manage/create/ManageList';
+import ManageFilter from '../manage/utils/ManageFilter';
+import ManageBreadCrumb from '../manage/utils/ManageBreadCrumb';
 
-export default function ProductManage() {
+import SideDrawer from '../../../../components/SideDrawer';
+
+export default function ProductMain() {
   const {
     products,
     fetchAllProduct,

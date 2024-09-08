@@ -37,11 +37,11 @@ export const createProduct = (bcsId, data) =>
 export const updateProduct = (productId, data) =>
   axios.patch(`/products/${productId}`, data);
 
-//SPEC ITEM
+//GET ALL SPEC ITEM BY SUB CATEGORY ID
 export const getSpecBySubCategory = (subCategoryId) =>
-  axios.get(`/products/spec-items/${subCategoryId}`);
+  axios.get(`/products/spec-items/sub/${subCategoryId}`);
 
-//?
+//GET SPEC ITEM BY THEIR ID
 export const getSpecItemById = (specItemId) =>
   axios.get(`/products/spec-items/${specItemId}`);
 

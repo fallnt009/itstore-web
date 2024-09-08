@@ -60,10 +60,7 @@ export default function SpecProductEdit({onClose, prevData, dataForm, title}) {
   };
 
   return (
-    <form
-      className="w-full px-5 py-2 pb-5 text-gray-600"
-      onSubmit={handleSubmitUpdate}
-    >
+    <form className="px-2 text-gray-600" onSubmit={handleSubmitUpdate}>
       <div className="flex justify-between text-base font-semibold pb-4">
         <h1>Edit Text</h1>
         <button type="button" onClick={onClose}>

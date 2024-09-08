@@ -1,4 +1,4 @@
-import SpecProductAction from './SpecProductAction';
+import SpecProductAction from './actions/SpecProductAction';
 
 export default function SpecProductItem({item, onEdit, onDelete, onSelect}) {
   if (!item || Object.keys(item).length === 0) {
