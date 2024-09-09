@@ -19,6 +19,7 @@ export default function ProductCardContent({product}) {
     ProductSubCategory,
     ProductDiscount,
     ProductImages,
+    slug,
   } = product;
 
   const subCategoryName = (
@@ -35,7 +36,7 @@ export default function ProductCardContent({product}) {
     <div className="grid px-2 py-3 ">
       <Link
         className="flex flex-col justify-center"
-        to={`/categories/${categoryName}/${subCategoryName}/${title}`}
+        to={`/categories/${categoryName}/${subCategoryName}/${slug}`}
       >
         <div className="block">
           <ProductPic size="250px" src={productImages} />

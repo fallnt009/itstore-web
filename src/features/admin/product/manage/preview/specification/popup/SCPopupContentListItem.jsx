@@ -12,6 +12,8 @@ export default function SCPopupContentListItem({
 }) {
   const {deleteSpecDetail} = useProduct();
 
+  const {SpecProduct} = item;
+
   const handleRemoveItem = async (id) => {
     try {
       const specDetailId = id;
@@ -50,7 +52,7 @@ export default function SCPopupContentListItem({
           <span></span>
         </>
       )}
-      <h4>{item.text}</h4>
+      <h4>{SpecProduct.text}</h4>
       <div className="flex items-center justify-center gap-2">
         {/* <button type="button">
       <MdEdit size={15} />

@@ -8,7 +8,7 @@ import {
   CREATE_SUCCESS,
   UNEXPECTED_ERROR,
 } from '../../../../../../config/messages';
-import ManageBreadCrumb from '../../breadcrumb/ManageBreadCrumb';
+import ManageBreadCrumb from '../../utils/ManageBreadCrumb';
 
 import Input from '../../../../../../components/Input';
 import validateCategory from '../../../../../../validators/validate-category';

@@ -1,4 +1,4 @@
-export default function SContentListItem({item}) {
+export default function PSListItem({item}) {
   const data = item.SpecProduct;
 
   return (

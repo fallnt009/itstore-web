@@ -10,7 +10,7 @@ import {UNEXPECTED_ERROR} from '../../../../../config/messages';
 import useProduct from '../../../../../hooks/useProduct';
 import useLoading from '../../../../../hooks/useLoading';
 
-import ManageBreadCrumb from '../breadcrumb/ManageBreadCrumb';
+import ManageBreadCrumb from '../utils/ManageBreadCrumb';
 import PreviewImages from './images/PreviewImages';
 import SInfo from './specification/SInfo';
 import SContent from './specification/SContent';

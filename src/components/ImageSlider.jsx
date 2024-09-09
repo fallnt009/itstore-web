@@ -9,30 +9,28 @@ export default function ImageSlider({images}) {
     setImageIndex(index);
   };
 
+  console.log(images);
+
   return (
     <div className="container ">
       <div className="grid grid-cols-[1fr_3fr]">
         <div className="grid grid-rows-4 overflow-y-auto max-h-[65vh] no-scrollbar gap-3">
-          {images ? (
-            images?.map((el, index) => (
-              <span
-                key={index}
-                onClick={() => handleSelectImage(index)}
-                className="object-contain"
-              >
-                <ProductPic key={el.id} src={el.path} size="100px" />
-              </span>
-            ))
-          ) : (
-            <div className="flex justify-center items-center h-[100px] w-[100px] bg-stone-100 text-stone-400"></div>
-          )}
+          {images?.map((el, index) => (
+            <span
+              key={index}
+              onClick={() => handleSelectImage(index)}
+              className="object-contain"
+            >
+              <ProductPic key={el.id} src={el.path} size="100px" />
+            </span>
+          ))}
         </div>
         {/* Main Image */}
         <div className="max-h-[55vh] ">
           {images ? (
-            <ProductPic src={images[imageIndex]?.path} size="400px" />
+            <ProductPic src={images[imageIndex]?.path} size="350px" />
           ) : (
-            <div className="flex justify-center items-center h-[400px] w-[400px] bg-stone-100 text-stone-400">
+            <div className="flex justify-center items-center h-[350px] w-[350px] bg-stone-100 text-stone-400">
               No Photo
             </div>
           )}

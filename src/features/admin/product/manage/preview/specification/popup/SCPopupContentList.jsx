@@ -15,7 +15,7 @@ export default function SCPopupContentList({selectedSpec, product}) {
         .map((filtered) => (
           <SCPopupContentListItem
             key={filtered.id}
-            item={filtered.SpecProduct}
+            item={filtered}
             specDetailId={filtered.id}
             productId={product.id}
           />

@@ -11,7 +11,7 @@ import {
 } from '../../../../../../config/messages';
 import Input from '../../../../../../components/Input';
 
-import ManageBreadCrumb from '../../breadcrumb/ManageBreadCrumb';
+import ManageBreadCrumb from '../../utils/ManageBreadCrumb';
 import validateCategory from '../../../../../../validators/validate-category';
 
 import useProduct from '../../../../../../hooks/useProduct';

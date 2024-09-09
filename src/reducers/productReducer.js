@@ -53,6 +53,9 @@ function productReducer(state, action) {
         ...state,
         productInfo: action.payload.productInfo,
         productSpec: action.payload.productSpec,
+        specItems: action.payload.specItems,
+        specDetail: action.payload.specDetail,
+        productImages: action.payload.productImages,
         error: null,
       };
 

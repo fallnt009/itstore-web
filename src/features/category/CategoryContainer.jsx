@@ -1,13 +1,13 @@
 import {useState, useEffect, useCallback} from 'react';
 import {useParams} from 'react-router-dom';
 
-import ProductCategory from '../product/ProductCategory';
+import ProductCategory from '../product/category/ProductCategory';
 import ParginationButton from '../../components/ParginationButton';
 
 import useCategory from '../../hooks/useCategory';
 
 export default function CategoryContainer() {
-  const {categoryName, subCategoryName} = useParams();
+  const {categorySlug, subCategorySlug} = useParams();
   const {
     categoryItem,
     totalItems,
@@ -23,7 +23,8 @@ export default function CategoryContainer() {
   const loadCategory = useCallback(async () => {
     setLoading(true);
     try {
-      await fetchCategoryItem(categoryName, subCategoryName, page, 8);
+      //
+      await fetchCategoryItem(categorySlug, subCategorySlug, page, 8);
     } catch (err) {
       setLoading(false);
     } finally {
@@ -31,7 +32,7 @@ export default function CategoryContainer() {
         setLoading(false);
       }, 2000);
     }
-  }, [categoryName, subCategoryName, fetchCategoryItem, page]);
+  }, [categorySlug, subCategorySlug, fetchCategoryItem, page]);
 
   useEffect(() => {
     loadCategory();
@@ -44,7 +45,6 @@ export default function CategoryContainer() {
   return (
     <div>
       <ProductCategory
-        subCategoryName={subCategoryName}
         product={categoryItem}
         totalItems={totalItems}
         loading={loading}

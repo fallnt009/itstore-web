@@ -1,8 +1,8 @@
-import ProductDetail from '../product/ProductDetail';
+import ProductDetail from '../details/ProductDetail';
 
 export default function ProductContainer() {
   return (
-    <div>
+    <div className="px-40">
       <ProductDetail />
     </div>
   );

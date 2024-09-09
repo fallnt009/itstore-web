@@ -7,19 +7,19 @@ export const getSalesProduct = (page, pageSize) =>
   axios.get('/products/sales', {params: {page, pageSize}});
 
 export const getProductByCategory = (
-  categoryName,
-  subCategoryName,
+  categorySlug,
+  subCategorySlug,
   page,
   pageSize,
   filter
 ) =>
-  axios.get(`/categories/product/${categoryName}/${subCategoryName}`, {
+  axios.get(`/categories/product/${categorySlug}/${subCategorySlug}`, {
     params: {page, pageSize, filter},
   });
 
-export const getProductInfo = (categoryName, subCategoryName, productName) =>
+export const getProductInfo = (categorySlug, subCategorySlug, productSlug) =>
   axios.get(
-    `/categories/product/${categoryName}/${subCategoryName}/${productName}`
+    `/categories/product/${categorySlug}/${subCategorySlug}/${productSlug}`
   );
 export const getProductSpec = (productName) =>
   axios.get(`/products/spec-prod/${productName}`);
@@ -63,6 +63,10 @@ export const deleteSubSpec = (specProductId, productId) =>
   axios.delete(`/products/subspec/${productId}`, {
     data: {specProductId: specProductId},
   });
+
+//SUB SPEC Public use
+export const getSpecDetailPublic = (productId) =>
+  axios.get(`/products/subspec/public/${productId}`);
 
 //SPEC PRODUCT
 export const getSpecProductByItemId = (specItemId) =>

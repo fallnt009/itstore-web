@@ -6,7 +6,7 @@ import {MdArrowBack} from 'react-icons/md';
 import useAdmin from '../../../../../../hooks/useAdmin';
 import useLoading from '../../../../../../hooks/useLoading';
 
-import ManageBreadCrumb from '../../breadcrumb/ManageBreadCrumb';
+import ManageBreadCrumb from '../../utils/ManageBreadCrumb';
 import SpecFilter from '../filter/SpecFilter';
 import SpecPreviewContent from './SpecPreviewContent';
 import SpecProductEdit from '../edit/popup/SpecProductEdit';

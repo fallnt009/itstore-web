@@ -1,12 +1,12 @@
 import React from 'react';
 
 export default function CategoryHeader({
-  categoryName,
-  subCategoryName,
+  categorySlug,
+  subCategorySlug,
   totalItems,
 }) {
-  const categoryTitle = categoryName.toUpperCase();
-  const subCategoryTitle = subCategoryName.toUpperCase();
+  const categoryTitle = categorySlug.toUpperCase();
+  const subCategoryTitle = subCategorySlug.toUpperCase();
 
   return (
     <>

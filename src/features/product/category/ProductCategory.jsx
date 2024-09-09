@@ -1,18 +1,18 @@
 import {useParams} from 'react-router-dom';
 
-import CategoryHeader from '../category/CategoryHeader';
-import CategoryFilter from '../category/CategoryFilter';
-import CategoryProductItem from '../category/CategoryProductItem';
+import CategoryHeader from '../../category/CategoryHeader';
+import CategoryFilter from '../../category/filter/CategoryFilter';
+import CategoryProductItem from '../../category/CategoryProductItem';
 
 export default function ProductCategory({product, loading, totalItems}) {
-  const {categoryName, subCategoryName} = useParams();
+  const {categorySlug, subCategorySlug} = useParams();
 
   return (
     <div className="container">
       <div className="py-10 px-24">
         <CategoryHeader
-          categoryName={categoryName}
-          subCategoryName={subCategoryName}
+          categorySlug={categorySlug}
+          subCategorySlug={subCategorySlug}
           totalItems={totalItems}
         />
         <CategoryFilter />

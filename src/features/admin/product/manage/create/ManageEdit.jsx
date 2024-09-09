@@ -11,7 +11,7 @@ import Input from '../../../../../components/Input';
 import TextArea from '../../../../../components/TextArea';
 
 import ManageTag from './tag/ManageTag';
-import ManageBreadCrumb from '../breadcrumb/ManageBreadCrumb';
+import ManageBreadCrumb from '../utils/ManageBreadCrumb';
 import TagPreview from './tag/TagPreview';
 
 import useProduct from '../../../../../hooks/useProduct';
