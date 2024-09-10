@@ -3,7 +3,6 @@ import {createContext, useCallback, useReducer} from 'react';
 import categoryReducer, {
   INIT_CATEGORY,
   FETCH_CATEGORY_ITEM,
-  SET_CATEGORY_ITEM,
   CATEGORY_ERROR,
 } from '../reducers/categoryReducer';
 

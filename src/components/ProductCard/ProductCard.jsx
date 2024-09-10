@@ -10,7 +10,7 @@ export default function ProductCard({product, error, loading}) {
   }
 
   return (
-    <div className="container ">
+    <div className="container p-2">
       {loading ? <ProductCardLoad /> : <ProductCardContent product={product} />}
     </div>
   );

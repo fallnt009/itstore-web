@@ -17,7 +17,7 @@ export default function SCPopupContentListItem({
   const handleRemoveItem = async (id) => {
     try {
       const specDetailId = id;
-      const specProductId = item.id;
+      const specProductId = SpecProduct.id;
 
       const res = await deleteSpecDetail(
         specDetailId,

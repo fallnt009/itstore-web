@@ -7,7 +7,6 @@ import ProductDescription from './desc/ProductDescription';
 import ImageSlider from '../../../components/ImageSlider';
 import StockStatus from '../../../components/StockStatus';
 import BreadCrumb from '../../../components/BreadCrumb';
-import ActiveButton from '../../../components/ActiveButton';
 
 import useCart from '../../../hooks/useCart';
 import useProduct from '../../../hooks/useProduct';

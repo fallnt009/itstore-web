@@ -1,5 +1,6 @@
 //action.type
 export const FETCH_CATEGORY_ITEM = 'FETCH_CATEGORY_ITEM';
+export const FETCH_CATEGORY_FILTER = 'FETCH_CATEGORY_FILTER';
 
 export const SET_CATEGORY_ITEM = 'SET_CATEGORY_ITEM';
 export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
@@ -14,6 +15,7 @@ export const INIT_CATEGORY = {
   totalPages: 1,
   currentPage: 1,
   error: null,
+  categoryFilter: [],
 };
 
 function categoryReducer(state, action) {
@@ -27,6 +29,12 @@ function categoryReducer(state, action) {
         currentPage: action.payload.currentPage,
         filterCategory: action.payload.filterCategory,
         error: null,
+      };
+    }
+    case FETCH_CATEGORY_FILTER: {
+      return {
+        ...state,
+        categoryFilter: action.payload.categoryFilter,
       };
     }
     case SET_CATEGORY_ITEM: {

@@ -13,6 +13,7 @@ import productReducer, {
   ADD_SPEC_DETAIL,
   DELETE_SPEC_DETAIL,
   FETCH_PRODUCT_SINGLE,
+  FETCH_PRODUCT_FILTER,
 } from '../reducers/productReducer';
 
 const ProductContext = createContext();
@@ -276,6 +277,32 @@ export default function ProductContextProvider({children}) {
     }
   };
 
+  const fetchProductFilter = useCallback(
+    async (subCategorySlug) => {
+      try {
+        const specProduct = await ProductApi.getSpecProductBySubCategory(
+          subCategorySlug
+        );
+
+        //fetch SpecItem by subCategorySLug
+        const specItem = await ProductApi.getSpecItemBySubCategorySlug(
+          subCategorySlug
+        );
+
+        dispatch({
+          type: FETCH_PRODUCT_FILTER,
+          payload: {
+            specProduct: specProduct.data.result,
+            specItems: specItem.data.result,
+          },
+        });
+      } catch (err) {
+        return err.response;
+      }
+    },
+    [dispatch]
+  );
+
   return (
     <ProductContext.Provider
       value={{
@@ -300,6 +327,7 @@ export default function ProductContextProvider({children}) {
         fetchSpecItemById,
         fetchSpecProduct,
         fetchProductById,
+        fetchProductFilter,
         createSpecItem,
         updateSpecItem,
         addSpecDetail,

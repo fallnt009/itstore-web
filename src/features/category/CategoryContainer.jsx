@@ -24,7 +24,7 @@ export default function CategoryContainer() {
     setLoading(true);
     try {
       //
-      await fetchCategoryItem(categorySlug, subCategorySlug, page, 8);
+      await fetchCategoryItem(categorySlug, subCategorySlug, page, 32);
     } catch (err) {
       setLoading(false);
     } finally {

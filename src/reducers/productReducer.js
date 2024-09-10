@@ -5,6 +5,7 @@ export const FETCH_PRODUCT_LIST = 'FETCH_PRODUCT_LIST';
 export const FETCH_PRODUCT_INFO = 'FETCH_PRODUCT_INFO';
 export const FETCH_PRODUCT_IMAGE = 'FETCH_PRODUCT_IMAGE';
 export const FETCH_PRODUCT_ERROR = 'FETCH_PRODUCT_ERROR';
+export const FETCH_PRODUCT_FILTER = 'FETCH_PRODUCT_FILTER';
 
 //fetch for admin
 export const FETCH_PRODUCT_SINGLE = 'FETCH_PRODUCT_SINGLE';
@@ -77,6 +78,13 @@ function productReducer(state, action) {
         productPreview: action.payload.productPreview,
         specItems: action.payload.specItems,
         specDetail: action.payload.specDetail,
+      };
+
+    case FETCH_PRODUCT_FILTER:
+      return {
+        ...state,
+        specItems: action.payload.specItems,
+        specProduct: action.payload.specProduct,
       };
 
     case FETCH_SPEC_PRODUCT:
