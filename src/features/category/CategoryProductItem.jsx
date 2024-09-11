@@ -1,7 +1,11 @@
 import ProductCard from '../../components/ProductCard/ProductCard';
 
+import CategoryNotFound from './CategoryNotFound';
+
 export default function CategoryProductItem({product, loading}) {
-  //limit 4
+  if (product.length === 0) {
+    return <CategoryNotFound />;
+  }
 
   return (
     <div className="grid grid-cols-4 pt-5 px-5">

@@ -1,7 +1,13 @@
 import SidebarFilterCheckBox from './SidebarFilterCheckBox';
 import SidebarFilterSearch from './SidebarFilterSearch';
 
-export default function SidebarFilter({specItems, specProduct}) {
+export default function SidebarFilter({
+  specItems,
+  specProduct,
+  filters,
+  onSelect,
+  onClear,
+}) {
   //filter by keyword //apply
   //filter by checkbox just click
 
@@ -12,11 +18,23 @@ export default function SidebarFilter({specItems, specProduct}) {
   //fetch Thread
   return (
     <div className="p-4 border-r">
-      <div className="font-semibold">
+      <div className="flex justify-between items-center font-semibold">
         <h1 className="text-xl">Filter</h1>
+        <button
+          type="button"
+          className="p-2 text-indigo-600 hover:text-gray-500 font-semibold"
+          onClick={onClear}
+        >
+          Clear All
+        </button>
       </div>
       <SidebarFilterSearch />
-      <SidebarFilterCheckBox specItems={specItems} specProduct={specProduct} />
+      <SidebarFilterCheckBox
+        specItems={specItems}
+        specProduct={specProduct}
+        filters={filters}
+        onSelect={onSelect}
+      />
     </div>
   );
 }

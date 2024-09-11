@@ -1,6 +1,20 @@
 import SidebarFilterCheckBoxItem from './SidebarFilterCheckBoxItem';
 
-export default function SidebarFilterCheckBox({specItems, specProduct}) {
+export default function SidebarFilterCheckBox({
+  specItems,
+  specProduct,
+  filters,
+  onSelect,
+}) {
+  //if not have specProduct
+  //specItems must not shown
+  //cpu //get only Brand,Series and socket
+  //spec Item can be selected
+
+  //choose SpecItems
+  //use SpecItem id to filter
+  // console.log(filters);
+
   return (
     <>
       {specItems?.map((item) => (
@@ -12,7 +26,12 @@ export default function SidebarFilterCheckBox({specItems, specProduct}) {
           {specProduct
             ?.filter((detail) => detail.SpecSubcategory.SpecItem.id === item.id)
             .map((filtered) => (
-              <SidebarFilterCheckBoxItem key={filtered.id} item={filtered} />
+              <SidebarFilterCheckBoxItem
+                key={filtered.id}
+                item={filtered}
+                isChecked={filters.includes(filtered)}
+                onSelect={onSelect}
+              />
             ))}
         </div>
       ))}

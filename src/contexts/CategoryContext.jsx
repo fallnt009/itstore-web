@@ -16,7 +16,7 @@ export default function CategoryContextProvider({children}) {
 
   //fetch Category Item
   const fetchCategoryItem = useCallback(
-    async (categoryName, subCategoryName, page, limit, filter) => {
+    async (categoryName, subCategoryName, page, limit, search, filters) => {
       try {
         //fetch filterCategory
 
@@ -26,17 +26,18 @@ export default function CategoryContextProvider({children}) {
           subCategoryName,
           page,
           limit,
-          filter
+          search,
+          filters
         );
 
         dispatch({
           type: FETCH_CATEGORY_ITEM,
           payload: {
             categoryItem: categoryItem.data.result,
+            categoryItemFilter: categoryItem.data.result,
             totalItems: categoryItem.data.totalItems,
             totalPages: categoryItem.data.totalPages,
             currentPage: categoryItem.data.currentPage,
-            //add filterCategory
           },
         });
       } catch (err) {
@@ -48,6 +49,8 @@ export default function CategoryContextProvider({children}) {
     },
     [dispatch]
   );
+
+  //
 
   return (
     <CategoryContext.Provider

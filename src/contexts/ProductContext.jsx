@@ -278,7 +278,7 @@ export default function ProductContextProvider({children}) {
   };
 
   const fetchProductFilter = useCallback(
-    async (subCategorySlug) => {
+    async (subCategorySlug, title) => {
       try {
         const specProduct = await ProductApi.getSpecProductBySubCategory(
           subCategorySlug
@@ -286,7 +286,8 @@ export default function ProductContextProvider({children}) {
 
         //fetch SpecItem by subCategorySLug
         const specItem = await ProductApi.getSpecItemBySubCategorySlug(
-          subCategorySlug
+          subCategorySlug,
+          title
         );
 
         dispatch({

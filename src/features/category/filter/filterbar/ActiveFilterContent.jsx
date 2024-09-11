@@ -2,7 +2,7 @@ import {MdFilterAlt} from 'react-icons/md';
 
 import ActiveFilterItem from './ActiveFilterItem';
 
-export default function ActiveFilterContent() {
+export default function ActiveFilterContent({onClear, onRemove, filters}) {
   return (
     <div className="text-base">
       <form className="text-stone-700">
@@ -15,10 +15,15 @@ export default function ActiveFilterContent() {
           </h1>
           {/* Active Filter */}
           {/* Not more than 3 */}
-          <ActiveFilterItem />
-          <ActiveFilterItem />
+          {filters?.map((item) => (
+            <ActiveFilterItem item={item} onRemove={onRemove} />
+          ))}
 
-          <button className="p-2 text-indigo-600 hover:text-gray-500 font-semibold">
+          <button
+            type="button"
+            className="p-2 text-indigo-600 hover:text-gray-500 font-semibold"
+            onClick={onClear}
+          >
             Clear All
           </button>
         </div>

@@ -1,22 +1,38 @@
-import {useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 
 import CategoryHeader from '../../category/CategoryHeader';
 import CategoryProductItem from '../../category/CategoryProductItem';
 
-import ActiveFilterContent from '../../category/filter/filterbar/ActiveFilterContent';
 import SidebarFilter from '../../category/filter/sidebar/SidebarFilter';
 
 import useProduct from '../../../hooks/useProduct';
 
-export default function ProductCategory({product, loading, totalItems}) {
+export default function ProductCategory({
+  product,
+  loading,
+  totalItems,
+  filters,
+  onSelect,
+  onClear,
+}) {
   const {categorySlug, subCategorySlug} = useParams();
   const {specItems, specProduct, fetchProductFilter} = useProduct();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await fetchProductFilter(subCategorySlug);
+        let title = [];
+
+        switch (subCategorySlug) {
+          case 'cpu':
+            title = ['Brand', 'Series', 'Socket'];
+            break;
+          default:
+            return;
+        }
+        //call fetch
+        await fetchProductFilter(subCategorySlug, title);
       } catch (err) {
         //err
       }
@@ -34,10 +50,15 @@ export default function ProductCategory({product, loading, totalItems}) {
         />
         <div className="grid grid-cols-[1fr_5fr]">
           <div>
-            <SidebarFilter specItems={specItems} specProduct={specProduct} />
+            <SidebarFilter
+              specItems={specItems}
+              specProduct={specProduct}
+              filters={filters}
+              onSelect={onSelect}
+              onClear={onClear}
+            />
           </div>
           <div>
-            <ActiveFilterContent />
             {totalItems === 0 ? (
               <div>
                 Sorry! for Inconvenience. We have no product on this Section

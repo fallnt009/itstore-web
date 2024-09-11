@@ -11,10 +11,11 @@ export const getProductByCategory = (
   subCategorySlug,
   page,
   pageSize,
-  filter
+  search,
+  filters
 ) =>
   axios.get(`/categories/product/${categorySlug}/${subCategorySlug}`, {
-    params: {page, pageSize, filter},
+    params: {page, pageSize, search, filters},
   });
 
 export const getProductInfo = (categorySlug, subCategorySlug, productSlug) =>
@@ -45,8 +46,10 @@ export const getSpecBySubCategory = (subCategoryId) =>
 export const getSpecItemById = (specItemId) =>
   axios.get(`/products/spec-items/${specItemId}`);
 //GET SPECITEM BY SLUG
-export const getSpecItemBySubCategorySlug = (subCategorySlug) =>
-  axios.get(`/products/spec-items/subcategory/${subCategorySlug}`);
+export const getSpecItemBySubCategorySlug = (subCategorySlug, title) =>
+  axios.get(`/products/spec-items/subcategory/${subCategorySlug}`, {
+    params: {title},
+  });
 
 export const createSpecItem = (data) =>
   axios.post('/products/spec-items', data);
