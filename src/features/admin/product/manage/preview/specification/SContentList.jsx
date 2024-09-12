@@ -3,6 +3,12 @@ import {MdEdit} from 'react-icons/md';
 import SContentListItem from './SContentListItem';
 
 export default function SContentList({specItems, specDetail, onSelect}) {
+  // console.log(specItems);
+
+  // console.log(specDetail);
+
+  //specSubId on each not the same
+
   return (
     <div>
       <div className="grid grid-cols-[1.5fr_7fr_2fr] gap-2 bg-gray-200 p-2 rounded-lg text-gray-600 font-semibold">

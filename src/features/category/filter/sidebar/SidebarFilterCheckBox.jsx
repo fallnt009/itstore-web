@@ -13,7 +13,6 @@ export default function SidebarFilterCheckBox({
 
   //choose SpecItems
   //use SpecItem id to filter
-  // console.log(filters);
 
   return (
     <>

@@ -1,4 +1,4 @@
-import CategoryContainer from '../features/category/CategoryContainer';
+import CategoryContainer from '../features/category/main/CategoryContainer';
 
 export default function CategoryPage() {
   return (

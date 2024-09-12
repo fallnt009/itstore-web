@@ -10,7 +10,7 @@ export default function ProductSpecContainer() {
         <h1 className="text-3xl text-gray-600 font-semibold py-2">
           Specification
         </h1>
-        <div className="py-3 text-sm">
+        <div className="py-3 text-base">
           <PSList specItems={specItems} specDetail={specDetail} />
         </div>
       </div>

@@ -18,15 +18,15 @@ export default function SpecDetailAdd({specItemObj, product}) {
   const [selectSpecProductId, setSpecProductId] = useState(null);
 
   const {id: SpecItemId} = specItemObj;
-  const {id: ProductId} = product;
-
-  // const specSubCategoryId = SpecSubcategory.id;
+  const {id: ProductId, ProductSubCategory} = product;
+  const subCategoryId = ProductSubCategory.BrandCategorySub.subCategoryId || '';
 
   //fetch data here
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetchSpecProduct(SpecItemId);
+        //send SubcategoryId
+        const res = await fetchSpecProduct(SpecItemId, subCategoryId);
 
         if (res.status === 200) {
           setError('');
@@ -70,6 +70,8 @@ export default function SpecDetailAdd({specItemObj, product}) {
       console.log(err);
     }
   };
+  //filter specProduct By SubCategoryID
+  console.log(specProduct);
 
   return (
     <form

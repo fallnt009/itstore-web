@@ -13,8 +13,8 @@ import OurWorkPage from '../pages/OurWorkPage';
 import TrackingPage from '../pages/TrackingPage';
 import ContactUsPage from '../pages/ContactUsPage';
 
-import CategoryNewProduct from '../features/category/CategoryNewProduct';
-import CategorySaleProduct from '../features/category/CategorySaleProduct';
+import CategoryNewProduct from '../features/category/promo/CategoryNewProduct';
+import CategorySaleProduct from '../features/category/promo/CategorySaleProduct';
 
 export const publicRoutes = [
   {

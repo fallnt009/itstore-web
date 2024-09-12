@@ -75,8 +75,8 @@ export const getSpecDetailPublic = (productId) =>
   axios.get(`/products/subspec/public/${productId}`);
 
 //SPEC PRODUCT
-export const getSpecProductByItemId = (specItemId) =>
-  axios.get(`/products/spec-product/${specItemId}`);
+export const getSpecProductByItemId = (specItemId, subCategoryId) =>
+  axios.get(`/products/spec-product/${specItemId}`, {params: {subCategoryId}});
 
 //For filter in category page
 export const getSpecProductBySubCategory = (subCategorySlug) =>

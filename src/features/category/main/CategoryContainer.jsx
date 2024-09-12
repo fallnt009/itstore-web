@@ -1,10 +1,10 @@
 import {useState, useEffect, useCallback} from 'react';
 import {useParams} from 'react-router-dom';
 
-import ProductCategory from '../product/category/ProductCategory';
-import ParginationButton from '../../components/ParginationButton';
+import ProductCategory from './CategoryContent';
+import ParginationButton from '../../../components/ParginationButton';
 
-import useCategory from '../../hooks/useCategory';
+import useCategory from '../../../hooks/useCategory';
 
 export default function CategoryContainer() {
   const {categorySlug, subCategorySlug} = useParams();
@@ -42,28 +42,14 @@ export default function CategoryContainer() {
     loadCategory();
   }, [loadCategory]);
 
+  const handleSubmitFilter = (newFilters, newSearch) => {
+    setFilters(newFilters);
+    setSearch(newSearch);
+    setPage(1);
+  };
+
   const handleChangePage = (newPage) => {
     setPage(newPage);
-  };
-
-  const handleOnSelectFilter = (item, isChecked) => {
-    setFilters((prevFilter) => {
-      if (isChecked) {
-        //pack
-        if (!prevFilter.includes(item)) {
-          return [...prevFilter, item];
-        }
-      } else {
-        //removing one by one
-        return prevFilter.filter((filter) => filter !== item);
-      }
-
-      return prevFilter;
-    });
-  };
-
-  const handleClearAllFilter = () => {
-    setFilters([]);
   };
 
   return (
@@ -72,9 +58,9 @@ export default function CategoryContainer() {
         product={categoryItem}
         totalItems={totalItems}
         loading={loading}
-        filters={filters}
-        onSelect={handleOnSelectFilter}
-        onClear={handleClearAllFilter}
+        onSubmit={handleSubmitFilter}
+        setFilters={setFilters}
+        setSearch={setSearch}
       />
       <div className="flex justify-center gap-2 py-3">
         <ParginationButton

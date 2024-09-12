@@ -40,7 +40,7 @@ export default function NavbarItem({
   };
   return (
     <div
-      className="flex justify-start text-xl  text-cerulean-blue-800 gap-7 px-10 py-2"
+      className="flex justify-start text-xl  text-cerulean-blue-800 gap-7 px-10 border-b-2"
       onMouseLeave={handleMouseLeave}
     >
       {menuItems.map((item, index) => (
@@ -57,7 +57,7 @@ export default function NavbarItem({
         </div>
       ))}
       {isOpen && (
-        <div ref={dropdownRef} className=" ">
+        <div ref={dropdownRef}>
           <NavbarSelection
             index={currentIndex}
             isOpen={isOpen}

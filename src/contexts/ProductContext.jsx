@@ -233,9 +233,12 @@ export default function ProductContextProvider({children}) {
 
   //SPEC PRODUCT
   const fetchSpecProduct = useCallback(
-    async (specItemId) => {
+    async (specItemId, subCategoryId) => {
       try {
-        const res = await ProductApi.getSpecProductByItemId(specItemId);
+        const res = await ProductApi.getSpecProductByItemId(
+          specItemId,
+          subCategoryId
+        );
         dispatch({
           type: FETCH_SPEC_PRODUCT,
           payload: {specProduct: res.data.result},

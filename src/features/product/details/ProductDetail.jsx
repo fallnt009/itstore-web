@@ -101,12 +101,7 @@ export default function ProductDetail() {
           </div>
         </div>
       </div>
-      <div className="flex pt-5">
-        <div className="flex-1">
-          <ProductSpecContainer />
-        </div>
-        <div className="flex-1 bg-gray-100"></div>
-      </div>
+      <ProductSpecContainer />
     </div>
   );
 }

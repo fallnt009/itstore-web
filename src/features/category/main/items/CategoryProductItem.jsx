@@ -1,6 +1,6 @@
-import ProductCard from '../../components/ProductCard/ProductCard';
+import ProductCard from '../../../../components/ProductCard/ProductCard';
 
-import CategoryNotFound from './CategoryNotFound';
+import CategoryNotFound from '../../utils/CategoryNotFound';
 
 export default function CategoryProductItem({product, loading}) {
   if (product.length === 0) {
