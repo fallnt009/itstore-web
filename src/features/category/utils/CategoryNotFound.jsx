@@ -2,7 +2,7 @@ import {MdWarning} from 'react-icons/md';
 
 export default function CategoryNotFound() {
   return (
-    <div className=" bg-black bg-opacity-5 h-full content-center">
+    <div className="h-full content-center">
       <div className="flex flex-col justify-center gap-2">
         <span className="flex justify-center">
           <MdWarning size={50} />

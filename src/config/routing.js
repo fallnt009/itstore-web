@@ -4,11 +4,18 @@ exports.HOME = '/';
 exports.PRODUCT = '/product';
 exports.NEW_PRODUCT = '/product/new';
 exports.SALE_PRODUCT = '/product/flashsale';
-//Category
+//For Route
 exports.PRODUCT_CATEGORY = '/categories/:categorySlug/:subCategorySlug';
-//Product Detail
 exports.PRODUCT_DETAIL =
   '/categories/:categorySlug/:subCategorySlug/:productSlug';
+
+//CATEGORY
+//Category Navigation
+exports.PRODUCT_CATEGORY_NAV = (categorySlug, subCategorySlug) =>
+  `/categories/${categorySlug}/${subCategorySlug}`;
+//Product Detail
+exports.PRODUCT_DETAIL_NAV = (categorySlug, subCategorySlug, productSlug) =>
+  `/categories/${categorySlug}/${subCategorySlug}/${productSlug}`;
 
 //For Profile
 exports.MY_PROFILE = (userId) => `/profile/${userId}`;

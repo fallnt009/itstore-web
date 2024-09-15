@@ -12,7 +12,7 @@ import {
 
 export default function SpecDetailAdd({specItemObj, product}) {
   const {specProduct, fetchSpecProduct, addSpecDetail} = useProduct();
-  const [input, setInput] = useState({value: '', specProductId: ''});
+  const [input, setInput] = useState({value: '', desc: '', specProductId: ''});
   const [error, setError] = useState('');
   //selectedSpecProductId
   const [selectSpecProductId, setSpecProductId] = useState(null);
@@ -71,7 +71,6 @@ export default function SpecDetailAdd({specItemObj, product}) {
     }
   };
   //filter specProduct By SubCategoryID
-  console.log(specProduct);
 
   return (
     <form
@@ -93,10 +92,22 @@ export default function SpecDetailAdd({specItemObj, product}) {
               min="0"
             />
           </div>
+          <div className="flex flex-col gap-2">
+            <div className="flex gap-2 items-baseline">
+              <h4>Description</h4>
+              <p className="text-xs text-red-500">*optional</p>
+            </div>
+            <Input
+              type="text"
+              name="desc"
+              value={input.desc}
+              onChange={handleChangeInput}
+            />
+          </div>
           <div className="flex flex-col gap-1 ">
             <h4>Select Text</h4>
             <select
-              className={`border rounded-lg p-2 ${
+              className={`border rounded-lg shadow-inner p-2 ${
                 error && 'border-red-500 border-2'
               }`}
               onChange={handleChangeInput}
@@ -124,21 +135,17 @@ export default function SpecDetailAdd({specItemObj, product}) {
           </div>
         </div>
         <div className="flex justify-end pt-3">
-          {selectSpecProductId ? (
-            <button
-              type="submit"
-              className="p-2 px-4 border rounded-lg font-semibold text-white bg-indigo-600 hover:bg-white hover:border-indigo-600 hover:text-indigo-600 shadow"
-            >
-              Add
-            </button>
-          ) : (
-            <div
-              type="submit"
-              className="p-2 px-4 border rounded-lg font-semibold text-white bg-gray-400 shadow"
-            >
-              Add
-            </div>
-          )}
+          <button
+            type="submit"
+            className={`p-2 px-4 border rounded-lg font-semibold shadow ${
+              input.specProductId || input.desc
+                ? 'bg-indigo-600 text-white hover:bg-white hover:text-indigo-600 hover:border-indigo-600'
+                : 'bg-gray-400 text-white cursor-not-allowed'
+            }`}
+            disabled={!input.specProductId || !input.desc}
+          >
+            Add
+          </button>
         </div>
       </div>
     </form>

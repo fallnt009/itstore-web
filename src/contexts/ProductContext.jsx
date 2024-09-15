@@ -41,7 +41,7 @@ export default function ProductContextProvider({children}) {
 
   const fetchHomeProduct = useCallback(async () => {
     try {
-      const newProduct = await ProductApi.getNewProduct();
+      const newProduct = await ProductApi.getNewProduct(1, 5);
       const salesProduct = await ProductApi.getSalesProduct();
       dispatch({
         type: FETCH_HOME_PRODUCT,
@@ -106,8 +106,6 @@ export default function ProductContextProvider({children}) {
           ProductApi.getSpecBySubCategory(subCategoryId),
           ProductApi.getSpecDetailPublic(productId),
         ]);
-
-        console.log(productInfoData);
 
         dispatch({
           type: FETCH_PRODUCT_INFO,

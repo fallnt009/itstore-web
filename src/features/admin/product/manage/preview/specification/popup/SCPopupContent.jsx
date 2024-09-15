@@ -35,7 +35,7 @@ export default function SCPopupContent({
         </div>
       </div>
       <div className="py-4">
-        <button
+        {/* <button
           type="button"
           className="flex items-center gap-1 p-2 hover:text-indigo-600 hover:border-indigo-600 border rounded-lg "
         >
@@ -43,7 +43,7 @@ export default function SCPopupContent({
             <MdAdd />
           </span>
           Add new
-        </button>
+        </button> */}
       </div>
       <div>
         <SpecDetailAdd specItemObj={selectedSpec} product={product} />

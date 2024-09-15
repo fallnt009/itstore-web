@@ -9,7 +9,7 @@ export default function DropdownMenu({open, onClose}) {
   const {logout, authenUser} = useAuth();
   return (
     <div
-      className={`absolute z-100 right-0 bg-white py-3 px-2 border rounded-md shadow-sm w-96 text-cerulean-blue-800 ${
+      className={`absolute z-100 right-0 bg-white py-3 px-2 border rounded-md shadow-sm w-96 text-indigo-700 ${
         open ? 'block' : 'hidden'
       }`}
     >

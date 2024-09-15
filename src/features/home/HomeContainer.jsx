@@ -1,9 +1,10 @@
 import {useState, useEffect} from 'react';
+import useProduct from '../../hooks/useProduct';
 
 import HomeFlashSale from './HomeFlashSale';
 import HomeNewProduct from './HomeNewProduct';
 
-import useProduct from '../../hooks/useProduct';
+import HomeCoverContainer from './cover/HomeCoverContainer';
 
 export default function HomeContainer() {
   const [loading, setLoading] = useState(false);
@@ -29,8 +30,9 @@ export default function HomeContainer() {
   return (
     <>
       <div>
-        <div className="grid ">{/* <Carousel /> */}</div>
-        <div className="px-16">
+        {/* Picture */}
+        <HomeCoverContainer />
+        <div className="px-10 py-10">
           <HomeFlashSale
             salesProduct={salesProduct}
             error={error}

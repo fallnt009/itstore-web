@@ -53,14 +53,7 @@ export default function CategoryContent({
             />
           </div>
           <div>
-            {totalItems === 0 ? (
-              <div>
-                Sorry! for Inconvenience. We have no product on this Section
-                Right now!
-              </div>
-            ) : (
-              <CategoryProductItem product={product} loading={loading} />
-            )}
+            <CategoryProductItem product={product} loading={loading} />
           </div>
         </div>
       </div>

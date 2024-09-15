@@ -1,7 +1,10 @@
 import {useNavigate} from 'react-router-dom';
+import {MdArrowRight} from 'react-icons/md';
+
 import {SALE_PRODUCT} from '../../config/routing';
 
-import ProductCard from '../../components/ProductCard/ProductCard';
+import HomeProductContainer from '../../components/ProductCard/home/HomeProductContainer';
+import HomeCardError from './err/HomeCardError';
 
 export default function HomeFlashSale({error, salesProduct, loading}) {
   const navigate = useNavigate();
@@ -10,33 +13,36 @@ export default function HomeFlashSale({error, salesProduct, loading}) {
     navigate(SALE_PRODUCT);
     navigate(0);
   };
+
   return (
-    <div className="mx-5 mt-10">
-      <div className="flex items-center justify-between">
-        <h1 className="text-5xl text-cerulean-blue-800 font-semibold ">
-          Flash Sale
-        </h1>
+    <div>
+      <div className="flex flex-col justify-start">
+        <h1 className="text-3xl text-indigo-700 font-semibold">Best Deals</h1>
         <div>
           <button
             type="button"
-            className="bg-white px-3 py-2 rounded-xl text-cerulean-blue-800 font-semibold border-2 hover:border-cerulean-blue-800"
+            className="bg-white  py-2 rounded-xl text-indigo-700 flex items-center hover:font-semibold"
             onClick={handleRedirect}
           >
-            View All
+            See more
+            <span>
+              <MdArrowRight />
+            </span>
           </button>
         </div>
       </div>
-      {/* Product Card */}
-
-      {error ? (
-        <div className="flex justify-center py-24"> {error}</div>
-      ) : (
-        <div className="grid grid-cols-4 py-5">
+      {salesProduct.length ? (
+        <div className="grid grid-cols-5 gap-5 py-5">
           {salesProduct?.map((item) => (
-            <ProductCard key={item.id} product={item} loading={loading} />
+            <HomeProductContainer
+              key={item.id}
+              product={item}
+              loading={loading}
+            />
           ))}
         </div>
-        //limit 4
+      ) : (
+        <HomeCardError />
       )}
     </div>
   );

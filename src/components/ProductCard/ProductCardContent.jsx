@@ -7,6 +7,8 @@ import ProductCardInfo from './ProductCardInfo';
 
 import useCart from '../../hooks/useCart';
 
+import {PRODUCT_DETAIL_NAV} from '../../config/routing';
+
 export default function ProductCardContent({product}) {
   const {addCartItem} = useCart();
 
@@ -21,13 +23,11 @@ export default function ProductCardContent({product}) {
     slug,
   } = product;
 
-  const subCategoryName = (
-    ProductSubCategory?.BrandCategorySub?.SubCategory?.title || 'unknown'
-  ).toLowerCase();
-  const categoryName = (
-    ProductSubCategory?.BrandCategorySub?.BrandCategory?.MainCategory?.title ||
-    'unknown'
-  ).toLowerCase();
+  const subCategoryName =
+    ProductSubCategory?.BrandCategorySub?.SubCategory?.slug || 'unknown';
+  const categoryName =
+    ProductSubCategory?.BrandCategorySub?.BrandCategory?.MainCategory?.slug ||
+    'unknown';
 
   const productImages = ProductImages[0]?.path;
 
@@ -35,7 +35,7 @@ export default function ProductCardContent({product}) {
     <div className="text-sm border p-2">
       <Link
         className="flex flex-col justify-center"
-        to={`/categories/${categoryName}/${subCategoryName}/${slug}`}
+        to={PRODUCT_DETAIL_NAV(categoryName, subCategoryName, slug)}
       >
         <div className="flex justify-center">
           <ProductPic size="250px" src={productImages} />
