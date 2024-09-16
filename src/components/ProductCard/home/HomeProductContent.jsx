@@ -26,7 +26,7 @@ export default function HomeProductContent({product}) {
   return (
     <div className="text-sm px-2 pt-4 pb-4 bg-slate-100 rounded-md ">
       <Link
-        className="grid grid-rows-2 justify-center"
+        className="grid grid-rows-2 justify-center "
         to={PRODUCT_DETAIL_NAV(categoryName, subCategoryName, slug)}
       >
         {/* Productbox */}

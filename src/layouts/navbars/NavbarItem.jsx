@@ -56,7 +56,7 @@ export default function NavbarItem({
           {item.title}
         </div>
       ))}
-      {isOpen && (
+      {/* {isOpen && (
         <div ref={dropdownRef}>
           <NavbarSelection
             index={currentIndex}
@@ -64,7 +64,7 @@ export default function NavbarItem({
             setIsOpen={setIsOpen}
           />
         </div>
-      )}
+      )} */}
     </div>
   );
 }

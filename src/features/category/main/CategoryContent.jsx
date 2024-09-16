@@ -34,8 +34,8 @@ export default function CategoryContent({
   }, [fetchProductFilter, subCategorySlug]);
 
   return (
-    <div className="container">
-      <div className="px-10">
+    <div>
+      <div>
         <CategoryHeader
           categorySlug={categorySlug}
           subCategorySlug={subCategorySlug}

@@ -16,7 +16,9 @@ export default function HomeNewProduct({newProducts, error, loading}) {
   return (
     <div>
       <div className="flex flex-col justify-start">
-        <h1 className="text-3xl text-indigo-700 font-semibold ">New Product</h1>
+        <h1 className="text-3xl text-indigo-700 font-semibold ">
+          New Arrivals
+        </h1>
 
         <button
           type="button"
@@ -31,7 +33,7 @@ export default function HomeNewProduct({newProducts, error, loading}) {
       </div>
 
       {newProducts.length ? (
-        <div className="grid grid-cols-5 gap-5 py-5">
+        <div className="grid lg:grid-cols-5 gap-5 py-5">
           {newProducts?.map((item) => (
             <HomeProductContainer
               key={item.id}

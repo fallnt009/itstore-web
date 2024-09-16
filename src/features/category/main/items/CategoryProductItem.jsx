@@ -8,7 +8,7 @@ export default function CategoryProductItem({product, loading}) {
   }
 
   return (
-    <div className="grid grid-cols-4 pt-5 px-5">
+    <div className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 pt-5 px-5">
       {product.map((el) => (
         <ProductCard key={el.id} product={el} loading={loading} />
       ))}

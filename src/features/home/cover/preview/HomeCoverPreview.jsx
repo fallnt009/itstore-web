@@ -7,7 +7,7 @@ import ram from '../../../../assets/ram.png';
 
 export default function HomeCoverPreview() {
   return (
-    <div className="">
+    <div>
       <div className="grid grid-rows-2 grid-cols-2 gap-4">
         <div className=" bg-slate-100 rounded-md">
           <HomeCoverPreviewItem

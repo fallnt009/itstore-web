@@ -1,7 +1,7 @@
 import {useState, useEffect, useCallback} from 'react';
 import {useParams} from 'react-router-dom';
 
-import ProductCategory from './CategoryContent';
+import CategoryContent from './CategoryContent';
 import ParginationButton from '../../../components/ParginationButton';
 
 import useCategory from '../../../hooks/useCategory';
@@ -53,8 +53,8 @@ export default function CategoryContainer() {
   };
 
   return (
-    <div>
-      <ProductCategory
+    <div className="px-10">
+      <CategoryContent
         product={categoryItem}
         totalItems={totalItems}
         loading={loading}

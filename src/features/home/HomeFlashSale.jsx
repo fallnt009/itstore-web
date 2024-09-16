@@ -32,7 +32,7 @@ export default function HomeFlashSale({error, salesProduct, loading}) {
         </div>
       </div>
       {salesProduct.length ? (
-        <div className="grid grid-cols-5 gap-5 py-5">
+        <div className="grid lg:grid-cols-5 gap-5 py-5">
           {salesProduct?.map((item) => (
             <HomeProductContainer
               key={item.id}
