@@ -1,20 +1,19 @@
 export default function SelectMainButton({src, item, onSelect}) {
-  const {id, title} = item || '';
-
-  console.log(item);
+  const {title} = item || '';
 
   return (
-    <div>
+    <div className="px-5 select-none">
       <div
         className="flex flex-col cursor-pointer"
-        onClick={() => onSelect(id)}
+        onClick={() => onSelect(item)}
       >
         <div>
-          <div className="flex justify-center items-center bg-slate-200 rounded-full w-24 h-24">
+          <div className="flex justify-center items-center bg-slate-200 rounded-full w-28 h-28">
             <img
               alt="navbaricon"
               src={src}
               style={{width: `70px`, height: `70px`}}
+              loading="lazy"
             />
           </div>
         </div>

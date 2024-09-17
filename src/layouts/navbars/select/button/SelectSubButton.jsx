@@ -1,18 +1,19 @@
 import {Link} from 'react-router-dom';
 
 export default function SelectSubButton({src, item}) {
-  const {id, title, pathname} = item || {};
+  const {title, pathname} = item || {};
 
-  console.log(item);
+  console.log(src);
 
   return (
-    <Link className="flex flex-col cursor-pointer" to={pathname}>
-      <div>
-        <div className="flex justify-center items-center bg-slate-200 rounded-full w-24 h-24">
+    <Link className="flex flex-col cursor-pointer select-none" to={pathname}>
+      <div className="px-5">
+        <div className="flex justify-center items-center bg-slate-200 rounded-full w-28 h-28">
           <img
             alt="navbaricon"
             src={src}
             style={{width: `70px`, height: `70px`}}
+            loading="lazy"
           />
         </div>
       </div>
