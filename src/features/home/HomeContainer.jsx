@@ -5,6 +5,7 @@ import HomeFlashSale from './HomeFlashSale';
 import HomeNewProduct from './HomeNewProduct';
 
 import HomeCoverContainer from './cover/HomeCoverContainer';
+import HomeAdsSlider from './ads/HomeAdsSlider';
 
 export default function HomeContainer() {
   const [loading, setLoading] = useState(false);
@@ -38,6 +39,7 @@ export default function HomeContainer() {
             error={error}
             loading={loading}
           />
+          <HomeAdsSlider />
           <HomeNewProduct
             newProducts={newProduct}
             error={error}

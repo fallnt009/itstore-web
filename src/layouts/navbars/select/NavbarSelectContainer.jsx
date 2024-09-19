@@ -1,5 +1,4 @@
 import {useState} from 'react';
-import {MdKeyboardDoubleArrowUp} from 'react-icons/md';
 
 import Category from '../../../data/productCategory.json';
 
@@ -7,7 +6,7 @@ import SelectControlButton from './button/SelectControlButton';
 import SelectMainButton from './button/SelectMainButton';
 import SelectSubButton from './button/SelectSubButton';
 
-export default function NavbarSelectContainer({onClose}) {
+export default function NavbarSelectContainer() {
   const [subBarOpen, setSubBarOpen] = useState(false);
   const [selectCategory, setSelectCategory] = useState({});
 
@@ -21,35 +20,30 @@ export default function NavbarSelectContainer({onClose}) {
   };
 
   return (
-    <div className="px-10 py-5 border">
-      <div className="flex">
-        <div>
-          <div className="relative w-full h-full overflow-hidden pr-5 border-r">
-            <div
-              className={`flex transition-transform duration-1000 ease-in-out`}
-              style={{
-                transform: subBarOpen ? `translateX(0%)` : `translateX(-100%)`,
-                width: '100%',
-              }}
-            >
-              {subBarOpen && (
-                <div className="flex flex-col justify-start">
-                  <SelectControlButton
-                    title="Back"
-                    onClose={handleCloseSubBar}
-                  />
-                  <div className="font-semibold text-lg">
-                    {selectCategory.title}
-                  </div>
+    <div className="px-10 pt-1">
+      <div className="w-full bg-slate-100 rounded-md p-4">
+        <div className="relative w-full h-full overflow-hidden pr-5 border-r">
+          <div
+            className={`flex transition-transform duration-1000 ease-in-out`}
+            style={{
+              transform: subBarOpen ? `translateX(0%)` : `translateX(-100%)`,
+              width: '100%',
+            }}
+          >
+            {subBarOpen && (
+              <div className="flex gap-3 items-center justify-start">
+                <SelectControlButton title="Back" onClose={handleCloseSubBar} />
+                <div className="font-semibold text-lg">
+                  {selectCategory.title}
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </div>
 
-        <div className="px-5">
-          <div className="flex scrollbar-thin overflow-auto pb-3 w-full max-w-[80vw]">
-            <div className="flex">
+        <div className="px-5 py-5">
+          <div className="flex scrollbar-thin overflow-auto pb-3 w-full max-w-full">
+            <div className="flex ">
               {!subBarOpen &&
                 Category?.map((item) => (
                   <div key={item.id}>

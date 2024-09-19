@@ -15,7 +15,7 @@ export default function HomeFlashSale({error, salesProduct, loading}) {
   };
 
   return (
-    <div>
+    <div className="py-10">
       <div className="flex flex-col justify-start">
         <h1 className="text-3xl text-indigo-700 font-semibold">Best Deals</h1>
         <div>

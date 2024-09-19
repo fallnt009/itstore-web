@@ -8,11 +8,11 @@ export default function SelectSubButton({src, item}) {
   return (
     <Link className="flex flex-col cursor-pointer select-none" to={pathname}>
       <div className="px-5">
-        <div className="flex justify-center items-center bg-slate-200 rounded-full w-28 h-28">
+        <div className="flex justify-center items-center bg-slate-200 rounded-full w-32 h-32 hover:shadow-xl">
           <img
             alt="navbaricon"
             src={src}
-            style={{width: `70px`, height: `70px`}}
+            style={{width: `85px`, height: `85px`}}
             loading="lazy"
           />
         </div>
